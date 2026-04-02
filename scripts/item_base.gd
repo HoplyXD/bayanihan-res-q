@@ -122,7 +122,8 @@ func _draw() -> void:
 			var inner := PackedVector2Array([
 				Vector2(0, -36), Vector2(36, 0), Vector2(0, 36), Vector2(-36, 0)
 			])
-			draw_polygon(inner, PackedColorArray([col.lightened(0.4)] * 4))
+			var ic := col.lightened(0.4)
+			draw_polygon(inner, PackedColorArray([ic, ic, ic, ic]))
 
 		ItemType.FUEL:
 			# Fuel canister shape
