@@ -8,18 +8,22 @@ const SPAWN_Y: float = -110.0
 
 const SPAWN_INTERVAL_START: float = 1.20
 const SPAWN_INTERVAL_MIN:   float = 0.45
-const INTERVAL_DECREASE:    float = 0.04   # per difficulty tick
-const DIFFICULTY_TICK:      float = 12.0   # seconds between difficulty bumps
+const INTERVAL_DECREASE:    float = 0.04
+const DIFFICULTY_TICK:      float = 12.0
 
 # Spawn weights aligned to ItemBase.ItemType enum order:
-# [RICE, WATER, MEDS, HAZARD, BLOCK, SHIELD, SPEED_BOOST, FUEL]
-const SPAWN_WEIGHTS: Array[int] = [26, 22, 14, 18, 9, 3, 3, 5]
+# [RICE, WATER, MEDS, HAZARD, BLOCK, SHIELD, SPEED_BOOST, FUEL, REPAIR]
+var _spawn_weights: Array[int] = [22, 18, 12, 16, 8, 3, 3, 12, 6]
 
 var _item_scene: PackedScene = preload("res://scenes/items/item.tscn")
 
 var _spawn_timer: float    = 0.0
 var _diff_timer: float     = 0.0
 var _spawn_interval: float = SPAWN_INTERVAL_START
+
+
+func _ready() -> void:
+	GameManager.level_up.connect(_on_level_up)
 
 
 func _process(delta: float) -> void:
@@ -51,12 +55,22 @@ func _spawn_item() -> void:
 
 func _weighted_random() -> int:
 	var total: int = 0
-	for w in SPAWN_WEIGHTS:
+	for w in _spawn_weights:
 		total += w
 	var roll: int = randi() % total
 	var cumulative: int = 0
-	for i in SPAWN_WEIGHTS.size():
-		cumulative += SPAWN_WEIGHTS[i]
+	for i in _spawn_weights.size():
+		cumulative += _spawn_weights[i]
 		if roll < cumulative:
 			return i
 	return 0
+
+
+func _on_level_up(lvl: int) -> void:
+	if lvl <= 1:
+		return
+	# Ramp up danger each level; resources diminish slightly
+	_spawn_weights[3] = min(_spawn_weights[3] + 2, 26)   # HAZARD
+	_spawn_weights[4] = min(_spawn_weights[4] + 1, 14)   # BLOCK
+	_spawn_weights[0] = max(_spawn_weights[0] - 2, 10)   # RICE
+	_spawn_weights[1] = max(_spawn_weights[1] - 1, 10)   # WATER

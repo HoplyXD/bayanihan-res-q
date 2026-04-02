@@ -18,10 +18,32 @@ color = Color(0.0, 0.0, 0.0, 0.55)
 [node name="ScoreLabel" type="Label" parent="."]
 offset_left = 20.0
 offset_top = 12.0
-offset_right = 400.0
+offset_right = 380.0
 offset_bottom = 80.0
 text = "Score: 0"
 theme_override_font_sizes/font_size = 48
+
+; ── Level (top-centre) ────────────────────────────────────────────────────
+[node name="LevelLabel" type="Label" parent="."]
+offset_left = 390.0
+offset_top = 12.0
+offset_right = 780.0
+offset_bottom = 80.0
+text = "LVL 1"
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.6, 1.0, 0.6, 1.0)
+
+; ── Combo (below top bar, left) ───────────────────────────────────────────
+[node name="ComboLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 192.0
+offset_right = 520.0
+offset_bottom = 250.0
+text = ""
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(1.0, 0.85, 0.1, 1.0)
+visible = false
 
 ; ── "NEED:" title ─────────────────────────────────────────────────────────
 [node name="DemandTitle" type="Label" parent="."]
@@ -162,6 +184,27 @@ offset_bottom = 1912.0
 text = "DUMP CARGO  [SPACE]"
 theme_override_font_sizes/font_size = 40
 
+; ── Full-screen hit flash overlay (normally transparent) ──────────────────
+[node name="HitFlash" type="ColorRect" parent="."]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1080.0
+offset_bottom = 1920.0
+color = Color(1.0, 0.0, 0.0, 0.0)
+mouse_filter = 2
+
+; ── Banner label (centred mid-screen for level/delivery messages) ──────────
+[node name="BannerLabel" type="Label" parent="."]
+offset_left = 80.0
+offset_top = 800.0
+offset_right = 1000.0
+offset_bottom = 960.0
+text = ""
+theme_override_font_sizes/font_size = 72
+horizontal_alignment = 1
+vertical_alignment = 1
+visible = false
+
 ; ============================================================
 ; START PANEL
 ; ============================================================
@@ -215,7 +258,7 @@ offset_left = 60.0
 offset_top = 1200.0
 offset_right = 1020.0
 offset_bottom = 1560.0
-text = "🟡 RICE   🔵 WATER   🔴 MEDS\n🌊 FLOOD = slow\n🟫 DEBRIS = damage\n🟢 SHIELD = block next hit\n🟠 BOOST = speed up\n🟣 FUEL = refill tank"
+text = "🟡 RICE   🔵 WATER   🔴 MEDS\n🌊 FLOOD = slow\n🟫 DEBRIS = damage\n🟢 SHIELD = block next hit\n🟠 BOOST = speed up\n🟣 FUEL = refill tank\n🩵 REPAIR = restore 1 HP"
 theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 
@@ -259,6 +302,16 @@ text = "Score: 0"
 theme_override_font_sizes/font_size = 66
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(1.0, 0.85, 0.1, 1.0)
+
+[node name="HighScoreLabel" type="Label" parent="GameOverPanel"]
+offset_left = 140.0
+offset_top = 998.0
+offset_right = 940.0
+offset_bottom = 1080.0
+text = "Best: 0"
+theme_override_font_sizes/font_size = 46
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.6, 1.0, 0.6, 1.0)
 
 [node name="RestartButton" type="Button" parent="GameOverPanel"]
 offset_left = 240.0

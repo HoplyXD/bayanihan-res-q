@@ -15,6 +15,7 @@ enum ItemType {
 	POWERUP_SHIELD,
 	POWERUP_SPEED,
 	FUEL,
+	POWERUP_REPAIR,
 }
 
 @export var item_type: ItemType = ItemType.RESOURCE_RICE
@@ -23,14 +24,15 @@ enum ItemType {
 var collected: bool = false
 
 const ITEM_COLORS: Dictionary = {
-	ItemType.RESOURCE_RICE:   Color(1.00, 0.88, 0.18),   # gold-yellow
-	ItemType.RESOURCE_WATER:  Color(0.18, 0.55, 1.00),   # bright blue
-	ItemType.RESOURCE_MEDS:   Color(1.00, 0.22, 0.22),   # red
-	ItemType.HAZARD:          Color(0.38, 0.62, 0.95, 0.85),  # flood blue
-	ItemType.BLOCK:           Color(0.40, 0.35, 0.28),   # debris brown-grey
-	ItemType.POWERUP_SHIELD:  Color(0.10, 0.95, 0.45),   # bright green
-	ItemType.POWERUP_SPEED:   Color(1.00, 0.48, 0.05),   # orange
-	ItemType.FUEL:            Color(0.80, 0.18, 0.85),   # purple
+	ItemType.RESOURCE_RICE:   Color(1.00, 0.88, 0.18),
+	ItemType.RESOURCE_WATER:  Color(0.18, 0.55, 1.00),
+	ItemType.RESOURCE_MEDS:   Color(1.00, 0.22, 0.22),
+	ItemType.HAZARD:          Color(0.38, 0.62, 0.95, 0.85),
+	ItemType.BLOCK:           Color(0.40, 0.35, 0.28),
+	ItemType.POWERUP_SHIELD:  Color(0.10, 0.95, 0.45),
+	ItemType.POWERUP_SPEED:   Color(1.00, 0.48, 0.05),
+	ItemType.FUEL:            Color(0.80, 0.18, 0.85),
+	ItemType.POWERUP_REPAIR:  Color(0.10, 0.88, 0.85),   # cyan
 }
 
 const ITEM_LABELS: Dictionary = {
@@ -42,6 +44,7 @@ const ITEM_LABELS: Dictionary = {
 	ItemType.POWERUP_SHIELD:  "SHIELD",
 	ItemType.POWERUP_SPEED:   "BOOST",
 	ItemType.FUEL:            "FUEL",
+	ItemType.POWERUP_REPAIR:  "REPAIR",
 }
 
 
@@ -88,6 +91,10 @@ func on_collected(player: Node) -> void:
 			GameManager.collect_powerup("SPEED_BOOST")
 		ItemType.FUEL:
 			GameManager.collect_fuel()
+		ItemType.POWERUP_REPAIR:
+			GameManager.collect_powerup("REPAIR_KIT")
+			if player.has_method("queue_redraw"):
+				player.queue_redraw()
 
 	queue_free()
 
@@ -131,6 +138,12 @@ func _draw() -> void:
 			draw_rect(Rect2(-14, -56, 28, 16), col.darkened(0.15))
 			draw_rect(Rect2(-6,  -60, 12, 8),  col.darkened(0.3))
 			draw_rect(Rect2(-18, -20, 36, 6),  Color(1, 1, 1, 0.4))
+
+		ItemType.POWERUP_REPAIR:
+			# Medical cross
+			draw_rect(Rect2(-46, -18, 92, 36), col)
+			draw_rect(Rect2(-18, -46, 36, 92), col)
+			draw_rect(Rect2(-40, -12, 80, 24), col.lightened(0.3))
 
 		_:
 			# Resources — coloured box with highlight

@@ -10,9 +10,13 @@ var current_lane: int  = 1
 var target_x: float    = 540.0
 var is_penalized: bool = false
 var penalty_timer: float = 0.0
+var is_hit: bool = false
+var hit_timer: float = 0.0
 
-# Smoothing
+const HIT_FLASH_DURATION: float = 0.45
+
 var _tween: Tween = null
+var _shake_tween: Tween = null
 
 
 func _ready() -> void:
@@ -20,6 +24,7 @@ func _ready() -> void:
 	position.y = 1650.0
 	$PickupArea.area_entered.connect(_on_pickup_area_entered)
 	GameManager.hazard_hit.connect(_on_hazard_hit)
+	GameManager.block_hit.connect(_on_block_hit)
 
 
 func _process(delta: float) -> void:
@@ -29,6 +34,11 @@ func _process(delta: float) -> void:
 		penalty_timer -= delta
 		if penalty_timer <= 0.0:
 			is_penalized = false
+			queue_redraw()
+	if is_hit:
+		hit_timer -= delta
+		if hit_timer <= 0.0:
+			is_hit = false
 			queue_redraw()
 
 
@@ -86,11 +96,29 @@ func _on_hazard_hit() -> void:
 	queue_redraw()
 
 
+func _on_block_hit() -> void:
+	is_hit = true
+	hit_timer = HIT_FLASH_DURATION
+	queue_redraw()
+	if _shake_tween:
+		_shake_tween.kill()
+	var origin_x := target_x
+	_shake_tween = create_tween()
+	_shake_tween.tween_property(self, "position:x", origin_x + 26.0, 0.05)
+	_shake_tween.tween_property(self, "position:x", origin_x - 26.0, 0.05)
+	_shake_tween.tween_property(self, "position:x", origin_x + 12.0, 0.04)
+	_shake_tween.tween_property(self, "position:x", origin_x,         0.04)
+
+
 # ---------------------------------------------------------------------------
 # Drawing — simple truck shape using primitives
 # ---------------------------------------------------------------------------
 func _draw() -> void:
-	var body_color := Color(0.10, 0.35, 0.75) if not is_penalized else Color(0.85, 0.25, 0.10)
+	var body_color: Color
+	if is_penalized or is_hit:
+		body_color = Color(0.85, 0.25, 0.10)
+	else:
+		body_color = Color(0.10, 0.35, 0.75)
 
 	# Truck bed (back)
 	draw_rect(Rect2(-50, 0, 100, 80), body_color.darkened(0.25))
