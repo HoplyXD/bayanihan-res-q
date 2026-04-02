@@ -23,6 +23,17 @@ But the road is dangerous. The SAME lanes that hold resources are also full of t
 * 🟡 **Hazards:** Hitting water or mud gives you a temporary speed penalty.
 * 🔴 **Hard Blocks:** Hitting a fallen tree will reduce your truck’s Durability. Hit 3, and your mission fails (Truck Breakdown)!
 
+## ⚡ Power-Ups & Fuel
+
+Airdrop teams don't only deliver relief goods — they also scatter special items to keep your truck in the fight!
+
+* 🟢 **Shield Power-Up:** Absorbs the next Hard Block hit completely, saving a point of Durability. Appears as a green diamond on the road.
+* 🟠 **Speed Boost Power-Up:** Instantly increases your truck's speed for a burst of momentum. Appears as an orange diamond.
+* 🟣 **Fuel Canister:** Your truck runs on a finite fuel tank that drains continuously as you race. Pick up purple fuel canisters scattered on the road to keep the engine going — running out of fuel ends your mission immediately!
+
+> **Tip:** Fuel canisters and power-ups are rarer than resources, so plan lane-switches carefully. Always prioritise fuel when the gauge turns red!
+
+
 ## Scavenge Smartly
 
 You have limited inventory slots in your truck bed. You can miss crucial items, and you can mistakenly pick up unwanted items. Picking up the wrong resource takes up a valuable slot! Use the single-button "Dump Cargo" mechanic to jettison unwanted cargo—this saves your inventory, but costs valuable time. You must reach the Barangay with the exact match of demand to fulfill the Quest and score maximum points.
