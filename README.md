@@ -7,9 +7,9 @@
 * **Genre:** Fast-Paced Action Puzzler / Vertical Scavenger-Runner
 * **Target Audience:** General (Ages 7+)
 * **Platform:** Mobile (Portrait, Single-Handed Control)
-* **Developer:** [Your Class Name/School] - Western Visayas Development Team
+* **Developer:** BSEMC 1A - WVSU/CICT
 
-In Bayanihan Res-Q, you are a "Hero on the Road"—part of a specialized emergency response unit. Disaster has struck the lush Panay Region, leaving countless communities in urgent need of aid. But this is no standard delivery mission. The roads are chaotic, and you enter the crisis empty-handed.
+In Bayanihan Res-Q, you are a "Hero on the Road"—part of a specialized emergency response unit. Disaster has struck the lush Region, leaving countless communities in urgent need of aid. But this is no standard delivery mission. The roads are chaotic, and you enter the crisis empty-handed.
 
 ## The Challenge
 
@@ -43,11 +43,11 @@ Building this game required the synchronized efforts of 30+ students working as 
 
 | Group | Department | Task | Primary Godot Node Focus |
 | --- | --- | --- | --- |
-| Logistics Tech | The Matchmaker (Engine) | Codes the "Demand Match" logic. Compares the Current Inventory (from UI) against the Barangay Demand (from Spawner) to calculate success or failure signals. | Singleton (Global), Signal |
-| Map & Intel | The World (Level Design) | Uses Godot's TileMap and ParallaxScrolling to dynamically generate an infinite, stylized road system that flows downwards. They create the base layers (road, water, grass). | TileMap, ParallaxLayer |
-| The "Events" Team | The Spawner (Storyteller) | Design and spawn logical "patterns" of road items: resources, hazards (water), and blocks (debris). They balance the "Rarity"—e.g., Medicine is rare, Rice is common. | Area2D (for triggers), RandomNumberGenerator |
-| Inventory UI | The Dashboard (Interface) | Design the single-hand portrait control panel. Create the dynamic HBoxContainer for the 3 visual cargo slots, the Durability progress bar, and the "SMS News Ticker" at the bottom. | HBoxContainer, ProgressBar, Anchor |
-| Fleet Group | The Magnet (Units) | Codes the 3-lane horizontal snapping movement logic. Programs the truck's "Pick-up Area." When the truck overlaps a resource, it adds the item to the inventory list and triggers collection animations. | Area2D (for collection), move_and_slide() or Tween (for lane movement) |
+| Group 1: Logistics Tech | The Matchmaker (Engine) | Codes the "Demand Match" logic. Compares the Current Inventory (from UI) against the Barangay Demand (from Spawner) to calculate success or failure signals. | Singleton (Global), Signal |
+| Group 2: Map & Intel | The World (Level Design) | Uses Godot's TileMap and ParallaxScrolling to dynamically generate an infinite, stylized road system that flows downwards. They create the base layers (road, water, grass). | TileMap, ParallaxLayer |
+| Group 3: The "Events" Team | The Spawner (Storyteller) | Design and spawn logical "patterns" of road items: resources, hazards (water), and blocks (debris). They balance the "Rarity"—e.g., Medicine is rare, Rice is common. | Area2D (for triggers), RandomNumberGenerator |
+| Group 4: Inventory UI | The Dashboard (Interface) | Design the single-hand portrait control panel. Create the dynamic HBoxContainer for the 3 visual cargo slots, the Durability progress bar, and the "SMS News Ticker" at the bottom. | HBoxContainer, ProgressBar, Anchor |
+| Group 5: Fleet Group | The Magnet (Units) | Codes the 3-lane horizontal snapping movement logic. Programs the truck's "Pick-up Area." When the truck overlaps a resource, it adds the item to the inventory list and triggers collection animations. | Area2D (for collection), move_and_slide() or Tween (for lane movement) |
 
 ## 🚀 Technical Implementation (Godot 4)
 
