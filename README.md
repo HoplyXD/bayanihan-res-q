@@ -9,7 +9,24 @@
 * **Platform:** Mobile (Portrait, Single-Handed Control)
 * **Developer:** BSEMC 1A - WVSU/CICT
 
-In Bayanihan Res-Q, you are a "Hero on the Road"—part of a specialized emergency response unit. Disaster has struck the lush Region, leaving countless communities in urgent need of aid. But this is no standard delivery mission. The roads are chaotic, and you enter the crisis empty-handed.
+**Bayanihan Res-Q** is a student-built mobile game project developed by college students. The goal is to create an action game that’s **fun to play** while also teaching **young players** the basics of disaster preparedness, smart relief distribution, and the spirit of **bayanihan**.
+
+In Bayanihan Res-Q, you are a "Hero on the Road"—part of a specialized emergency response unit. Disaster has struck the region, leaving countless communities in urgent need of aid. But this is no standard delivery mission. The roads are chaotic, and you enter the crisis empty-handed.
+
+## 🧠 Learning Objectives (Kid-Friendly)
+
+By playing (and repeating runs), young players should gradually learn to:
+
+* **Recognize common disasters in the Philippines:** typhoons, floods, earthquakes, and volcanic eruptions.
+* **Prioritize essentials:** choose the right combination of rice, water, and medicine under pressure.
+* **Understand “right aid, right time”:** wrong items waste space and slow down real relief operations.
+* **Stay calm and make fast decisions:** accuracy matters as much as speed.
+
+## 👧🧒 Target Players & Accessibility
+
+* **Controls:** portrait, single-handed lane switching.
+* **Readability:** icons-first UI; minimal reading required during gameplay.
+* **Comfort options (recommended):** reduced screen shake, adjustable SFX/music, high-contrast UI mode.
 
 ## The Challenge
 
@@ -31,12 +48,21 @@ Airdrop teams don't only deliver relief goods — they also scatter special item
 * 🟠 **Speed Boost Power-Up:** Instantly increases your truck's speed for a burst of momentum. Appears as an orange diamond.
 * 🟣 **Fuel Canister:** Your truck runs on a finite fuel tank that drains continuously as you race. Pick up purple fuel canisters scattered on the road to keep the engine going — running out of fuel ends your mission immediately!
 
-> **Tip:** Fuel canisters and power-ups are rarer than resources, so plan lane-switches carefully. Always prioritise fuel when the gauge turns red!
+> **Tip:** Fuel canisters and power-ups are rarer than resources, so plan lane-switches carefully. Always prioritize fuel when the gauge turns red!
+
+## 🔁 Core Gameplay Loop (30 Seconds)
+
+1. **Dash forward** on a 3-lane road.
+2. **Collect resources** (Rice/Water/Meds) by switching lanes at the right time.
+3. **Avoid hazards and blocks** to preserve speed and durability.
+4. **Manage cargo** (capacity changes per level) and dump wrong items if needed.
+5. **Match a Barangay’s demand** exactly to complete a delivery and score higher.
+6. **Survive longer** as difficulty and disaster events increase the challenge.
 
 
 ## Scavenge Smartly
 
-You have limited inventory slots in your truck bed. You can miss crucial items, and you can mistakenly pick up unwanted items. Picking up the wrong resource takes up a valuable slot! Use the single-button "Dump Cargo" mechanic to jettison unwanted cargo—this saves your inventory, but costs valuable time. You must reach the Barangay with the exact match of demand to fulfill the Quest and score maximum points.
+Your truck’s **cargo capacity changes per level**, so you’ll need to adapt your strategy each run. You can miss crucial items, and you can mistakenly pick up unwanted items. Picking up the wrong resource takes up valuable space! Use the single-button "Dump Cargo" mechanic to jettison unwanted cargo—this saves your inventory, but costs valuable time. You must reach the Barangay with the exact match of demand to fulfill the Quest and score maximum points.
 
 Bayanihan Res-Q isn't just a game of speed; it's a game of split-second accuracy and reflex under pressure!
 
@@ -50,7 +76,28 @@ Bayanihan Res-Q isn't just a game of speed; it's a game of split-second accuracy
 
 ## 🌪️ Random Disaster Events (Philippines)
 
-To keep each run unpredictable (and grounded in real local risks), the game includes **random events** like **typhoons**, **flooding**, **earthquakes**, **volcanic eruptions**, and other disasters common in the Philippines. These events can temporarily change the environment, hazards, visuals, and audio.
+To keep each run unpredictable (and grounded in real local risks), the game includes **random events** inspired by disasters common in the Philippines. Events should be **short**, **clearly telegraphed**, and **fair** (players should understand what changed and why they got hit).
+
+Examples (tune during playtests):
+
+* **Typhoon**
+	- Visuals: stronger rain/wind, darker sky, occasional lightning.
+	- Gameplay: reduced visibility, more debris patterns, slightly increased hazard frequency.
+	- Audio: wind layers + rain intensity ramp.
+* **Flooding**
+	- Visuals: more water pooling and muddy sections.
+	- Gameplay: more slow zones and “flooded pothole” hazards; safe lanes still exist (avoid unavoidable damage).
+	- Audio: water splashes and muffled ambience.
+* **Earthquake / Aftershocks**
+	- Visuals: brief camera shake (optionally reduced), dust puffs, new cracks/debris.
+	- Gameplay: short aftershock moments that reshuffle obstacle patterns (telegraphed with rumble + dust).
+	- Audio: rumble + impact cues.
+* **Volcanic Eruption / Ashfall**
+	- Visuals: ash particles, hazy air, darker palette.
+	- Gameplay: periodic ash clouds that reduce visibility; falling debris as hard blocks.
+	- Audio: distant rumbles + falling grit.
+* **Other local hazards (optional)**
+	- Landslides, storm surge, road collapses, etc., as long as they remain readable and balanced.
 
 ## 🛠️ Student Group Roles (Game Development)
 
@@ -97,6 +144,34 @@ Building this game is a class-wide collaboration. Students are organized into th
 	- Create clear feedback for success/failure (matched delivery, wrong item, low fuel, durability warnings) with minimal screen clutter.
 	- Provide UI states for random events (event banner, subtle warnings, accessibility-friendly colors/contrast).
 	- Deliverables: UI layout mockups, UI asset pack (icons, frames, bars), and a style guide (type sizes, spacing, colors).
+
+## ✅ Milestones (Suggested for Student Teams)
+
+* **Milestone 1: Vertical Slice**
+	- One playable run loop (movement → pickups → hazards → delivery match → fail state).
+* **Milestone 2: One Event End-to-End**
+	- Implement 1 random disaster event with visuals + gameplay effect + sound layer.
+* **Milestone 3: UI + Feedback Pass**
+	- Make sure kids can understand what happened (clear warnings, clear success/fail feedback).
+* **Milestone 4: Audio Pass**
+	- Add core SFX + one ambience layer per environment.
+* **Milestone 5: Classroom Playtest Build**
+	- A stable build for testing and iteration.
+
+## 🧪 Playtesting With Kids (Quick Checklist)
+
+* Can a new player explain the goal after **10 seconds**?
+* Do they understand why collecting the **wrong item** is bad?
+* Are hazards readable at speed (shape + color + consistent behavior)?
+* Does it feel challenging but still **fun** (not punishing)?
+* Are comfort options available (reduced shake, volume control)?
+
+## 🤝 Student Dev Workflow (Suggested)
+
+* **Single source of truth:** keep requirements in this README (update as decisions change).
+* **Asset handoff:** each art/audio group provides export-ready files + a short “integration notes” sheet.
+* **Naming conventions:** consistent names for events, hazards, and resources (e.g., `event_typhoon`, `hazard_flood_pothole`).
+* **Integration cadence:** set a weekly merge day where Developers integrate new assets and produce a playable build.
 
 ## 🚀 Technical Implementation (Godot 4)
 
