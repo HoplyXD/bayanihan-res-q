@@ -11,7 +11,7 @@
 
 **Bayanihan Res-Q** is a student-built mobile game project developed by college students. The goal is to create an action game that’s **fun to play** while also teaching **young players** the basics of disaster preparedness, smart relief distribution, and the spirit of **bayanihan**.
 
-In Bayanihan Res-Q, you are a "Hero on the Road"—part of a specialized emergency response unit. Disaster has struck the region, leaving countless communities in urgent need of aid. But this is no standard delivery mission. The roads are chaotic, and you enter the crisis empty-handed.
+In Bayanihan Res-Q, you are a "Hero on the Road"—part of a specialized emergency response unit. Disaster has struck the region, leaving countless communities in urgent need of aid. But this is no standard delivery mission. The roads are chaotic, and you enter the crisis empty-handed. In flooded areas, your rescue truck can switch into a rescue boat so you can continue the mission across water-heavy zones.
 
 ## 🧠 Learning Objectives (Kid-Friendly)
 
@@ -30,7 +30,7 @@ By playing (and repeating runs), young players should gradually learn to:
 
 ## The Challenge
 
-Your truck is racing at high speed into the disaster zone! As you dash along the winding, 3-lane road, essential relief goods (Rice, Water, Meds) will appear as "pickups" on the road lanes, having been strategically airdropped by logistics teams. You must manually lane-switch rapidly, weaving left and right to active-collect the exact combo of resources needed by the flashing Barangay demand icons at the top of your screen.
+Your truck is racing at high speed into the disaster zone! As you dash along the winding, 3-lane road, essential relief goods (Rice, Water, Meds) will appear as "pickups" on the road lanes, having been strategically airdropped by logistics teams. When flood segments appear, the vehicle can switch from truck mode to boat mode to keep moving through deep water. You must manually lane-switch rapidly, weaving left and right to active-collect the exact combo of resources needed by the flashing Barangay demand icons at the top of your screen.
 
 ## Look Out!
 
@@ -86,7 +86,7 @@ Examples (tune during playtests):
 	- Audio: wind layers + rain intensity ramp.
 * **Flooding**
 	- Visuals: more water pooling and muddy sections.
-	- Gameplay: more slow zones and “flooded pothole” hazards; safe lanes still exist (avoid unavoidable damage).
+	- Gameplay: more slow zones and “flooded pothole” hazards; deeper water segments trigger a truck-to-boat switch so players can traverse flooded areas; safe lanes still exist (avoid unavoidable damage).
 	- Audio: water splashes and muffled ambience.
 * **Earthquake / Aftershocks**
 	- Visuals: brief camera shake (optionally reduced), dust puffs, new cracks/debris.
