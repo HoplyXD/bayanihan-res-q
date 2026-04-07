@@ -45,20 +45,58 @@ Bayanihan Res-Q isn't just a game of speed; it's a game of split-second accuracy
 1. **Accessible Education:** By focusing on reflex and matching, we made a complex topic (disaster response) friendly and engaging for kids, teaching the importance of community support (Bayanihan) in a crisis.
 2. **Data with Dignity:** We moved away from cold, numbers-only data, visualizing the human need through personalized "SMS Alerts" from residents.
 3. **Real-World Lessons:**
-    * **The Right Aid:** The game strictly penalizes "Wrong Item" collection to teach students that unsolicited/wrong donations can clog up relief efforts in real life.
-    * **Efficiency under Pressure:** The core loop teaches split-second decision-making: "Do I risk the flood to get that rare medicine, or stay safe?"
+	* **The Right Aid:** The game strictly penalizes "Wrong Item" collection to teach students that unsolicited/wrong donations can clog up relief efforts in real life.
+	* **Efficiency under Pressure:** The core loop teaches split-second decision-making: "Do I risk the flood to get that rare medicine, or stay safe?"
 
-## 🛠️ The "Department Model" Group Assignments
+## 🌪️ Random Disaster Events (Philippines)
 
-Building this game required the synchronized efforts of 30+ students working as functional departments. This is how the class was structured:
+To keep each run unpredictable (and grounded in real local risks), the game includes **random events** like **typhoons**, **flooding**, **earthquakes**, **volcanic eruptions**, and other disasters common in the Philippines. These events can temporarily change the environment, hazards, visuals, and audio.
 
-| Group | Department | Task | Primary Godot Node Focus |
-| --- | --- | --- | --- |
-| Group 1: Logistics Tech | The Matchmaker (Engine) | Codes the "Demand Match" logic. Compares the Current Inventory (from UI) against the Barangay Demand (from Spawner) to calculate success or failure signals. | Singleton (Global), Signal |
-| Group 2: Map & Intel | The World (Level Design) | Uses Godot's TileMap and ParallaxScrolling to dynamically generate an infinite, stylized road system that flows downwards. They create the base layers (road, water, grass). | TileMap, ParallaxLayer |
-| Group 3: The "Events" Team | The Spawner (Storyteller) | Design and spawn logical "patterns" of road items: resources, hazards (water), and blocks (debris). They balance the "Rarity"—e.g., Medicine is rare, Rice is common. | Area2D (for triggers), RandomNumberGenerator |
-| Group 4: Inventory UI | The Dashboard (Interface) | Design the single-hand portrait control panel. Create the dynamic HBoxContainer for the 3 visual cargo slots, the Durability progress bar, and the "SMS News Ticker" at the bottom. | HBoxContainer, ProgressBar, Anchor |
-| Group 5: Fleet Group | The Magnet (Units) | Codes the 3-lane horizontal snapping movement logic. Programs the truck's "Pick-up Area." When the truck overlaps a resource, it adds the item to the inventory list and triggers collection animations. | Area2D (for collection), move_and_slide() or Tween (for lane movement) |
+## 🛠️ Student Group Roles (Game Development)
+
+Building this game is a class-wide collaboration. Students are organized into the following roles:
+
+- **Group 1: Rescue Vehicle / Rescue Boat Design**
+	- Design the main rescue vehicle(s) and rescue boat as usable game-ready assets (silhouette, proportions, readable at phone size).
+	- Create the visual states needed for gameplay feedback (idle, movement, impact, shielded, low durability, etc.).
+	- Define how the vehicle communicates gameplay info through visuals (pickup “magnet” area hint, durability cues, speed boost FX attachment points).
+	- Deliverables: sprite sheets / textures (or 2D/3D assets), animation list, color palette, and export-ready files for Godot.
+
+- **Group 2: Earthquake Environment**
+	- Build the earthquake-themed environment look (cracked roads, rubble, fallen posts, dust, broken signage) that fits the Philippines setting.
+	- Design earthquake event variations that affect difficulty (lane debris patterns, aftershock screen shake, temporary visibility dust).
+	- Specify hazard/block visuals so players can read them instantly at high speed (clear shapes, strong contrast, consistent hitboxes).
+	- Deliverables: tile/prop set, background/parallax layers, earthquake event art/VFX list, and example “pattern” sketches for spawners.
+
+- **Group 3: Flood/Typhoon Environment**
+	- Create flood and typhoon visuals: rain intensity, wind-driven debris, rising water, puddles/mud, and stormy sky layers.
+	- Define how flood hazards behave in-game (slow zones, slippery sections, waterlogged potholes) and how they are telegraphed.
+	- Propose typhoon random-event effects (reduced visibility, stronger hazard frequency, gust FX, lightning flashes) while staying fair.
+	- Deliverables: water/mud tiles, rain/wind VFX assets, parallax backgrounds, and a short “event rules” sheet for developers.
+
+- **Group 4: Volcanic Eruption Environment**
+	- Design a volcanic eruption environment set: ashfall, darkened skies, lava glow accents, falling rocks, and evacuation signage.
+	- Plan eruption event phases (calm → ashfall → heavier debris) that progressively change hazards and atmosphere during a run.
+	- Create readable hazard art for eruption-specific obstacles (hot debris, ash clouds, blocked roads), consistent with gameplay hit rules.
+	- Deliverables: volcanic tiles/props, ash/debris VFX list, background layers, and eruption phase reference frames.
+
+- **Group 5: Sound Design**
+	- Create the game’s audio identity: UI clicks, pickup sounds, hazard hits, block crashes, shield/speed/fuel sounds, and ambience.
+	- Build event-based audio layers for random disasters (rain/wind for typhoon, rumble for earthquake, ashfall/debris for eruption).
+	- Define mixing priorities so gameplay remains readable (alerts and critical feedback cut through ambience; avoid ear fatigue).
+	- Deliverables: SFX set (normalized), ambience loops, simple audio-mix notes, and naming conventions for easy integration.
+
+- **Group 6: Developers**
+	- Implement gameplay systems in Godot 4: movement/lane switching, spawning/pattern logic, inventory, demand matching, scoring, and fail states.
+	- Integrate environments and random events so they modify visuals/hazards/audio via reusable systems (signals, timers, difficulty scaling).
+	- Maintain the project structure and build stability (scene organization, naming conventions, version control hygiene, merge conflict resolution).
+	- Deliverables: working scenes/scripts, event system hooks, integration of assets from other groups, and playable builds for feedback.
+
+- **Group 7: Game UI Design**
+	- Design the portrait mobile UI: demand icons, cargo slots, durability, fuel, score, and the “SMS Alert / News Ticker” readability.
+	- Create clear feedback for success/failure (matched delivery, wrong item, low fuel, durability warnings) with minimal screen clutter.
+	- Provide UI states for random events (event banner, subtle warnings, accessibility-friendly colors/contrast).
+	- Deliverables: UI layout mockups, UI asset pack (icons, frames, bars), and a style guide (type sizes, spacing, colors).
 
 ## 🚀 Technical Implementation (Godot 4)
 
