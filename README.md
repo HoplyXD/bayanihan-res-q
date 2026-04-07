@@ -2,6 +2,10 @@
 
 > "The faster you dash, the more you save!"
 
+## 🎥 Video Overview
+
+Watch the project overview here: [Bayanihan Res-Q Video Overview](https://youtu.be/M1R4Uc-STFo)
+
 ## 🎮 Game Summary
 
 * **Genre:** Fast-Paced Action Puzzler / Vertical Scavenger-Runner
