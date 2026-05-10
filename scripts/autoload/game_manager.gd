@@ -21,6 +21,8 @@ signal speed_changed(speed: float)
 signal demand_updated(demand: Array)
 signal level_up(level: int)
 signal combo_changed(combo: int)
+signal game_paused
+signal game_resumed
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -126,7 +128,15 @@ func dump_cargo() -> void:
 	inventory.clear()
 	emit_signal("inventory_changed", inventory)
 
+func pause() -> void:
+	get_tree().paused = true
+	emit_signal("game_paused")
 
+func resume() -> void:
+	get_tree().paused = false
+	game_running = true
+	emit_signal("game_resumed")
+	
 # ---------------------------------------------------------------------------
 # Hazards & blocks
 # ---------------------------------------------------------------------------

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bs4rl7ia5qo0c"]
+
+[ext_resource type="Texture2D" uid="uid://cbwhq87af00np" path="res://assets/Team 1 Concept Art.png" id="1_cmhrf"]
+[ext_resource type="Script" uid="uid://ba3vdgnuvuecd" path="res://scripts/main_menu.gd" id="1_d2nv2"]
+
+[node name="Menu" type="Node2D" unique_id=526888199]
+script = ExtResource("1_d2nv2")
+
+[node name="Team1ConceptArt" type="Sprite2D" parent="." unique_id=2080936745]
+position = Vector2(531.99994, 958)
+scale = Vector2(1.8464164, 2.6768377)
+texture = ExtResource("1_cmhrf")
+
+[node name="Start" type="Button" parent="." unique_id=1900214674]
+offset_left = 192.0
+offset_top = 401.0
+offset_right = 868.0
+offset_bottom = 568.0
+theme_override_font_sizes/font_size = 64
+text = "Start"
+
+[node name="Settings" type="Button" parent="." unique_id=2042687930]
+offset_left = 196.0
+offset_top = 788.0
+offset_right = 872.0
+offset_bottom = 955.0
+theme_override_font_sizes/font_size = 64
+text = "Settings
+"
+
+[node name="Exit" type="Button" parent="." unique_id=2052458067]
+offset_left = 197.0
+offset_top = 1177.0
+offset_right = 873.0
+offset_bottom = 1344.0
+theme_override_font_sizes/font_size = 64
+text = "Exit
+"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
