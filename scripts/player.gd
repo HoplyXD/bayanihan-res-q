@@ -51,8 +51,8 @@ func _input(event: InputEvent) -> void:
 		match event.physical_keycode:
 			KEY_A, KEY_LEFT:   switch_lane(-1)
 			KEY_D, KEY_RIGHT:  switch_lane(1)
-			KEY_BACKSPACE:     GameManager.dump_cargo()
-			KEY_SPACE:         GameManager.pause()
+			KEY_SPACE:         GameManager.dump_cargo()
+			KEY_ESCAPE:        GameManager.pause()
 
 	# ── Touch (portrait, single-handed) ───────────────────────────────────
 	if event is InputEventScreenTouch and event.pressed:

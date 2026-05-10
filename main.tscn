@@ -25,7 +25,8 @@ script = ExtResource("3_spawner")
 [node name="Player" parent="." unique_id=1953807204 instance=ExtResource("4_player")]
 position = Vector2(540, 1650)
 
-[node name="HUD" parent="." unique_id=87955094 instance=ExtResource("5_hud")]
-
 [node name="Pause_Menu" parent="." unique_id=1104614468 instance=ExtResource("6_7mycd")]
-visible = false
+process_mode = 3
+layer = 11
+
+[node name="HUD" parent="." unique_id=87955094 instance=ExtResource("5_hud")]

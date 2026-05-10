@@ -73,7 +73,14 @@ func _process(delta: float) -> void:
 		return
 	_drain_fuel(delta)
 
-
+func _notification(what: int) -> void:
+	if not game_running:
+		return
+	match what:
+		NOTIFICATION_APPLICATION_FOCUS_OUT:  # phone / tab switch
+			pause()
+		NOTIFICATION_WM_WINDOW_FOCUS_OUT:    # desktop window unfocus
+			pause()
 # ---------------------------------------------------------------------------
 # Game flow
 # ---------------------------------------------------------------------------

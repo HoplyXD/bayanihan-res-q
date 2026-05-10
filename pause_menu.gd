@@ -1,18 +1,25 @@
-extends Node2D
+extends CanvasLayer
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	visible = false
+	GameManager.game_paused.connect(_on_paused)
+	GameManager.game_resumed.connect(_on_resumed)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_paused() -> void:
+	visible = true
+
+func _on_resumed() -> void:
+	visible = false
 
 func _on_resume_pressed() -> void:
-	pass # Replace with function body.
+	GameManager.resume()
 
 func _on_restart_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().paused = false
+	GameManager.end_game("RESTARTED") 
+	get_tree().reload_current_scene()
 
 func _on_return_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().paused = false
+	GameManager.end_game("RETURN TO MENU") 
+	get_tree().change_scene_to_file("res://main_menu.tscn")
