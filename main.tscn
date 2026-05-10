@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dby1t5rbgx3qv"]
 
+[ext_resource type="PackedScene" uid="uid://ckpoygsyaerjm" path="res://scenes/hazards/hazard.tscn" id="1_272bh"]
 [ext_resource type="Script" uid="uid://banqmpk3n4ytu" path="res://scripts/road_scroll.gd" id="1_roadscroll"]
 [ext_resource type="Script" uid="uid://cd1cn3m884jqs" path="res://scripts/road_panel.gd" id="2_roadpanel"]
 [ext_resource type="Script" uid="uid://bumoffyetmctx" path="res://scripts/spawner.gd" id="3_spawner"]
@@ -8,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://c4dj4uamatm8i" path="res://pause_menu.tscn" id="6_7mycd"]
 
 [node name="Main" type="Node2D" unique_id=1819170390]
+
+[node name="Hazard" parent="." unique_id=664916071 instance=ExtResource("1_272bh")]
 
 [node name="RoadScroll" type="Node2D" parent="." unique_id=989939033]
 script = ExtResource("1_roadscroll")
@@ -30,3 +33,6 @@ process_mode = 3
 layer = 11
 
 [node name="HUD" parent="." unique_id=87955094 instance=ExtResource("5_hud")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=545668677]
+position = Vector2(529, 952)

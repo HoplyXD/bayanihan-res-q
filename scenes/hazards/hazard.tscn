@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://ckpoygsyaerjm"]
+
+[ext_resource type="Script" uid="uid://b45hjxxwcttm1" path="res://scripts/hazard_event.gd" id="1_idyoq"]
+[ext_resource type="Texture2D" uid="uid://c4wstwdstpm0s" path="res://icon.svg" id="2_34h3q"]
+
+[node name="Hazard" type="CanvasLayer" unique_id=499371632]
+script = ExtResource("1_idyoq")
+
+[node name="Typhoon" type="Sprite2D" parent="." unique_id=42038332]
+visible = false
+self_modulate = Color(0.31, 0.31, 0.31, 0.5882353)
+position = Vector2(547, 966)
+scale = Vector2(8.59375, 15.1875)
+texture = ExtResource("2_34h3q")
+
+[node name="Flooding" type="Sprite2D" parent="." unique_id=304329371]
+visible = false
+self_modulate = Color(0, 1, 1, 0.39215687)
+position = Vector2(547, 966)
+scale = Vector2(8.594, 15.188)
+texture = ExtResource("2_34h3q")
+
+[node name="Earthquake" type="Sprite2D" parent="." unique_id=727956765]
+visible = false
+self_modulate = Color(1, 1, 0, 0.19607843)
+position = Vector2(547, 966)
+scale = Vector2(8.594, 15.188)
+texture = ExtResource("2_34h3q")
+
+[node name="Volcanic" type="Sprite2D" parent="." unique_id=2067799884]
+visible = false
+self_modulate = Color(0.23921569, 0, 0, 0.5882353)
+position = Vector2(547, 966)
+scale = Vector2(8.594, 15.188)
+texture = ExtResource("2_34h3q")

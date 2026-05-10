@@ -1,6 +1,4 @@
 ## Spawner — Group 3: Events Team
-## Instantiates road items in random lanes with weighted rarity.
-## Speed and spawn-rate increase over time for escalating difficulty.
 extends Node2D
 
 const LANE_POSITIONS: Array[float] = [270.0, 540.0, 810.0]
@@ -11,9 +9,8 @@ const SPAWN_INTERVAL_MIN:   float = 0.45
 const INTERVAL_DECREASE:    float = 0.04
 const DIFFICULTY_TICK:      float = 12.0
 
-# Spawn weights aligned to ItemBase.ItemType enum order:
-# [RICE, WATER, MEDS, HAZARD, BLOCK, SHIELD, SPEED_BOOST, FUEL, REPAIR]
-var _spawn_weights: Array[int] = [22, 18, 12, 16, 8, 3, 3, 12, 6]
+# [RICE=0, WATER=1, MEDS=2, HAZARD=3, BLOCK=4, SHIELD=5, SPEED=6, FUEL=7, REPAIR=8]
+var _spawn_weights: Array[int] = [22, 18, 12, 12, 8, 3, 3, 16, 6]
 
 var _item_scene: PackedScene = preload("res://scenes/items/item.tscn")
 
@@ -23,13 +20,13 @@ var _spawn_interval: float = SPAWN_INTERVAL_START
 
 
 func _ready() -> void:
+	add_to_group("spawner")   # so hazard_event can find this node
 	GameManager.level_up.connect(_on_level_up)
 
 
 func _process(delta: float) -> void:
 	if not GameManager.game_running:
 		return
-
 	_spawn_timer += delta
 	_diff_timer  += delta
 
@@ -46,10 +43,9 @@ func _process(delta: float) -> void:
 func _spawn_item() -> void:
 	var lane: int      = randi() % 3
 	var type_idx: int  = _weighted_random()
-
 	var item: ItemBase = _item_scene.instantiate() as ItemBase
-	item.item_type = type_idx as ItemBase.ItemType
-	item.position  = Vector2(LANE_POSITIONS[lane], SPAWN_Y)
+	item.item_type     = type_idx as ItemBase.ItemType
+	item.position      = Vector2(LANE_POSITIONS[lane], SPAWN_Y)
 	add_child(item)
 
 
@@ -69,8 +65,7 @@ func _weighted_random() -> int:
 func _on_level_up(lvl: int) -> void:
 	if lvl <= 1:
 		return
-	# Ramp up danger each level; resources diminish slightly
-	_spawn_weights[3] = min(_spawn_weights[3] + 2, 26)   # HAZARD
-	_spawn_weights[4] = min(_spawn_weights[4] + 1, 14)   # BLOCK
-	_spawn_weights[0] = max(_spawn_weights[0] - 2, 10)   # RICE
-	_spawn_weights[1] = max(_spawn_weights[1] - 1, 10)   # WATER
+	_spawn_weights[3] = min(_spawn_weights[3] + 2, 26)  # HAZARD
+	_spawn_weights[4] = min(_spawn_weights[4] + 1, 14)  # BLOCK
+	_spawn_weights[0] = max(_spawn_weights[0] - 2, 10)  # RICE
+	_spawn_weights[1] = max(_spawn_weights[1] - 1, 10)  # WATER
