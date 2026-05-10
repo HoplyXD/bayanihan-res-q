@@ -63,7 +63,7 @@ func _on_level_up(lvl: int) -> void:
 		_event_weights[4] = min(_event_weights[4] + 1, 25)
 
 	if lvl <= 3 or lvl == 5 or lvl == 6:
-		_apply_event.call_deferred(3)   # CALM
+		_apply_event.call_deferred(0)   # CALM
 	elif lvl == 4:
 		_apply_event.call_deferred(3)   # EARTHQUAKE
 	elif lvl == 7:
