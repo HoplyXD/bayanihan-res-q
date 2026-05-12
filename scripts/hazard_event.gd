@@ -54,14 +54,14 @@ func _roll_next_anim_time() -> void:
 func _on_level_up(lvl: int) -> void:
 	if lvl <= 1:
 		return
-
+	if lvl ==2:
+		GameManager.play_dialogue(2)
 	if lvl >= 8:
 		_event_weights[0] = max(_event_weights[0] - 2, 10)
 		_event_weights[1] = min(_event_weights[1] + 1, 25)
 		_event_weights[2] = min(_event_weights[2] + 1, 25)
 		_event_weights[3] = min(_event_weights[3] + 1, 25)
 		_event_weights[4] = min(_event_weights[4] + 1, 25)
-
 	if lvl <= 3 or lvl == 5 or lvl == 6:
 		_apply_event.call_deferred(0)   # CALM
 	elif lvl == 4:

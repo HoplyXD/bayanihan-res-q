@@ -1,9 +1,9 @@
 ## Player — Group 5: Fleet Group
 ## Handles 3-lane snapping movement, visuals drawn via _draw(),
-## and item pickup via a child Area2D.
+## and item pickup via a child Area2D.2
 extends CharacterBody2D
 
-const LANE_POSITIONS: Array[float] = [270.0, 540.0, 810.0]
+const LANE_POSITIONS: Array[float] = [250.0, 540.0, 830.0]
 const LANE_SWITCH_SPEED: float     = 18.0   # tween duration divisor
 
 var current_lane: int  = 1

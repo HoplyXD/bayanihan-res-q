@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c4dj4uamatm8i"]
 
 [ext_resource type="Texture2D" uid="uid://cbwhq87af00np" path="res://assets/Team 1 Concept Art.png" id="1_hdmo1"]
-[ext_resource type="Script" uid="uid://d0xpefu3cj5is" path="res://pause_menu.gd" id="1_nwcfo"]
+[ext_resource type="Script" uid="uid://d0xpefu3cj5is" path="res://scripts/pause_menu.gd" id="1_nwcfo"]
 
 [node name="Pause_Menu" type="CanvasLayer" unique_id=565456883]
 script = ExtResource("1_nwcfo")

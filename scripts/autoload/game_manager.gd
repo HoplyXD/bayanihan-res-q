@@ -23,6 +23,7 @@ signal level_up(level: int)
 signal combo_changed(combo: int)
 signal game_paused
 signal game_resumed
+signal dialogue_requested(id: int)
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -103,6 +104,7 @@ func start_game() -> void:
 	emit_signal("inventory_changed",  inventory)
 	emit_signal("level_up",           level)
 	emit_signal("combo_changed",      combo)
+	play_dialogue(1)
 
 
 func end_game(reason: String) -> void:
@@ -250,3 +252,6 @@ func _save_high_score() -> void:
 	var cfg := ConfigFile.new()
 	cfg.set_value("game", "high_score", high_score)
 	cfg.save("user://save.cfg")
+
+func play_dialogue(id: int) -> void:
+	emit_signal("dialogue_requested", id)

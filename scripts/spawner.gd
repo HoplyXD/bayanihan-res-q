@@ -1,7 +1,7 @@
 ## Spawner — Group 3: Events Team
 extends Node2D
 
-const LANE_POSITIONS: Array[float] = [270.0, 540.0, 810.0]
+const LANE_POSITIONS: Array[float] = [250.0, 540.0, 830.0]
 const SPAWN_Y: float = -110.0
 
 const SPAWN_INTERVAL_START: float = 1.20

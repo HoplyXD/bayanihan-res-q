@@ -22,4 +22,4 @@ func _on_restart_pressed() -> void:
 func _on_return_pressed() -> void:
 	get_tree().paused = false
 	GameManager.end_game("RETURN TO MENU") 
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

@@ -18,20 +18,20 @@ const STRIPE_GAP: float = 60.0
 const STRIPE_W: float   = 6.0
 
 
-func _draw() -> void:
+#func _draw() -> void:
 	# ── Grass / shoulders ─────────────────────────────────────────────────
-	draw_rect(Rect2(0, 0, W, H), Color(0.16, 0.48, 0.10))
+	#draw_rect(Rect2(0, 0, W, H), Color(0.16, 0.48, 0.10))
 
 	# ── Road surface ──────────────────────────────────────────────────────
-	draw_rect(Rect2(ROAD_LEFT, 0, ROAD_RIGHT - ROAD_LEFT, H), Color(0.22, 0.22, 0.22))
+	#draw_rect(Rect2(ROAD_LEFT, 0, ROAD_RIGHT - ROAD_LEFT, H), Color(0.22, 0.22, 0.22))
 
 	# ── Road edge lines (solid yellow) ────────────────────────────────────
-	draw_rect(Rect2(ROAD_LEFT, 0, 7, H), Color(0.95, 0.82, 0.08))
-	draw_rect(Rect2(ROAD_RIGHT - 7, 0, 7, H), Color(0.95, 0.82, 0.08))
+	#draw_rect(Rect2(ROAD_LEFT, 0, 7, H), Color(0.95, 0.82, 0.08))
+	#draw_rect(Rect2(ROAD_RIGHT - 7, 0, 7, H), Color(0.95, 0.82, 0.08))
 
 	# ── Lane dividers (dashed white) ──────────────────────────────────────
-	var y: float = 0.0
-	while y < H:
-		draw_rect(Rect2(DIV1 - STRIPE_W * 0.5, y, STRIPE_W, STRIPE_H), Color(0.9, 0.9, 0.9, 0.7))
-		draw_rect(Rect2(DIV2 - STRIPE_W * 0.5, y, STRIPE_W, STRIPE_H), Color(0.9, 0.9, 0.9, 0.7))
-		y += STRIPE_H + STRIPE_GAP
+	#var y: float = 0.0
+	#while y < H:
+	#	draw_rect(Rect2(DIV1 - STRIPE_W * 0.5, y, STRIPE_W, STRIPE_H), Color(0.9, 0.9, 0.9, 0.7))
+	#	draw_rect(Rect2(DIV2 - STRIPE_W * 0.5, y, STRIPE_W, STRIPE_H), Color(0.9, 0.9, 0.9, 0.7))
+	#	y += STRIPE_H + STRIPE_GAP
