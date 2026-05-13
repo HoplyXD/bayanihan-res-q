@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c4dj4uamatm8i"]
+
+[ext_resource type="Texture2D" uid="uid://cbwhq87af00np" path="res://assets/Team 1 Concept Art.png" id="1_hdmo1"]
+[ext_resource type="Script" uid="uid://d0xpefu3cj5is" path="res://scripts/pause_menu.gd" id="1_nwcfo"]
+
+[node name="Pause_Menu" type="CanvasLayer" unique_id=565456883]
+script = ExtResource("1_nwcfo")
+
+[node name="Team1ConceptArt" type="Sprite2D" parent="." unique_id=313573437]
+modulate = Color(1, 1, 1, 0.11764706)
+position = Vector2(541, 963.25)
+scale = Vector2(1.8430034, 2.6650484)
+texture = ExtResource("1_hdmo1")
+
+[node name="Resume" type="Button" parent="." unique_id=1325166324]
+offset_left = 192.0
+offset_top = 401.0
+offset_right = 868.0
+offset_bottom = 568.0
+theme_override_font_sizes/font_size = 64
+text = "Resume"
+
+[node name="Restart" type="Button" parent="." unique_id=1218741597]
+offset_left = 195.0
+offset_top = 802.0
+offset_right = 871.0
+offset_bottom = 969.0
+theme_override_font_sizes/font_size = 64
+text = "Restart"
+
+[node name="Return" type="Button" parent="." unique_id=2145540258]
+offset_left = 198.0
+offset_top = 1203.0
+offset_right = 874.0
+offset_bottom = 1370.0
+theme_override_font_sizes/font_size = 64
+text = "Return to Menu"
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]

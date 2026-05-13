@@ -21,6 +21,9 @@ signal speed_changed(speed: float)
 signal demand_updated(demand: Array)
 signal level_up(level: int)
 signal combo_changed(combo: int)
+signal game_paused
+signal game_resumed
+signal dialogue_requested(id: int)
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -71,7 +74,14 @@ func _process(delta: float) -> void:
 		return
 	_drain_fuel(delta)
 
-
+func _notification(what: int) -> void:
+	if not game_running:
+		return
+	match what:
+		NOTIFICATION_APPLICATION_FOCUS_OUT:  # phone / tab switch
+			pause()
+		NOTIFICATION_WM_WINDOW_FOCUS_OUT:    # desktop window unfocus
+			pause()
 # ---------------------------------------------------------------------------
 # Game flow
 # ---------------------------------------------------------------------------
@@ -94,6 +104,7 @@ func start_game() -> void:
 	emit_signal("inventory_changed",  inventory)
 	emit_signal("level_up",           level)
 	emit_signal("combo_changed",      combo)
+	play_dialogue(1)
 
 
 func end_game(reason: String) -> void:
@@ -126,7 +137,15 @@ func dump_cargo() -> void:
 	inventory.clear()
 	emit_signal("inventory_changed", inventory)
 
+func pause() -> void:
+	get_tree().paused = true
+	emit_signal("game_paused")
 
+func resume() -> void:
+	get_tree().paused = false
+	game_running = true
+	emit_signal("game_resumed")
+	
 # ---------------------------------------------------------------------------
 # Hazards & blocks
 # ---------------------------------------------------------------------------
@@ -233,3 +252,6 @@ func _save_high_score() -> void:
 	var cfg := ConfigFile.new()
 	cfg.set_value("game", "high_score", high_score)
 	cfg.save("user://save.cfg")
+
+func play_dialogue(id: int) -> void:
+	emit_signal("dialogue_requested", id)

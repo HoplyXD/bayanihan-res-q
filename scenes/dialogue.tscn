@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://btvrrbkl82bqr"]
+
+[ext_resource type="Script" uid="uid://igbf5f5r4ww0" path="res://scripts/dialogue.gd" id="1_jwyou"]
+
+[node name="Dialogue" type="CanvasLayer" unique_id=179663980]
+script = ExtResource("1_jwyou")
+
+[node name="Control" type="Panel" parent="." unique_id=1843343477]
+offset_left = 85.0
+offset_top = 326.0
+offset_right = 1010.0
+offset_bottom = 545.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1630340223]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="Control/VBoxContainer" unique_id=779380615]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Name"
+horizontal_alignment = 1
+
+[node name="TextLabel" type="Label" parent="Control/VBoxContainer" unique_id=412420930]
+custom_minimum_size = Vector2(925, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "Input Text"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ContinueLabel" type="Label" parent="Control/VBoxContainer" unique_id=2140495047]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "▼  tap / Enter"
+horizontal_alignment = 2
+vertical_alignment = 2

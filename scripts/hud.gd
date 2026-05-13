@@ -22,6 +22,7 @@ extends CanvasLayer
 	$InventoryContainer/Slot3 as Label,
 ]
 @onready var dump_button:   Button = $DumpButton
+@onready var pause_button: Button = $PauseButton
 @onready var shield_label:  Label  = $ShieldLabel
 
 # ── Overlays ─────────────────────────────────────────────────────────────
@@ -61,6 +62,7 @@ func _ready() -> void:
 
 	start_button.pressed.connect(_on_start_pressed)
 	dump_button.pressed.connect(GameManager.dump_cargo)
+	pause_button.pressed.connect(GameManager.pause)
 	restart_button.pressed.connect(_on_restart_pressed)
 
 	game_over_panel.visible = false

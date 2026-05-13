@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bvx2m8player1"]
 
-[ext_resource type="Script" uid="uid://c2playerscr6" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://bckepi6d6uott" path="res://scripts/player.gd" id="1_player"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(80, 160)
@@ -8,19 +8,17 @@ size = Vector2(80, 160)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pickup"]
 size = Vector2(260, 140)
 
-[node name="Player" type="CharacterBody2D"]
-collision_layer = 1
+[node name="Player" type="CharacterBody2D" unique_id=967128805]
 collision_mask = 0
 script = ExtResource("1_player")
 
-[node name="BodyCollision" type="CollisionShape2D" parent="."]
+[node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=470252640]
 shape = SubResource("RectangleShape2D_body")
 
-[node name="PickupArea" type="Area2D" parent="."]
+[node name="PickupArea" type="Area2D" parent="." unique_id=1839285225]
 collision_layer = 0
 collision_mask = 2
-monitoring = true
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=443306475]
 shape = SubResource("RectangleShape2D_pickup")
