@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjivnesu7qes0"]
+
+[ext_resource type="Texture2D" uid="uid://c2foakeun88j4" path="res://UI Deliverables/Loading Bar Overlay/LoadingBarUnder.png" id="1_1l04a"]
+[ext_resource type="Texture2D" uid="uid://dhsg5dqyaotm2" path="res://UI Deliverables/Loading Bar Overlay/LoadingBar2.png" id="1_gov4d"]
+[ext_resource type="FontFile" uid="uid://b2pkbqm63xs17" path="res://UI Deliverables/ThertoleRegular.ttf" id="3_ecfth"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+offset_right = 1080.0
+offset_bottom = 1920.0
+color = Color(0, 0, 0, 0.6666667)
+
+[node name="LoadingBar" type="TextureProgressBar" parent="HUD"]
+offset_left = 367.0
+offset_top = 885.0001
+offset_right = 400.0
+offset_bottom = 901.0001
+scale = Vector2(10, 10)
+texture_under = ExtResource("1_1l04a")
+texture_over = ExtResource("1_gov4d")
+
+[node name="LoadingText" type="Label" parent="HUD"]
+offset_left = 379.0
+offset_top = 823.0
+offset_right = 689.0
+offset_bottom = 895.0
+theme_override_colors/font_color = Color(0.9552637, 0.47050232, 0.055536367, 1)
+theme_override_fonts/font = ExtResource("3_ecfth")
+theme_override_font_sizes/font_size = 75
+text = "LOADING..."

@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://c81c5k2lf0xx"]
+
+[ext_resource type="Texture2D" uid="uid://brh5j7u3ks4qg" path="res://UI Deliverables/LogoDraft.png" id="1_fyow0"]
+[ext_resource type="Texture2D" uid="uid://cc34bb8g5jej6" path="res://UI Deliverables/Buttons/Playbutton.png" id="2_r5xy5"]
+[ext_resource type="Texture2D" uid="uid://crw4hwjpr4olc" path="res://UI Deliverables/Buttons/Menutbutton.png" id="3_3mu3u"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="LogoDraft" type="Sprite2D" parent="HUD"]
+position = Vector2(539, 683)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_fyow0")
+
+[node name="PlayButton" type="TextureButton" parent="HUD"]
+offset_left = 410.0
+offset_top = 1379.0
+offset_right = 442.0
+offset_bottom = 1411.0
+scale = Vector2(8, 8)
+texture_normal = ExtResource("2_r5xy5")
+
+[node name="MenuButton" type="TextureButton" parent="HUD"]
+offset_left = 75.0
+offset_top = 79.0
+offset_right = 107.0
+offset_bottom = 111.0
+scale = Vector2(3.5, 3.5)
+texture_normal = ExtResource("3_3mu3u")
+
+[node name="CoverArt" type="TextureRect" parent="HUD"]
+offset_right = 1080.0
+offset_bottom = 1920.0
