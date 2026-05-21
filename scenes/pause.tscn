@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://btt37dxvjcvmy"]
 
 [ext_resource type="Texture2D" uid="uid://bpymdq12l8loj" path="res://UI Deliverables/Buttons/Window2.png" id="1_05lnj"]
-[ext_resource type="FontFile" uid="uid://b2pkbqm63xs17" path="res://UI Deliverables/ThertoleRegular.ttf" id="2_jg8ls"]
-[ext_resource type="Texture2D" uid="uid://crw4hwjpr4olc" path="res://UI Deliverables/Buttons/Menutbutton.png" id="4_56vcw"]
-[ext_resource type="Texture2D" uid="uid://ddjd0t488eiwh" path="res://UI Deliverables/Buttons/replayfinal.png" id="5_56vcw"]
+[ext_resource type="FontFile" uid="uid://b2pkbqm63xs17" path="res://UI Deliverables/Fonts/ThertoleRegular.ttf" id="2_jg8ls"]
+[ext_resource type="Texture2D" uid="uid://crw4hwjpr4olc" path="res://UI Deliverables/Buttons/MenuButton.png" id="4_56vcw"]
+[ext_resource type="Texture2D" uid="uid://ddjd0t488eiwh" path="res://UI Deliverables/Buttons/ReplayButton.png" id="5_56vcw"]
 [ext_resource type="Texture2D" uid="uid://cc34bb8g5jej6" path="res://UI Deliverables/Buttons/Playbutton.png" id="5_m0a22"]
 [ext_resource type="Texture2D" uid="uid://siq20iegkalo" path="res://UI Deliverables/Buttons/Xbutton2.png" id="6_w2ufp"]
 [ext_resource type="Texture2D" uid="uid://2k4g2mglp310" path="res://UI Deliverables/Sliders (Volume)/1/Grabber.png" id="7_m0a22"]

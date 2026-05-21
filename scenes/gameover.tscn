@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://oqfro5cqyeka"]
 
 [ext_resource type="Texture2D" uid="uid://bpymdq12l8loj" path="res://UI Deliverables/Buttons/Window2.png" id="1_w3x71"]
-[ext_resource type="FontFile" uid="uid://b2pkbqm63xs17" path="res://UI Deliverables/ThertoleRegular.ttf" id="2_af4fq"]
-[ext_resource type="FontFile" uid="uid://cidnk7s46u5kg" path="res://UI Deliverables/Minecraft.ttf" id="3_g1o2j"]
-[ext_resource type="Texture2D" uid="uid://crw4hwjpr4olc" path="res://UI Deliverables/Buttons/Menutbutton.png" id="4_pn7gr"]
-[ext_resource type="Texture2D" uid="uid://ddjd0t488eiwh" path="res://UI Deliverables/Buttons/replayfinal.png" id="5_w3x71"]
+[ext_resource type="FontFile" uid="uid://b2pkbqm63xs17" path="res://UI Deliverables/Fonts/ThertoleRegular.ttf" id="2_af4fq"]
+[ext_resource type="FontFile" uid="uid://cidnk7s46u5kg" path="res://UI Deliverables/Fonts/Minecraft.ttf" id="3_g1o2j"]
+[ext_resource type="Texture2D" uid="uid://crw4hwjpr4olc" path="res://UI Deliverables/Buttons/MenuButton.png" id="4_pn7gr"]
+[ext_resource type="Texture2D" uid="uid://ddjd0t488eiwh" path="res://UI Deliverables/Buttons/ReplayButton.png" id="5_w3x71"]
 [ext_resource type="Texture2D" uid="uid://siq20iegkalo" path="res://UI Deliverables/Buttons/Xbutton2.png" id="6_7nmon"]
 
 [node name="GameOver" type="Node2D"]
@@ -108,7 +108,7 @@ scale = Vector2(5, 5)
 texture_normal = ExtResource("4_pn7gr")
 metadata/_edit_use_anchors_ = true
 
-[node name="PlayButton" type="TextureButton" parent="HUD/TextureRect"]
+[node name="ReplayButton" type="TextureButton" parent="HUD/TextureRect"]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 610.0
