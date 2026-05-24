@@ -1,7 +1,7 @@
 extends CanvasLayer
 @onready var camera: Camera2D = $"../Camera2D"
 
-# [CALM=0, TYPHOON=1, FLOODING=2, EARTHQUAKE=3, Volcanic=4]
+# [CALM=0, TYPHOON=1, FLOODING=2, EARTHQUAKE=3, VOLCANIC=4]
 var _event_weights: Array[int] = [40, 15, 15, 15, 15]
 var event_state: int = 0
 
@@ -102,7 +102,8 @@ func _apply_event(idx: int) -> void:
 
 	# Reset
 	_current_event_bonus = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-	event_state = idx            # ← THIS was missing, shake never triggered!
+	event_state = idx
+	GameManager.set_hazard_event(event_state)
 	_roll_next_anim_time()
 
 	match idx:

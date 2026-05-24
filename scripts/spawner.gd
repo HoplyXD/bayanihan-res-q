@@ -45,6 +45,7 @@ func _spawn_item() -> void:
 	var type_idx: int  = _weighted_random()
 	var item: ItemBase = _item_scene.instantiate() as ItemBase
 	item.item_type     = type_idx as ItemBase.ItemType
+	item.lane_index    = lane
 	item.position      = Vector2(LANE_POSITIONS[lane], SPAWN_Y)
 	add_child(item)
 

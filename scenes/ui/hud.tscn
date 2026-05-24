@@ -1,115 +1,84 @@
 [gd_scene format=3 uid="uid://dr6lahudscn1"]
 
 [ext_resource type="Script" uid="uid://ck03dbqybjn1a" path="res://scripts/hud.gd" id="1_hud"]
-[ext_resource type="PackedScene" uid="uid://cwvq0iotclyny" path="res://scenes/new_main.tscn" id="2_hqnrr"]
+[ext_resource type="Texture2D" uid="uid://b37qetx05te1v" path="res://UI Deliverables/Buttons/Pausebutton.png" id="3_4d46k"]
+[ext_resource type="Texture2D" uid="uid://de4iyks3m6ey" path="res://UI Deliverables/HP Bar Overlay/HPBarUnderlay.png" id="4_erw67"]
+[ext_resource type="Texture2D" uid="uid://bcd8edrd0e3w6" path="res://UI Deliverables/HP Bar Overlay/HPBarOverlay2.png" id="5_gonto"]
+[ext_resource type="Texture2D" uid="uid://b5llmg8n74tnh" path="res://UI Deliverables/HP Bar Overlay/HeartSymbol.png" id="6_cwdlq"]
+[ext_resource type="Texture2D" uid="uid://brvxkr28gfjh1" path="res://UI Deliverables/Levelnumber.png" id="7_o6xly"]
+[ext_resource type="FontFile" uid="uid://cidnk7s46u5kg" path="res://UI Deliverables/Fonts/Minecraft.ttf" id="8_we3sy"]
+[ext_resource type="Texture2D" uid="uid://c0ibkbuhr40bx" path="res://UI Deliverables/Scoreboard.png" id="9_65nxt"]
+[ext_resource type="Texture2D" uid="uid://ch3lbai4lacoc" path="res://UI Deliverables/Fuel Bar Overlay/FuelBarUnderlay.png" id="10_el1dq"]
+[ext_resource type="Texture2D" uid="uid://daec1dyte81mu" path="res://UI Deliverables/Fuel Bar Overlay/FuelBarOverlay.png" id="11_gmc6u"]
+[ext_resource type="Texture2D" uid="uid://qodqqqhxxpdc" path="res://UI Deliverables/Fuel Bar Overlay/FuelSymbol.png" id="12_1e6lo"]
+[ext_resource type="Texture2D" uid="uid://d1dev2tjkou33" path="res://UI Deliverables/Inventory/inventory-1x3.png" id="13_4mi7y"]
+[ext_resource type="Texture2D" uid="uid://ddafnbc3jbesy" path="res://UI Deliverables/Resources (icons)/Rice Icon (Detailed) .png" id="13_gonto"]
+[ext_resource type="Texture2D" uid="uid://q14u8tkjunsd" path="res://UI Deliverables/Resources (icons)/water bottle icon.png" id="14_cwdlq"]
+[ext_resource type="Texture2D" uid="uid://txrt4oai4h36" path="res://UI Deliverables/Resources (icons)/Medicine Icon (Detailed) .png" id="15_o6xly"]
+[ext_resource type="Texture2D" uid="uid://c4ewnyrc6mn3h" path="res://UI Deliverables/Inventory/inventory-highlight.png" id="16_cwdlq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwdlq"]
+atlas = ExtResource("16_cwdlq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6xly"]
+atlas = ExtResource("16_cwdlq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_we3sy"]
+atlas = ExtResource("16_cwdlq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65nxt"]
+atlas = ExtResource("16_cwdlq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_el1dq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwdlq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6xly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_we3sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65nxt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="HUD" type="CanvasLayer" unique_id=706015577]
 layer = 10
 script = ExtResource("1_hud")
 
-[node name="NewMain" parent="." unique_id=182444664 instance=ExtResource("2_hqnrr")]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1515791839]
+offset_right = 1080.0
+offset_bottom = 165.0
+color = Color(0.12941177, 0.5137255, 0.89411765, 0.60784316)
 
 [node name="TopBarBG" type="ColorRect" parent="." unique_id=248427686]
+visible = false
 offset_right = 1080.0
 offset_bottom = 185.0
 color = Color(0, 0, 0, 0.55)
 
-[node name="ScoreLabel" type="Label" parent="." unique_id=1210140190]
-offset_left = 20.0
-offset_top = 12.0
-offset_right = 380.0
-offset_bottom = 80.0
-theme_override_font_sizes/font_size = 48
-text = "Score: 0"
-
-[node name="LevelLabel" type="Label" parent="." unique_id=335123006]
-offset_left = 390.0
-offset_top = 12.0
-offset_right = 780.0
-offset_bottom = 80.0
-theme_override_colors/font_color = Color(0.6, 1, 0.6, 1)
-theme_override_font_sizes/font_size = 48
-text = "LVL 1"
-horizontal_alignment = 1
-
 [node name="ComboLabel" type="Label" parent="." unique_id=233766799]
-offset_left = 144.0
-offset_top = 262.0
-offset_right = 644.0
-offset_bottom = 320.0
+visible = false
+texture_filter = 1
+offset_left = 150.0
+offset_top = 275.0
+offset_right = 650.0
+offset_bottom = 333.0
 theme_override_colors/font_color = Color(1, 0.85, 0.1, 1)
-theme_override_font_sizes/font_size = 36
+theme_override_fonts/font = ExtResource("8_we3sy")
+theme_override_font_sizes/font_size = 50
 text = "Combo x99"
-
-[node name="DemandTitle" type="Label" parent="." unique_id=375923151]
-offset_left = 20.0
-offset_top = 90.0
-offset_right = 230.0
-offset_bottom = 175.0
-theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
-theme_override_font_sizes/font_size = 34
-text = "NEEDED:"
-
-[node name="DemandContainer" type="HBoxContainer" parent="." unique_id=1218737625]
-offset_left = 230.0
-offset_top = 88.0
-offset_right = 900.0
-offset_bottom = 182.0
-
-[node name="Demand1" type="Label" parent="DemandContainer" unique_id=921812735]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-horizontal_alignment = 1
-
-[node name="Demand2" type="Label" parent="DemandContainer" unique_id=1207434232]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-horizontal_alignment = 1
-
-[node name="Demand3" type="Label" parent="DemandContainer" unique_id=1484190560]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-horizontal_alignment = 1
-
-[node name="HPTitle" type="Label" parent="." unique_id=1830251092]
-offset_left = 920.0
-offset_top = 8.0
-offset_right = 1070.0
-offset_bottom = 55.0
-theme_override_font_sizes/font_size = 34
-text = "HP"
-horizontal_alignment = 1
-
-[node name="DurabilityBar" type="ProgressBar" parent="." unique_id=1052316134]
-offset_left = 930.0
-offset_top = 52.0
-offset_right = 1070.0
-offset_bottom = 178.0
-max_value = 3.0
-value = 3.0
-show_percentage = false
-
-[node name="FuelTitle" type="Label" parent="." unique_id=1156190459]
-offset_left = 1018.0
-offset_top = 200.0
-offset_right = 1075.0
-offset_bottom = 320.0
-theme_override_font_sizes/font_size = 22
-text = "FUEL"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FuelBar" type="ProgressBar" parent="." unique_id=1717772193]
-offset_left = 1022.0
-offset_top = 318.0
-offset_right = 1068.0
-offset_bottom = 960.0
-value = 100.0
-fill_mode = 2
-show_percentage = false
 
 [node name="ShieldLabel" type="Label" parent="." unique_id=113766983]
 visible = false
@@ -122,62 +91,20 @@ text = "🛡  SHIELD ACTIVE"
 horizontal_alignment = 1
 
 [node name="BottomBarBG" type="ColorRect" parent="." unique_id=1787920997]
+visible = false
 offset_top = 1720.0
 offset_right = 1080.0
 offset_bottom = 1920.0
 color = Color(0, 0, 0, 0.6)
 
 [node name="CargoTitle" type="Label" parent="." unique_id=748158892]
+visible = false
 offset_left = 10.0
 offset_top = 1726.0
 offset_right = 200.0
 offset_bottom = 1810.0
 theme_override_font_sizes/font_size = 36
 text = "CARGO:"
-
-[node name="InventoryContainer" type="HBoxContainer" parent="." unique_id=663001613]
-offset_left = 200.0
-offset_top = 1718.0
-offset_right = 920.0
-offset_bottom = 1820.0
-
-[node name="Slot1" type="Label" parent="InventoryContainer" unique_id=1687697675]
-custom_minimum_size = Vector2(230, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "[ ]"
-horizontal_alignment = 1
-
-[node name="Slot2" type="Label" parent="InventoryContainer" unique_id=419554625]
-custom_minimum_size = Vector2(230, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "[ ]"
-horizontal_alignment = 1
-
-[node name="Slot3" type="Label" parent="InventoryContainer" unique_id=468589742]
-custom_minimum_size = Vector2(230, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "[ ]"
-horizontal_alignment = 1
-
-[node name="DumpButton" type="Button" parent="." unique_id=893339923]
-offset_left = 240.0
-offset_top = 1832.0
-offset_right = 840.0
-offset_bottom = 1912.0
-theme_override_font_sizes/font_size = 40
-text = "DUMP CARGO  [SPACE]"
-
-[node name="PauseButton" type="Button" parent="." unique_id=1784062397]
-offset_left = 11.0
-offset_top = 190.0
-offset_right = 135.0
-offset_bottom = 308.0
-theme_override_font_sizes/font_size = 40
-text = "Pause
-[ESC]"
 
 [node name="HitFlash" type="ColorRect" parent="." unique_id=210330163]
 visible = false
@@ -195,6 +122,297 @@ offset_bottom = 960.0
 theme_override_font_sizes/font_size = 72
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PauseButton" type="TextureButton" parent="." unique_id=1961404047]
+texture_filter = 1
+offset_left = 34.0
+offset_top = 20.0
+offset_right = 66.0
+offset_bottom = 52.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("3_4d46k")
+
+[node name="HPBar" type="TextureProgressBar" parent="." unique_id=1095189049]
+texture_filter = 1
+offset_left = 154.0
+offset_top = 182.5
+offset_right = 474.0
+offset_bottom = 214.5
+scale = Vector2(2.7, 2.7)
+max_value = 3.0
+value = 3.0
+texture_under = ExtResource("4_erw67")
+texture_progress = ExtResource("5_gonto")
+
+[node name="HeartSymbol" type="Sprite2D" parent="HPBar" unique_id=1776465787]
+texture_filter = 1
+position = Vector2(-14.259266, 15.185188)
+scale = Vector2(2.9292912, 2.7946122)
+texture = ExtResource("6_cwdlq")
+
+[node name="LevelBox" type="TextureRect" parent="." unique_id=1737134216]
+texture_filter = 1
+offset_left = 172.0
+offset_top = 18.0
+offset_right = 556.0
+offset_bottom = 146.0
+texture = ExtResource("7_o6xly")
+
+[node name="LevelLabel" type="Label" parent="LevelBox" unique_id=2011518623]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9607843, 0.8980392, 0.7529412, 1)
+theme_override_fonts/font = ExtResource("8_we3sy")
+theme_override_font_sizes/font_size = 60
+text = "Level 999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreBox" type="TextureRect" parent="." unique_id=2092197638]
+texture_filter = 1
+offset_left = 562.0
+offset_top = 18.0
+offset_right = 1048.0
+offset_bottom = 146.0
+texture = ExtResource("9_65nxt")
+
+[node name="ScoreLabel" type="Label" parent="ScoreBox" unique_id=454484511]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9607843, 0.8980392, 0.7529412, 1)
+theme_override_fonts/font = ExtResource("8_we3sy")
+theme_override_font_sizes/font_size = 60
+text = "Score: 9999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FuelBar" type="TextureProgressBar" parent="." unique_id=272727742]
+texture_filter = 1
+offset_left = 939.25
+offset_top = 1444.5
+offset_right = 1259.25
+offset_bottom = 1476.5
+rotation = -1.5707964
+scale = Vector2(2.7, 2.7)
+value = 100.0
+texture_under = ExtResource("10_el1dq")
+texture_progress = ExtResource("11_gmc6u")
+
+[node name="FuelSymbol" type="Sprite2D" parent="FuelBar" unique_id=1626509568]
+texture_filter = 1
+position = Vector2(352.22223, 14.444458)
+rotation = 1.5707964
+scale = Vector2(1.5798606, 1.4467596)
+texture = ExtResource("12_1e6lo")
+
+[node name="Inventory1x3" type="Sprite2D" parent="." unique_id=1500755250]
+texture_filter = 1
+position = Vector2(560, 1806)
+scale = Vector2(7.5885415, 7.1093774)
+texture = ExtResource("13_4mi7y")
+
+[node name="Panel" type="Panel" parent="." unique_id=1476635933]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 1
+offset_left = 211.0
+offset_top = 1756.0
+offset_right = 909.0
+offset_bottom = 1906.0
+
+[node name="DemandContainer" type="HBoxContainer" parent="Panel" unique_id=1122650205]
+modulate = Color(1, 1, 1, 0.5882353)
+layout_mode = 0
+offset_top = -50.0
+offset_right = 696.0
+offset_bottom = -14.0
+theme_override_constants/separation = 30
+
+[node name="Demand1" type="HBoxContainer" parent="Panel/DemandContainer" unique_id=427076636]
+texture_filter = 1
+custom_minimum_size = Vector2(212, 48)
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Text" type="Label" parent="Panel/DemandContainer/Demand1" unique_id=546069456]
+custom_minimum_size = Vector2(96, 48)
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("8_we3sy")
+theme_override_font_sizes/font_size = 24
+text = "RICE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon1" type="TextureRect" parent="Panel/DemandContainer/Demand1" unique_id=1916747706]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Icon2" type="TextureRect" parent="Panel/DemandContainer/Demand1" unique_id=1398060528]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Demand2" type="HBoxContainer" parent="Panel/DemandContainer" unique_id=953504801]
+texture_filter = 1
+custom_minimum_size = Vector2(212, 48)
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Text" type="Label" parent="Panel/DemandContainer/Demand2" unique_id=773081934]
+custom_minimum_size = Vector2(96, 48)
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("8_we3sy")
+theme_override_font_sizes/font_size = 24
+text = "WATER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon1" type="TextureRect" parent="Panel/DemandContainer/Demand2" unique_id=589183706]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Icon2" type="TextureRect" parent="Panel/DemandContainer/Demand2" unique_id=648228468]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Demand3" type="HBoxContainer" parent="Panel/DemandContainer" unique_id=1604144554]
+texture_filter = 1
+custom_minimum_size = Vector2(212, 48)
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Text" type="Label" parent="Panel/DemandContainer/Demand3" unique_id=456963886]
+custom_minimum_size = Vector2(96, 48)
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("8_we3sy")
+theme_override_font_sizes/font_size = 24
+text = "MEDS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon1" type="TextureRect" parent="Panel/DemandContainer/Demand3" unique_id=398511466]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Icon2" type="TextureRect" parent="Panel/DemandContainer/Demand3" unique_id=243911475]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="InventoryContainer" type="HBoxContainer" parent="Panel" unique_id=886432547]
+modulate = Color(1, 1, 1, 0.5882353)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Item1" type="TextureButton" parent="Panel/InventoryContainer" unique_id=1337292632]
+texture_filter = 1
+custom_minimum_size = Vector2(212, 150)
+layout_mode = 2
+
+[node name="Highlight" type="AnimatedSprite2D" parent="Panel/InventoryContainer/Item1" unique_id=281026161]
+visible = false
+texture_filter = 1
+position = Vector2(105.5, 51.999947)
+scale = Vector2(7.59375, 7.1875033)
+sprite_frames = SubResource("SpriteFrames_el1dq")
+autoplay = "default"
+frame_progress = 0.59662104
+
+[node name="Item1" type="TextureRect" parent="Panel/InventoryContainer/Item1" unique_id=598168328]
+texture_filter = 1
+custom_minimum_size = Vector2(212, 150)
+layout_mode = 0
+texture = ExtResource("13_gonto")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Item2" type="TextureButton" parent="Panel/InventoryContainer" unique_id=1300447387]
+texture_filter = 1
+custom_minimum_size = Vector2(212, 150)
+layout_mode = 2
+
+[node name="Highlight" type="AnimatedSprite2D" parent="Panel/InventoryContainer/Item2" unique_id=361642303]
+visible = false
+texture_filter = 1
+position = Vector2(105.5, 51.999947)
+scale = Vector2(7.59375, 7.1875033)
+sprite_frames = SubResource("SpriteFrames_el1dq")
+autoplay = "default"
+frame_progress = 0.82321686
+
+[node name="Item2" type="TextureRect" parent="Panel/InventoryContainer/Item2" unique_id=2019211146]
+texture_filter = 1
+custom_minimum_size = Vector2(212, 150)
+layout_mode = 0
+texture = ExtResource("14_cwdlq")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Item3" type="TextureButton" parent="Panel/InventoryContainer" unique_id=1850138595]
+texture_filter = 1
+custom_minimum_size = Vector2(212, 150)
+layout_mode = 2
+
+[node name="Highlight" type="AnimatedSprite2D" parent="Panel/InventoryContainer/Item3" unique_id=1756520915]
+visible = false
+texture_filter = 1
+position = Vector2(105.5, 51.999947)
+scale = Vector2(7.59375, 7.1875033)
+sprite_frames = SubResource("SpriteFrames_el1dq")
+autoplay = "default"
+frame_progress = 0.3858232
+
+[node name="Item3" type="TextureRect" parent="Panel/InventoryContainer/Item3" unique_id=840574982]
+texture_filter = 1
+custom_minimum_size = Vector2(212, 150)
+layout_mode = 0
+texture = ExtResource("15_o6xly")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="DumpButton" type="Button" parent="." unique_id=893339923]
+offset_left = 256.0
+offset_top = 1605.0
+offset_right = 856.0
+offset_bottom = 1685.0
+theme_override_font_sizes/font_size = 40
+text = "DUMP CARGO  [SPACE]"
 
 [node name="StartPanel" type="ColorRect" parent="." unique_id=1676093178]
 visible = false
