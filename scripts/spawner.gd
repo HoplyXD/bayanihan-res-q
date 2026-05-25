@@ -8,15 +8,19 @@ const SPAWN_INTERVAL_START: float = 1.20
 const SPAWN_INTERVAL_MIN:   float = 0.45
 const INTERVAL_DECREASE:    float = 0.04
 const DIFFICULTY_TICK:      float = 12.0
+const FUEL_TYPE_INDEX: int = 7
+const FUEL_CHANCE_INCREASE: int = 4
+const MAX_FUEL_CHANCE: int = 100
 
 # [RICE=0, WATER=1, MEDS=2, HAZARD=3, BLOCK=4, SHIELD=5, SPEED=6, FUEL=7, REPAIR=8]
-var _spawn_weights: Array[int] = [22, 18, 12, 12, 8, 3, 3, 16, 6]
+var _spawn_weights: Array[int] = [22, 18, 12, 12, 8, 3, 3, 0, 6]
 
 var _item_scene: PackedScene = preload("res://scenes/items/item.tscn")
 
 var _spawn_timer: float    = 0.0
 var _diff_timer: float     = 0.0
 var _spawn_interval: float = SPAWN_INTERVAL_START
+var _fuel_spawn_chance: int = 0
 
 
 func _ready() -> void:
@@ -42,7 +46,7 @@ func _process(delta: float) -> void:
 
 func _spawn_item() -> void:
 	var lane: int      = randi() % 3
-	var type_idx: int  = _weighted_random()
+	var type_idx: int  = _pick_spawn_type()
 	var item: ItemBase = _item_scene.instantiate() as ItemBase
 	item.item_type     = type_idx as ItemBase.ItemType
 	item.lane_index    = lane
@@ -50,13 +54,26 @@ func _spawn_item() -> void:
 	add_child(item)
 
 
+func _pick_spawn_type() -> int:
+	if randi_range(1, 100) <= _fuel_spawn_chance:
+		_fuel_spawn_chance = 0
+		return FUEL_TYPE_INDEX
+
+	_fuel_spawn_chance = min(_fuel_spawn_chance + FUEL_CHANCE_INCREASE, MAX_FUEL_CHANCE)
+	return _weighted_random()
+
+
 func _weighted_random() -> int:
 	var total: int = 0
-	for w in _spawn_weights:
-		total += w
+	for i in _spawn_weights.size():
+		if i == FUEL_TYPE_INDEX:
+			continue
+		total += _spawn_weights[i]
 	var roll: int = randi() % total
 	var cumulative: int = 0
 	for i in _spawn_weights.size():
+		if i == FUEL_TYPE_INDEX:
+			continue
 		cumulative += _spawn_weights[i]
 		if roll < cumulative:
 			return i

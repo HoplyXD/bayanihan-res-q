@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://oqfro5cqyeka"]
+[gd_scene format=3 uid="uid://caqpchatjgtm4"]
 
 [ext_resource type="Texture2D" uid="uid://bpymdq12l8loj" path="res://UI Deliverables/Buttons/Window2.png" id="1_w3x71"]
 [ext_resource type="FontFile" uid="uid://b2pkbqm63xs17" path="res://UI Deliverables/Fonts/ThertoleRegular.ttf" id="2_af4fq"]
@@ -7,18 +7,18 @@
 [ext_resource type="Texture2D" uid="uid://ddjd0t488eiwh" path="res://UI Deliverables/Buttons/ReplayButton.png" id="5_w3x71"]
 [ext_resource type="Texture2D" uid="uid://siq20iegkalo" path="res://UI Deliverables/Buttons/Xbutton2.png" id="6_7nmon"]
 
-[node name="GameOver" type="Node2D"]
+[node name="GameOver" type="Node2D" unique_id=1823635518]
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=787878457]
 
-[node name="ColorRect" type="ColorRect" parent="HUD"]
+[node name="ColorRect" type="ColorRect" parent="HUD" unique_id=917285573]
 custom_minimum_size = Vector2(1080, 1920)
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.49411765, 0.49411765, 0.49411765, 0.43137255)
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="HUD"]
+[node name="TextureRect" type="TextureRect" parent="HUD" unique_id=101636944]
 custom_minimum_size = Vector2(640, 896)
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,7 +34,7 @@ grow_vertical = 2
 texture = ExtResource("1_w3x71")
 metadata/_edit_use_anchors_ = true
 
-[node name="GameOverText" type="Label" parent="HUD/TextureRect"]
+[node name="GameOverText" type="Label" parent="HUD/TextureRect" unique_id=573493452]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 100.0
@@ -50,7 +50,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="GameOverReason" type="Label" parent="HUD/TextureRect"]
+[node name="GameOverReason" type="Label" parent="HUD/TextureRect" unique_id=150877068]
 layout_mode = 0
 offset_left = 227.0
 offset_top = 181.0
@@ -62,7 +62,7 @@ theme_override_font_sizes/font_size = 30
 text = "Out of fuel..."
 metadata/_edit_use_anchors_ = true
 
-[node name="ScoreText" type="Label" parent="HUD/TextureRect"]
+[node name="ScoreText" type="Label" parent="HUD/TextureRect" unique_id=1007735001]
 layout_mode = 0
 offset_left = 222.0
 offset_top = 332.0
@@ -74,7 +74,7 @@ theme_override_font_sizes/font_size = 50
 text = "SCORE:"
 metadata/_edit_use_anchors_ = true
 
-[node name="ScoreNumber" type="Label" parent="HUD/TextureRect"]
+[node name="ScoreNumber" type="Label" parent="HUD/TextureRect" unique_id=118390428]
 layout_mode = 0
 offset_left = 145.0
 offset_top = 391.0
@@ -86,7 +86,7 @@ theme_override_font_sizes/font_size = 120
 text = "14, 887"
 metadata/_edit_use_anchors_ = true
 
-[node name="Best Score" type="Label" parent="HUD/TextureRect"]
+[node name="Best Score" type="Label" parent="HUD/TextureRect" unique_id=266871099]
 layout_mode = 0
 offset_left = 206.0
 offset_top = 517.0
@@ -98,7 +98,7 @@ theme_override_font_sizes/font_size = 40
 text = "Best: 20, 607"
 metadata/_edit_use_anchors_ = true
 
-[node name="MenuButton" type="TextureButton" parent="HUD/TextureRect"]
+[node name="MenuButton" type="TextureButton" parent="HUD/TextureRect" unique_id=532001385]
 layout_mode = 0
 offset_left = 339.0
 offset_top = 612.0
@@ -108,7 +108,7 @@ scale = Vector2(5, 5)
 texture_normal = ExtResource("4_pn7gr")
 metadata/_edit_use_anchors_ = true
 
-[node name="ReplayButton" type="TextureButton" parent="HUD/TextureRect"]
+[node name="ReplayButton" type="TextureButton" parent="HUD/TextureRect" unique_id=878287134]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 610.0
@@ -118,7 +118,8 @@ scale = Vector2(5, 5)
 texture_normal = ExtResource("5_w3x71")
 metadata/_edit_use_anchors_ = true
 
-[node name="ExitButton" type="TextureButton" parent="HUD/TextureRect"]
+[node name="ExitButton" type="TextureButton" parent="HUD/TextureRect" unique_id=337909229]
+visible = false
 layout_mode = 0
 offset_left = 573.00006
 offset_top = -3.9999986

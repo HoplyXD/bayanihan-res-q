@@ -42,11 +42,13 @@ extends CanvasLayer
 # ── Panels ───────────────────────────────────────────────────────────────
 @onready var start_panel:       Control = $StartPanel
 @onready var start_button:      Button  = $StartPanel/StartButton
-@onready var game_over_panel:   Control = $GameOverPanel
-@onready var reason_label:      Label   = $GameOverPanel/ReasonLabel
-@onready var final_score_label: Label   = $GameOverPanel/FinalScoreLabel
-@onready var high_score_label:  Label   = $GameOverPanel/HighScoreLabel
-@onready var restart_button:    Button  = $GameOverPanel/RestartButton
+@onready var game_over_panel:   CanvasLayer   = $GameOver
+@onready var reason_label:      Label         = $GameOver/TextureRect/GameOverReason
+@onready var final_score_label: Label         = $GameOver/TextureRect/ScoreNumber
+@onready var high_score_label:  Label         = $"GameOver/TextureRect/Best Score"
+@onready var restart_button:    TextureButton = $GameOver/TextureRect/ReplayButton
+@onready var menu_button:       TextureButton = $GameOver/TextureRect/MenuButton
+@onready var exit_button:       TextureButton = $GameOver/TextureRect/ExitButton
 
 const RESOURCE_COLORS: Dictionary = {
 	"RICE":  Color(1.00, 0.88, 0.18),
@@ -94,6 +96,8 @@ func _ready() -> void:
 	dump_button.pressed.connect(GameManager.dump_cargo)
 	pause_button.pressed.connect(GameManager.pause)
 	restart_button.pressed.connect(_on_restart_pressed)
+	menu_button.pressed.connect(_on_menu_pressed)
+	exit_button.pressed.connect(_on_exit_pressed)
 	for i in inv_buttons.size():
 		inv_buttons[i].pressed.connect(_on_inventory_slot_pressed.bind(i))
 
@@ -190,15 +194,15 @@ func _on_block_hit_flash() -> void:
 
 
 func _on_game_over(reason: String) -> void:
-	final_score_label.text = "Score: %d" % GameManager.score
-	high_score_label.text  = "Best: %d"  % GameManager.high_score
+	final_score_label.text = _format_score(GameManager.score)
+	high_score_label.text  = "Best: %s" % _format_score(GameManager.high_score)
 	match reason:
 		"TRUCK_BREAKDOWN":
-			reason_label.text = "TRUCK BREAKDOWN!\nYou hit too many obstacles."
+			reason_label.text = "Truck breakdown..."
 		"OUT_OF_FUEL":
-			reason_label.text = "OUT OF FUEL!\nPick up fuel canisters next time."
+			reason_label.text = "Out of fuel..."
 		_:
-			reason_label.text = "MISSION FAILED."
+			reason_label.text = "Mission failed..."
 	game_over_panel.visible = true
 
 
@@ -212,6 +216,14 @@ func _on_start_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
+
+
+func _on_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()
 
 
 func _on_inventory_slot_pressed(index: int) -> void:
@@ -319,6 +331,18 @@ func _get_item_texture_path(item: Variant) -> String:
 	if item is Dictionary:
 		return item.get("texture_path", "")
 	return ""
+
+
+func _format_score(value: int) -> String:
+	var digits := str(value)
+	var result := ""
+	var count := 0
+	for i in range(digits.length() - 1, -1, -1):
+		if count > 0 and count % 3 == 0:
+			result = ", " + result
+		result = digits.substr(i, 1) + result
+		count += 1
+	return result
 
 
 func _show_banner(text: String, color: Color = Color.WHITE) -> void:

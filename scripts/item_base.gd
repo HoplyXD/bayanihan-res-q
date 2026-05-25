@@ -129,7 +129,7 @@ func _get_texture_path() -> String:
 func _show_block_variant() -> void:
 	var options := _get_block_options()
 	if options.is_empty():
-		_show_animated_variant($"CrackAnim", VEHICLE_ANIMATIONS.pick_random())
+		_show_canvas_variant($"Tree branches")
 		return
 
 	var option: Dictionary = options.pick_random()
@@ -148,12 +148,16 @@ func _show_block_variant() -> void:
 	if node is AnimatedSprite2D:
 		_show_animated_variant(node as AnimatedSprite2D, option.get("animation", &""))
 	elif node is CanvasItem:
-		(node as CanvasItem).visible = true
+		_show_canvas_variant(node as CanvasItem)
 
 
 func _get_block_options() -> Array[Dictionary]:
 	var event := GameManager.current_hazard_event
 	var options: Array[Dictionary] = []
+
+	if event in [EVENT_CALM, EVENT_TYPHOON]:
+		options.append({"node": "Tree branches"})
+		options.append({"node": "Sprite2D"})
 
 	for animation in VEHICLE_ANIMATIONS:
 		options.append({"node": "CrackAnim", "animation": animation})
@@ -168,10 +172,16 @@ func _get_block_options() -> Array[Dictionary]:
 		options.append({"node": "CrackAnim", "animation": &"Crack"})
 
 	if lane_index == 2:
+		if event in [EVENT_CALM, EVENT_TYPHOON, EVENT_EARTHQUAKE]:
+			options.append({"node": "R-LaneTreeAnim", "animation": &"Tree1"})
+			options.append({"node": "R-LaneTreeAnim", "animation": &"Tree2"})
 		options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris3"})
 		if event != EVENT_FLOODING:
 			options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris4"})
 	elif lane_index == 0:
+		if event in [EVENT_CALM, EVENT_TYPHOON, EVENT_EARTHQUAKE]:
+			options.append({"node": "L-LaneTreeAnim", "animation": &"Tree1"})
+			options.append({"node": "L-LaneTreeAnim", "animation": &"Tree2"})
 		options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris3"})
 		if event != EVENT_FLOODING:
 			options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris4"})
@@ -183,6 +193,10 @@ func _get_block_options() -> Array[Dictionary]:
 			options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris6", "collision": "ML"})
 
 	return options
+
+
+func _show_canvas_variant(node: CanvasItem) -> void:
+	node.visible = true
 
 
 func _show_animated_variant(node: AnimatedSprite2D, animation: StringName) -> void:
@@ -204,6 +218,10 @@ func _hide_visuals() -> void:
 		"L-LaneDebrisAnim",
 		"MR-2LaneDebrisAnim",
 		"ML-2LaneDebrisAnim",
+		"R-LaneTreeAnim",
+		"L-LaneTreeAnim",
+		"Tree branches",
+		"Sprite2D",
 	]:
 		var node := get_node_or_null(node_name)
 		if node is CanvasItem:
