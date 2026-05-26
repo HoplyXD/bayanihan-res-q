@@ -1,11 +1,7 @@
-## ItemBase — base class for every road item (resource, hazard, block,
-## powerup, fuel).  Visuals drawn via _draw(); no child nodes required.
+## ItemBase - base class for every road item.
 class_name ItemBase
 extends Area2D
 
-# ---------------------------------------------------------------------------
-# Item type enum
-# ---------------------------------------------------------------------------
 enum ItemType {
 	RESOURCE_RICE,
 	RESOURCE_WATER,
@@ -19,41 +15,54 @@ enum ItemType {
 }
 
 @export var item_type: ItemType = ItemType.RESOURCE_RICE
+@export var lane_index: int = 1
 
-# Guard against double-collection
+const EVENT_CALM: int = 0
+const EVENT_TYPHOON: int = 1
+const EVENT_FLOODING: int = 2
+const EVENT_EARTHQUAKE: int = 3
+const EVENT_VOLCANIC: int = 4
+
+const TEXTURE_PATHS: Dictionary = {
+	ItemType.RESOURCE_RICE: [
+		"res://assets/Item Assets/Rice Icon (Detailed) .png",
+		"res://assets/Item Assets/Rice Icon w logo 1 (Detailed) .png",
+	],
+	ItemType.RESOURCE_WATER: [
+		"res://assets/Item Assets/water bottle icon.png",
+		"res://assets/Item Assets/Water Icon (Silver-Detailed).png",
+	],
+	ItemType.RESOURCE_MEDS: ["res://assets/Item Assets/Medicine Icon (Detailed) .png"],
+	ItemType.POWERUP_SHIELD: ["res://assets/Item Assets/shield-icon.png"],
+	ItemType.POWERUP_SPEED: ["res://assets/Item Assets/speedboost-icon.png"],
+	ItemType.FUEL: ["res://assets/Item Assets/FuelBar2.png"],
+	ItemType.POWERUP_REPAIR: ["res://assets/Item Assets/Repair Icon .png"],
+}
+
+const HAZARD_TEXTURE_PATHS: Array[String] = [
+	"res://assets/Flood & Typhoon Assets/Environment/Ground/Puddle variations/Puddles Assets1.png",
+	"res://assets/Flood & Typhoon Assets/Environment/Ground/Puddle variations/Puddles Assets2.png",
+	"res://assets/Flood & Typhoon Assets/Environment/Ground/Puddle variations/Puddles Assets3.png",
+	"res://assets/Flood & Typhoon Assets/Environment/Ground/Puddle variations/Puddles Assets4.png",
+]
+
+const VEHICLE_ANIMATIONS: Array[StringName] = [&"Car1", &"Car2", &"Car3", &"Tricycle1", &"Tricycle2", &"Tricycle3"]
+
+@onready var item_texture: TextureRect = $Item
+@onready var default_collision: CollisionShape2D = $CollisionShape2D
+@onready var mr_lane_collision: CollisionShape2D = $"MR-2LaneCollisionShape2D"
+@onready var ml_lane_collision: CollisionShape2D = $"ML-2LaneCollisionShape2D"
+
 var collected: bool = false
-
-const ITEM_COLORS: Dictionary = {
-	ItemType.RESOURCE_RICE:   Color(1.00, 0.88, 0.18),
-	ItemType.RESOURCE_WATER:  Color(0.18, 0.55, 1.00),
-	ItemType.RESOURCE_MEDS:   Color(1.00, 0.22, 0.22),
-	ItemType.HAZARD:          Color(0.38, 0.62, 0.95, 0.85),
-	ItemType.BLOCK:           Color(0.40, 0.35, 0.28),
-	ItemType.POWERUP_SHIELD:  Color(0.10, 0.95, 0.45),
-	ItemType.POWERUP_SPEED:   Color(1.00, 0.48, 0.05),
-	ItemType.FUEL:            Color(0.80, 0.18, 0.85),
-	ItemType.POWERUP_REPAIR:  Color(0.10, 0.88, 0.85),   # cyan
-}
-
-const ITEM_LABELS: Dictionary = {
-	ItemType.RESOURCE_RICE:   "RICE",
-	ItemType.RESOURCE_WATER:  "WATER",
-	ItemType.RESOURCE_MEDS:   "MEDS",
-	ItemType.HAZARD:          "FLOOD",
-	ItemType.BLOCK:           "DEBRIS",
-	ItemType.POWERUP_SHIELD:  "SHIELD",
-	ItemType.POWERUP_SPEED:   "BOOST",
-	ItemType.FUEL:            "FUEL",
-	ItemType.POWERUP_REPAIR:  "REPAIR",
-}
+var _selected_texture_path: String = ""
 
 
 func _ready() -> void:
 	collision_layer = 2
-	collision_mask  = 0
-	monitorable     = true
-	monitoring      = false
-	queue_redraw()
+	collision_mask = 0
+	monitorable = true
+	monitoring = false
+	_refresh_texture()
 
 
 func _process(delta: float) -> void:
@@ -64,9 +73,6 @@ func _process(delta: float) -> void:
 		queue_free()
 
 
-# ---------------------------------------------------------------------------
-# Collection callback — called by player's PickupArea signal
-# ---------------------------------------------------------------------------
 func on_collected(player: Node) -> void:
 	if collected:
 		return
@@ -74,11 +80,11 @@ func on_collected(player: Node) -> void:
 
 	match item_type:
 		ItemType.RESOURCE_RICE:
-			GameManager.collect_resource("RICE")
+			GameManager.collect_resource("RICE", _selected_texture_path)
 		ItemType.RESOURCE_WATER:
-			GameManager.collect_resource("WATER")
+			GameManager.collect_resource("WATER", _selected_texture_path)
 		ItemType.RESOURCE_MEDS:
-			GameManager.collect_resource("MEDS")
+			GameManager.collect_resource("MEDS", _selected_texture_path)
 		ItemType.HAZARD:
 			GameManager.on_hazard_hit()
 		ItemType.BLOCK:
@@ -99,62 +105,136 @@ func on_collected(player: Node) -> void:
 	queue_free()
 
 
-# ---------------------------------------------------------------------------
-# Drawing — prototype shapes
-# ---------------------------------------------------------------------------
-func _draw() -> void:
-	var col: Color  = ITEM_COLORS.get(item_type, Color.WHITE)
-	var lbl: String = ITEM_LABELS.get(item_type, "?")
+func _refresh_texture() -> void:
+	_hide_visuals()
+	_reset_collision_shapes()
+	if item_type == ItemType.BLOCK:
+		_show_block_variant()
+	else:
+		_selected_texture_path = _get_texture_path()
+		item_texture.texture = load(_selected_texture_path)
+		item_texture.visible = true
 
+
+func _get_texture_path() -> String:
 	match item_type:
 		ItemType.HAZARD:
-			# Watery ellipse (two overlapping circles)
-			draw_circle(Vector2(0, 5),   46.0, col)
-			draw_circle(Vector2(0, -5),  38.0, col.lightened(0.2))
-			draw_circle(Vector2(0, 0),   22.0, Color(0.5, 0.7, 1.0, 0.6))
-
+			return _pick(HAZARD_TEXTURE_PATHS)
 		ItemType.BLOCK:
-			# Chunky debris rectangle with X
-			draw_rect(Rect2(-48, -32, 96, 64), col)
-			draw_rect(Rect2(-48, -32, 96, 12), col.lightened(0.15))
-			draw_line(Vector2(-38, -22), Vector2(38, 22), Color(0.1, 0.1, 0.1), 6.0)
-			draw_line(Vector2(38, -22),  Vector2(-38, 22), Color(0.1, 0.1, 0.1), 6.0)
-
-		ItemType.POWERUP_SHIELD, ItemType.POWERUP_SPEED:
-			# Diamond / powerup gem
-			var pts := PackedVector2Array([
-				Vector2(0, -52), Vector2(52, 0), Vector2(0, 52), Vector2(-52, 0)
-			])
-			draw_polygon(pts, PackedColorArray([col, col, col, col]))
-			var inner := PackedVector2Array([
-				Vector2(0, -36), Vector2(36, 0), Vector2(0, 36), Vector2(-36, 0)
-			])
-			var ic := col.lightened(0.4)
-			draw_polygon(inner, PackedColorArray([ic, ic, ic, ic]))
-
-		ItemType.FUEL:
-			# Fuel canister shape
-			draw_rect(Rect2(-22, -44, 44, 72), col)
-			draw_rect(Rect2(-14, -56, 28, 16), col.darkened(0.15))
-			draw_rect(Rect2(-6,  -60, 12, 8),  col.darkened(0.3))
-			draw_rect(Rect2(-18, -20, 36, 6),  Color(1, 1, 1, 0.4))
-
-		ItemType.POWERUP_REPAIR:
-			# Medical cross
-			draw_rect(Rect2(-46, -18, 92, 36), col)
-			draw_rect(Rect2(-18, -46, 36, 92), col)
-			draw_rect(Rect2(-40, -12, 80, 24), col.lightened(0.3))
-
+			return ""
 		_:
-			# Resources — coloured box with highlight
-			draw_rect(Rect2(-42, -42, 84, 84), col)
-			draw_rect(Rect2(-42, -42, 84, 18), col.lightened(0.3))
-			draw_rect(Rect2(-42, -42, 8,  84), col.lightened(0.2))
+			return _pick(TEXTURE_PATHS.get(item_type, TEXTURE_PATHS[ItemType.RESOURCE_RICE]))
 
-	# Label text
-	var font: Font = ThemeDB.fallback_font
-	if font:
-		var font_size: int = 20
-		var text_w: float  = font.get_string_size(lbl, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
-		draw_string(font, Vector2(-text_w * 0.5, 10), lbl,
-				HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
+
+func _show_block_variant() -> void:
+	var options := _get_block_options()
+	if options.is_empty():
+		_show_canvas_variant($"Tree branches")
+		return
+
+	var option: Dictionary = options.pick_random()
+	var node := get_node_or_null(option.get("node", ""))
+	if node == null:
+		return
+
+	var collision_name: String = option.get("collision", "")
+	if collision_name == "MR":
+		default_collision.disabled = true
+		mr_lane_collision.disabled = false
+	elif collision_name == "ML":
+		default_collision.disabled = true
+		ml_lane_collision.disabled = false
+
+	if node is AnimatedSprite2D:
+		_show_animated_variant(node as AnimatedSprite2D, option.get("animation", &""))
+	elif node is CanvasItem:
+		_show_canvas_variant(node as CanvasItem)
+
+
+func _get_block_options() -> Array[Dictionary]:
+	var event := GameManager.current_hazard_event
+	var options: Array[Dictionary] = []
+
+	if event in [EVENT_CALM, EVENT_TYPHOON]:
+		options.append({"node": "Tree branches"})
+		options.append({"node": "Sprite2D"})
+
+	for animation in VEHICLE_ANIMATIONS:
+		options.append({"node": "CrackAnim", "animation": animation})
+
+	if event in [EVENT_CALM, EVENT_EARTHQUAKE, EVENT_VOLCANIC]:
+		options.append({"node": "Crack1"})
+		options.append({"node": "Crack2"})
+		options.append({"node": "DebrisAnim", "animation": &"Debris1"})
+		options.append({"node": "DebrisAnim", "animation": &"Debris2"})
+
+	if event in [EVENT_EARTHQUAKE, EVENT_VOLCANIC]:
+		options.append({"node": "CrackAnim", "animation": &"Crack"})
+
+	if lane_index == 2:
+		if event in [EVENT_CALM, EVENT_TYPHOON, EVENT_EARTHQUAKE]:
+			options.append({"node": "R-LaneTreeAnim", "animation": &"Tree1"})
+			options.append({"node": "R-LaneTreeAnim", "animation": &"Tree2"})
+		options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris3"})
+		if event != EVENT_FLOODING:
+			options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris4"})
+	elif lane_index == 0:
+		if event in [EVENT_CALM, EVENT_TYPHOON, EVENT_EARTHQUAKE]:
+			options.append({"node": "L-LaneTreeAnim", "animation": &"Tree1"})
+			options.append({"node": "L-LaneTreeAnim", "animation": &"Tree2"})
+		options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris3"})
+		if event != EVENT_FLOODING:
+			options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris4"})
+	else:
+		options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris5", "collision": "MR"})
+		options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris5", "collision": "ML"})
+		if event != EVENT_FLOODING:
+			options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris6", "collision": "MR"})
+			options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris6", "collision": "ML"})
+
+	return options
+
+
+func _show_canvas_variant(node: CanvasItem) -> void:
+	node.visible = true
+
+
+func _show_animated_variant(node: AnimatedSprite2D, animation: StringName) -> void:
+	node.visible = true
+	if not animation.is_empty():
+		node.animation = animation
+	node.frame = 0
+	node.play()
+
+
+func _hide_visuals() -> void:
+	for node_name in [
+		"Item",
+		"Crack1",
+		"Crack2",
+		"CrackAnim",
+		"DebrisAnim",
+		"R-LaneDebrisAnim",
+		"L-LaneDebrisAnim",
+		"MR-2LaneDebrisAnim",
+		"ML-2LaneDebrisAnim",
+		"R-LaneTreeAnim",
+		"L-LaneTreeAnim",
+		"Tree branches",
+		"Sprite2D",
+	]:
+		var node := get_node_or_null(node_name)
+		if node is CanvasItem:
+			(node as CanvasItem).visible = false
+
+
+func _reset_collision_shapes() -> void:
+	default_collision.disabled = false
+	mr_lane_collision.disabled = true
+	ml_lane_collision.disabled = true
+
+
+func _pick(paths: Array) -> String:
+	if paths.is_empty():
+		return ""
+	return paths[randi() % paths.size()]

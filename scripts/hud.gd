@@ -4,25 +4,35 @@
 extends CanvasLayer
 
 # ── Top HUD ──────────────────────────────────────────────────────────────
-@onready var score_label:     Label       = $ScoreLabel
-@onready var level_label:     Label       = $LevelLabel
+@onready var score_label:     Label       = $ScoreBox/ScoreLabel
+@onready var level_label:     Label       = $LevelBox/LevelLabel
 @onready var combo_label:     Label       = $ComboLabel
-@onready var demand_slots: Array[Label]   = [
-	$DemandContainer/Demand1 as Label,
-	$DemandContainer/Demand2 as Label,
-	$DemandContainer/Demand3 as Label,
+@onready var demand_slots: Array[CanvasItem] = [
+	$Panel/DemandContainer/Demand1 as CanvasItem,
+	$Panel/DemandContainer/Demand2 as CanvasItem,
+	$Panel/DemandContainer/Demand3 as CanvasItem,
 ]
-@onready var durability_bar:  ProgressBar = $DurabilityBar
-@onready var fuel_bar:        ProgressBar = $FuelBar
+@onready var durability_bar:  TextureProgressBar = $HPBar
+@onready var fuel_bar:        TextureProgressBar = $FuelBar
 
 # ── Bottom HUD ───────────────────────────────────────────────────────────
-@onready var inv_slots: Array[Label] = [
-	$InventoryContainer/Slot1 as Label,
-	$InventoryContainer/Slot2 as Label,
-	$InventoryContainer/Slot3 as Label,
+@onready var inv_buttons: Array[BaseButton] = [
+	$Panel/InventoryContainer/Item1 as BaseButton,
+	$Panel/InventoryContainer/Item2 as BaseButton,
+	$Panel/InventoryContainer/Item3 as BaseButton,
+]
+@onready var inv_slots: Array[CanvasItem] = [
+	$Panel/InventoryContainer/Item1/Item1 as CanvasItem,
+	$Panel/InventoryContainer/Item2/Item2 as CanvasItem,
+	$Panel/InventoryContainer/Item3/Item3 as CanvasItem,
+]
+@onready var inv_highlights: Array[CanvasItem] = [
+	$Panel/InventoryContainer/Item1/Highlight as CanvasItem,
+	$Panel/InventoryContainer/Item2/Highlight as CanvasItem,
+	$Panel/InventoryContainer/Item3/Highlight as CanvasItem,
 ]
 @onready var dump_button:   Button = $DumpButton
-@onready var pause_button: Button = $PauseButton
+@onready var pause_button:  TextureButton = $PauseButton
 @onready var shield_label:  Label  = $ShieldLabel
 
 # ── Overlays ─────────────────────────────────────────────────────────────
@@ -32,16 +42,38 @@ extends CanvasLayer
 # ── Panels ───────────────────────────────────────────────────────────────
 @onready var start_panel:       Control = $StartPanel
 @onready var start_button:      Button  = $StartPanel/StartButton
-@onready var game_over_panel:   Control = $GameOverPanel
-@onready var reason_label:      Label   = $GameOverPanel/ReasonLabel
-@onready var final_score_label: Label   = $GameOverPanel/FinalScoreLabel
-@onready var high_score_label:  Label   = $GameOverPanel/HighScoreLabel
-@onready var restart_button:    Button  = $GameOverPanel/RestartButton
+@onready var game_over_panel:   CanvasLayer   = $GameOver
+@onready var reason_label:      Label         = $GameOver/TextureRect/GameOverReason
+@onready var final_score_label: Label         = $GameOver/TextureRect/ScoreNumber
+@onready var high_score_label:  Label         = $"GameOver/TextureRect/Best Score"
+@onready var restart_button:    TextureButton = $GameOver/TextureRect/ReplayButton
+@onready var menu_button:       TextureButton = $GameOver/TextureRect/MenuButton
+@onready var exit_button:       TextureButton = $GameOver/TextureRect/ExitButton
 
 const RESOURCE_COLORS: Dictionary = {
 	"RICE":  Color(1.00, 0.88, 0.18),
 	"WATER": Color(0.18, 0.55, 1.00),
 	"MEDS":  Color(1.00, 0.22, 0.22),
+}
+
+const RESOURCE_TEXTURES: Dictionary = {
+	"RICE": preload("res://assets/Item Assets/Rice Icon (Detailed) .png"),
+	"WATER": preload("res://assets/Item Assets/water bottle icon.png"),
+	"MEDS": preload("res://assets/Item Assets/Medicine Icon (Detailed) .png"),
+}
+
+const RESOURCE_TEXTURE_VARIANTS: Dictionary = {
+	"RICE": [
+		preload("res://assets/Item Assets/Rice Icon (Detailed) .png"),
+		preload("res://assets/Item Assets/Rice Icon w logo 1 (Detailed) .png"),
+	],
+	"WATER": [
+		preload("res://assets/Item Assets/water bottle icon.png"),
+		preload("res://assets/Item Assets/Water Icon (Silver-Detailed).png"),
+	],
+	"MEDS": [
+		preload("res://assets/Item Assets/Medicine Icon (Detailed) .png"),
+	],
 }
 
 var _fuel_pulse_tween: Tween = null
@@ -64,6 +96,10 @@ func _ready() -> void:
 	dump_button.pressed.connect(GameManager.dump_cargo)
 	pause_button.pressed.connect(GameManager.pause)
 	restart_button.pressed.connect(_on_restart_pressed)
+	menu_button.pressed.connect(_on_menu_pressed)
+	exit_button.pressed.connect(_on_exit_pressed)
+	for i in inv_buttons.size():
+		inv_buttons[i].pressed.connect(_on_inventory_slot_pressed.bind(i))
 
 	game_over_panel.visible = false
 	shield_label.visible    = false
@@ -108,15 +144,12 @@ func _on_inventory_changed(inv: Array) -> void:
 
 func _on_demand_updated(demand: Array) -> void:
 	for i in demand_slots.size():
-		var slot: Label = demand_slots[i]
+		var slot: CanvasItem = demand_slots[i]
 		if i < demand.size():
-			slot.text    = demand[i]
-			slot.visible = true
-			slot.add_theme_color_override("font_color",
-					RESOURCE_COLORS.get(demand[i], Color.WHITE))
+			_set_slot_item(slot, demand[i])
 		else:
-			slot.text    = ""
-			slot.visible = false
+			_clear_slot_item(slot)
+	_refresh_inventory(GameManager.inventory)
 
 
 func _on_powerup_collected(type: String) -> void:
@@ -161,15 +194,15 @@ func _on_block_hit_flash() -> void:
 
 
 func _on_game_over(reason: String) -> void:
-	final_score_label.text = "Score: %d" % GameManager.score
-	high_score_label.text  = "Best: %d"  % GameManager.high_score
+	final_score_label.text = _format_score(GameManager.score)
+	high_score_label.text  = "Best: %s" % _format_score(GameManager.high_score)
 	match reason:
 		"TRUCK_BREAKDOWN":
-			reason_label.text = "TRUCK BREAKDOWN!\nYou hit too many obstacles."
+			reason_label.text = "Truck breakdown..."
 		"OUT_OF_FUEL":
-			reason_label.text = "OUT OF FUEL!\nPick up fuel canisters next time."
+			reason_label.text = "Out of fuel..."
 		_:
-			reason_label.text = "MISSION FAILED."
+			reason_label.text = "Mission failed..."
 	game_over_panel.visible = true
 
 
@@ -185,23 +218,131 @@ func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
+func _on_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_inventory_slot_pressed(index: int) -> void:
+	GameManager.drop_inventory_item(index)
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 func _refresh_inventory(inv: Array) -> void:
+	var extra_slots := _get_extra_inventory_slots(inv, GameManager.current_demand)
 	for i in inv_slots.size():
-		var slot: Label = inv_slots[i]
+		var slot: CanvasItem = inv_slots[i]
 		if i < inv.size():
-			slot.text = inv[i]
-			slot.add_theme_color_override("font_color",
-					RESOURCE_COLORS.get(inv[i], Color.WHITE))
-			slot.modulate = Color(1, 1, 1, 1)
+			_set_slot_item(slot, inv[i])
+			inv_highlights[i].visible = extra_slots[i]
+			inv_buttons[i].disabled = false
 		else:
-			slot.text = "[ ]"
-			slot.remove_theme_color_override("font_color")
-			slot.modulate = Color(0.5, 0.5, 0.5, 1)
+			_clear_slot_item(slot)
+			inv_highlights[i].visible = false
+			inv_buttons[i].disabled = true
 
 	shield_label.visible = GameManager.has_shield
+
+
+func _get_extra_inventory_slots(inv: Array, demand: Array) -> Array[bool]:
+	var demand_counts: Dictionary = {}
+	for item in demand:
+		demand_counts[item] = demand_counts.get(item, 0) + 1
+
+	var extra_slots: Array[bool] = []
+	for item in inv:
+		var item_type := _get_item_type(item)
+		var remaining: int = demand_counts.get(item_type, 0)
+		if remaining > 0:
+			demand_counts[item_type] = remaining - 1
+			extra_slots.append(false)
+		else:
+			extra_slots.append(true)
+	return extra_slots
+
+
+func _set_slot_item(slot: CanvasItem, item: Variant) -> void:
+	var item_type := _get_item_type(item)
+	slot.visible = true
+	slot.modulate = Color.WHITE
+	if slot is TextureRect:
+		var texture_path := _get_item_texture_path(item)
+		(slot as TextureRect).texture = load(texture_path) if not texture_path.is_empty() else RESOURCE_TEXTURES.get(item_type)
+	elif slot is HBoxContainer:
+		_set_demand_slot(slot as HBoxContainer, item_type)
+	elif slot is Label:
+		var label := slot as Label
+		label.text = item_type
+		label.add_theme_color_override("font_color", RESOURCE_COLORS.get(item_type, Color.WHITE))
+
+
+func _clear_slot_item(slot: CanvasItem) -> void:
+	slot.visible = false
+	slot.modulate = Color(0.5, 0.5, 0.5, 1)
+	if slot is TextureRect:
+		(slot as TextureRect).texture = null
+	elif slot is HBoxContainer:
+		_clear_demand_slot(slot as HBoxContainer)
+	elif slot is Label:
+		var label := slot as Label
+		label.text = ""
+		label.remove_theme_color_override("font_color")
+
+
+func _set_demand_slot(slot: HBoxContainer, item: String) -> void:
+	var label := slot.get_node_or_null("Text") as Label
+	if label:
+		label.text = item
+		label.add_theme_color_override("font_color", RESOURCE_COLORS.get(item, Color.WHITE))
+
+	var variants: Array = RESOURCE_TEXTURE_VARIANTS.get(item, [])
+	for i in 2:
+		var icon := slot.get_node_or_null("Icon%d" % (i + 1)) as TextureRect
+		if icon:
+			icon.visible = i < variants.size()
+			icon.texture = variants[i] if i < variants.size() else null
+
+
+func _clear_demand_slot(slot: HBoxContainer) -> void:
+	var label := slot.get_node_or_null("Text") as Label
+	if label:
+		label.text = ""
+		label.remove_theme_color_override("font_color")
+
+	for i in 2:
+		var icon := slot.get_node_or_null("Icon%d" % (i + 1)) as TextureRect
+		if icon:
+			icon.visible = false
+			icon.texture = null
+
+
+func _get_item_type(item: Variant) -> String:
+	if item is Dictionary:
+		return item.get("type", "")
+	return str(item)
+
+
+func _get_item_texture_path(item: Variant) -> String:
+	if item is Dictionary:
+		return item.get("texture_path", "")
+	return ""
+
+
+func _format_score(value: int) -> String:
+	var digits := str(value)
+	var result := ""
+	var count := 0
+	for i in range(digits.length() - 1, -1, -1):
+		if count > 0 and count % 3 == 0:
+			result = ", " + result
+		result = digits.substr(i, 1) + result
+		count += 1
+	return result
 
 
 func _show_banner(text: String, color: Color = Color.WHITE) -> void:

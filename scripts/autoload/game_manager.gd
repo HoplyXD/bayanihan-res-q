@@ -24,6 +24,7 @@ signal combo_changed(combo: int)
 signal game_paused
 signal game_resumed
 signal dialogue_requested(id: int)
+signal hazard_event_changed(event: int)
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -53,6 +54,7 @@ var fuel: float       = 100.0
 var has_shield: bool  = false
 var inventory: Array  = []
 var current_demand: Array = []
+var current_hazard_event: int = 0
 
 var level: int = 1
 var demands_fulfilled_count: int = 0
@@ -96,6 +98,7 @@ func start_game() -> void:
 	demands_fulfilled_count = 0
 	combo                  = 0
 	fuel_drain_rate        = FUEL_DRAIN_RATE
+	set_hazard_event(0)
 	game_running = true
 	_generate_demand()
 	emit_signal("score_changed",      score)
@@ -118,10 +121,13 @@ func end_game(reason: String) -> void:
 # ---------------------------------------------------------------------------
 # Inventory & resources
 # ---------------------------------------------------------------------------
-func collect_resource(type: String) -> void:
+func collect_resource(type: String, texture_path: String = "") -> void:
 	if inventory.size() >= MAX_INVENTORY:
 		return
-	inventory.append(type)
+	inventory.append({
+		"type": type,
+		"texture_path": texture_path,
+	})
 	combo += 1
 	var points: int = 10 + (min(combo, 5) - 1) * 4   # 10, 14, 18, 22, 26 max
 	add_score(points)
@@ -136,6 +142,19 @@ func dump_cargo() -> void:
 		return
 	inventory.clear()
 	emit_signal("inventory_changed", inventory)
+
+
+func drop_inventory_item(index: int) -> void:
+	if index < 0 or index >= inventory.size():
+		return
+	inventory.remove_at(index)
+	emit_signal("inventory_changed", inventory)
+	_check_demand_match()
+
+
+func set_hazard_event(event: int) -> void:
+	current_hazard_event = event
+	emit_signal("hazard_event_changed", current_hazard_event)
 
 func pause() -> void:
 	get_tree().paused = true
@@ -228,7 +247,7 @@ func _check_demand_match() -> void:
 		return
 	var remaining: Array = current_demand.duplicate()
 	for item in inventory:
-		remaining.erase(item)
+		remaining.erase(_get_inventory_item_type(item))
 	if remaining.is_empty():
 		add_score(100)
 		demands_fulfilled_count += 1
@@ -240,6 +259,12 @@ func _check_demand_match() -> void:
 			fuel_drain_rate += FUEL_DRAIN_INCREASE
 			emit_signal("level_up", level)
 		_generate_demand()
+
+
+func _get_inventory_item_type(item: Variant) -> String:
+	if item is Dictionary:
+		return item.get("type", "")
+	return str(item)
 
 
 func _load_high_score() -> void:

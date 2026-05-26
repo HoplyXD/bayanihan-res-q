@@ -1,7 +1,7 @@
 extends CanvasLayer
 @onready var camera: Camera2D = $"../Camera2D"
 
-# [CALM=0, TYPHOON=1, FLOODING=2, EARTHQUAKE=3, Volcanic=4]
+# [CALM=0, TYPHOON=1, FLOODING=2, EARTHQUAKE=3, VOLCANIC=4]
 var _event_weights: Array[int] = [40, 15, 15, 15, 15]
 var event_state: int = 0
 
@@ -55,6 +55,7 @@ func _on_level_up(lvl: int) -> void:
 	if lvl <= 1:
 		return
 	if lvl ==2:
+		_apply_event.call_deferred(1) # TYPHOON
 		GameManager.play_dialogue(2)
 	if lvl >= 8:
 		_event_weights[0] = max(_event_weights[0] - 2, 10)
@@ -62,7 +63,7 @@ func _on_level_up(lvl: int) -> void:
 		_event_weights[2] = min(_event_weights[2] + 1, 25)
 		_event_weights[3] = min(_event_weights[3] + 1, 25)
 		_event_weights[4] = min(_event_weights[4] + 1, 25)
-	if lvl <= 3 or lvl == 5 or lvl == 6:
+	if lvl == 1 or lvl == 3 or lvl == 5 or lvl == 6:
 		_apply_event.call_deferred(0)   # CALM
 	elif lvl == 4:
 		_apply_event.call_deferred(3)   # EARTHQUAKE
@@ -102,7 +103,8 @@ func _apply_event(idx: int) -> void:
 
 	# Reset
 	_current_event_bonus = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-	event_state = idx            # ← THIS was missing, shake never triggered!
+	event_state = idx
+	GameManager.set_hazard_event(event_state)
 	_roll_next_anim_time()
 
 	match idx:
@@ -123,14 +125,15 @@ func _apply_event(idx: int) -> void:
 			$Flooding.show()
 
 		3:  # EARTHQUAKE
-			_current_event_bonus[4] = 10
+			_current_event_bonus[4] = 20
+			_current_event_bonus[3] = -10
 			_current_event_bonus[2] =  5
 			_current_event_bonus[0] = -5
 			$Earthquake.show()
 
 		4:  # VOLCANIC
-			_current_event_bonus[3] =  6
-			_current_event_bonus[4] =  6
+			_current_event_bonus[3] = -3
+			_current_event_bonus[4] = 15
 			_current_event_bonus[1] = -4
 			_current_event_bonus[2] = -3
 			$Volcanic.show()

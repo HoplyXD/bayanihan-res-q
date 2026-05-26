@@ -1,0 +1,151 @@
+[gd_scene load_steps=13 format=3 uid="uid://cwvq0iotclyny"]
+
+[ext_resource type="Texture2D" uid="uid://ctjltej0qgjjf" path="res://UI Deliverables/Road-Tileset.png" id="1_qcw2d"]
+[ext_resource type="Texture2D" uid="uid://b37qetx05te1v" path="res://UI Deliverables/Buttons/Pausebutton.png" id="2_7qgpo"]
+[ext_resource type="Texture2D" uid="uid://brvxkr28gfjh1" path="res://UI Deliverables/Levelnumber.png" id="3_ksskx"]
+[ext_resource type="Texture2D" uid="uid://c0ibkbuhr40bx" path="res://UI Deliverables/Scoreboard.png" id="4_w2kc5"]
+[ext_resource type="FontFile" uid="uid://cidnk7s46u5kg" path="res://UI Deliverables/Fonts/Minecraft.ttf" id="4_xyy1j"]
+[ext_resource type="Texture2D" uid="uid://de4iyks3m6ey" path="res://UI Deliverables/HP Bar Overlay/HPBarUnderlay.png" id="5_g7d0j"]
+[ext_resource type="Texture2D" uid="uid://bcd8edrd0e3w6" path="res://UI Deliverables/HP Bar Overlay/HPBarOverlay2.png" id="6_xyy1j"]
+[ext_resource type="Texture2D" uid="uid://ch3lbai4lacoc" path="res://UI Deliverables/Fuel Bar Overlay/FuelBarUnderlay.png" id="7_ta2aw"]
+[ext_resource type="Texture2D" uid="uid://daec1dyte81mu" path="res://UI Deliverables/Fuel Bar Overlay/FuelBarOverlay.png" id="8_aeylb"]
+[ext_resource type="Texture2D" uid="uid://qodqqqhxxpdc" path="res://UI Deliverables/Fuel Bar Overlay/FuelSymbol.png" id="9_886ha"]
+[ext_resource type="Texture2D" uid="uid://b5llmg8n74tnh" path="res://UI Deliverables/HP Bar Overlay/HeartSymbol.png" id="10_1fxgr"]
+[ext_resource type="Texture2D" uid="uid://d1dev2tjkou33" path="res://UI Deliverables/Inventory/inventory-1x3.png" id="11_rc6o0"]
+
+[node name="NewMain" type="Node2D"]
+
+[node name="RoadScroll" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="RoadScroll"]
+position = Vector2(541, 1755)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("1_qcw2d")
+
+[node name="Sprite2D2" type="Sprite2D" parent="RoadScroll"]
+position = Vector2(541, 1423)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("1_qcw2d")
+
+[node name="Sprite2D3" type="Sprite2D" parent="RoadScroll"]
+position = Vector2(541, 1088.9999)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("1_qcw2d")
+
+[node name="Sprite2D4" type="Sprite2D" parent="RoadScroll"]
+position = Vector2(542, 763)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("1_qcw2d")
+
+[node name="Sprite2D5" type="Sprite2D" parent="RoadScroll"]
+position = Vector2(541, 429.99997)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("1_qcw2d")
+
+[node name="Sprite2D6" type="Sprite2D" parent="RoadScroll"]
+position = Vector2(541, 101)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("1_qcw2d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1080.0
+offset_bottom = 165.0
+color = Color(0.12941177, 0.5137255, 0.89411765, 0.60784316)
+
+[node name="PauseButton" type="TextureButton" parent="."]
+texture_filter = 1
+offset_left = 34.0
+offset_top = 20.0
+offset_right = 66.0
+offset_bottom = 52.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("2_7qgpo")
+
+[node name="LevelBox" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 172.0
+offset_top = 18.0
+offset_right = 556.0
+offset_bottom = 146.0
+texture = ExtResource("3_ksskx")
+
+[node name="Label" type="Label" parent="LevelBox"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9607843, 0.8980392, 0.7529412, 1)
+theme_override_fonts/font = ExtResource("4_xyy1j")
+theme_override_font_sizes/font_size = 60
+text = "Level 999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreBox" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 562.0
+offset_top = 18.0
+offset_right = 1048.0
+offset_bottom = 146.0
+texture = ExtResource("4_w2kc5")
+
+[node name="ScoreLabel" type="Label" parent="ScoreBox"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9607843, 0.8980392, 0.7529412, 1)
+theme_override_fonts/font = ExtResource("4_xyy1j")
+theme_override_font_sizes/font_size = 60
+text = "Score: 9999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+offset_left = 154.0
+offset_top = 182.5
+offset_right = 474.0
+offset_bottom = 214.5
+scale = Vector2(2.7, 2.7)
+value = 80.0
+texture_under = ExtResource("5_g7d0j")
+texture_progress = ExtResource("6_xyy1j")
+
+[node name="HeartSymbol" type="Sprite2D" parent="HPBar"]
+texture_filter = 1
+position = Vector2(-14.259266, 15.185188)
+scale = Vector2(2.9292912, 2.7946122)
+texture = ExtResource("10_1fxgr")
+
+[node name="FuelBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+offset_left = 939.25
+offset_top = 1444.5
+offset_right = 1259.25
+offset_bottom = 1476.5
+rotation = -1.5707964
+scale = Vector2(2.7, 2.7)
+value = 58.0
+texture_under = ExtResource("7_ta2aw")
+texture_progress = ExtResource("8_aeylb")
+
+[node name="FuelSymbol" type="Sprite2D" parent="FuelBar"]
+texture_filter = 1
+position = Vector2(352.22223, 14.444458)
+rotation = 1.5707964
+scale = Vector2(1.5798606, 1.4467596)
+texture = ExtResource("9_886ha")
+
+[node name="Inventory1x3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(552, 1760.0001)
+scale = Vector2(7.5885415, 7.1093774)
+texture = ExtResource("11_rc6o0")

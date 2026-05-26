@@ -21,7 +21,7 @@ var _shake_tween: Tween = null
 
 func _ready() -> void:
 	position.x = LANE_POSITIONS[current_lane]
-	position.y = 1650.0
+	position.y = 1450.0
 	$PickupArea.area_entered.connect(_on_pickup_area_entered)
 	GameManager.hazard_hit.connect(_on_hazard_hit)
 	GameManager.block_hit.connect(_on_block_hit)
