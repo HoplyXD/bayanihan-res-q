@@ -24,19 +24,13 @@ const EVENT_EARTHQUAKE: int = 3
 const EVENT_VOLCANIC: int = 4
 
 const TEXTURE_PATHS: Dictionary = {
-	ItemType.RESOURCE_RICE: [
-		"res://assets/Item Assets/Rice Icon (Detailed) .png",
-		"res://assets/Item Assets/Rice Icon w logo 1 (Detailed) .png",
-	],
-	ItemType.RESOURCE_WATER: [
-		"res://assets/Item Assets/water bottle icon.png",
-		"res://assets/Item Assets/Water Icon (Silver-Detailed).png",
-	],
+	ItemType.RESOURCE_RICE: ["res://assets/Item Assets/Rice Icon w logo 1 (Detailed) .png",],
+	ItemType.RESOURCE_WATER: ["res://assets/Item Assets/water bottle icon.png",],
 	ItemType.RESOURCE_MEDS: ["res://assets/Item Assets/Medicine Icon (Detailed) .png"],
 	ItemType.POWERUP_SHIELD: ["res://assets/Item Assets/shield-icon.png"],
 	ItemType.POWERUP_SPEED: ["res://assets/Item Assets/speedboost-icon.png"],
 	ItemType.FUEL: ["res://assets/Item Assets/FuelBar2.png"],
-	ItemType.POWERUP_REPAIR: ["res://assets/Item Assets/Repair Icon .png"],
+	ItemType.POWERUP_REPAIR: ["res://assets/Item Assets/Repair Icon.png"],
 }
 
 const HAZARD_TEXTURE_PATHS: Array[String] = [

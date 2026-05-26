@@ -382,7 +382,7 @@ position = Vector2(-0.6399962, 0.06584549)
 scale = Vector2(1.3151516, 1.752172)
 sprite_frames = SubResource("SpriteFrames_qh4va")
 autoplay = "default"
-frame_progress = 0.34878057
+frame_progress = 0.9659829
 
 [node name="TyphoonLightning" type="AnimatedSprite2D" parent="Typhoon" unique_id=1369533153]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -390,7 +390,7 @@ position = Vector2(-0.8145526, -0.395065)
 scale = Vector2(1.3090909, 1.3168724)
 sprite_frames = SubResource("SpriteFrames_iwb58")
 autoplay = "default"
-frame_progress = 0.16653712
+frame_progress = 0.45520595
 
 [node name="Flooding" type="Sprite2D" parent="." unique_id=459615170]
 visible = false
@@ -403,21 +403,21 @@ position = Vector2(-0.5818021, -0.36213353)
 scale = Vector2(1.3066287, 1.7566867)
 sprite_frames = SubResource("SpriteFrames_qh4va")
 autoplay = "default"
-frame_progress = 0.9178803
+frame_progress = 0.5350787
 
 [node name="FloodingRain2" type="AnimatedSprite2D" parent="Flooding" unique_id=346360070]
 position = Vector2(-0.5818021, -0.36213353)
 scale = Vector2(1.3066287, 1.7566867)
 sprite_frames = SubResource("SpriteFrames_qh4va")
 autoplay = "default"
-frame_progress = 0.020892715
+frame_progress = 0.63809204
 
 [node name="FloodingRain3" type="AnimatedSprite2D" parent="Flooding" unique_id=1396210109]
 position = Vector2(1.1636016, -17.447989)
 scale = Vector2(1.3066287, 1.7566867)
 sprite_frames = SubResource("SpriteFrames_qh4va")
 autoplay = "default"
-frame_progress = 0.21111342
+frame_progress = 0.8283163
 
 [node name="Earthquake" type="Sprite2D" parent="." unique_id=1861907530]
 visible = false

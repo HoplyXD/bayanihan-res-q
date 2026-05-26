@@ -54,10 +54,6 @@ func _roll_next_anim_time() -> void:
 func _on_level_up(lvl: int) -> void:
 	if lvl <= 1:
 		return
-	if lvl ==2:
-		_apply_event.call_deferred(1) # TYPHOON
-		await get_tree().create_timer(1.0).timeout
-		GameManager.play_dialogue(2)
 	if lvl >= 8:
 		_event_weights[0] = max(_event_weights[0] - 2, 10)
 		_event_weights[1] = min(_event_weights[1] + 1, 25)
@@ -66,6 +62,10 @@ func _on_level_up(lvl: int) -> void:
 		_event_weights[4] = min(_event_weights[4] + 1, 25)
 	if lvl == 1 or lvl == 3 or lvl == 5 or lvl == 6:
 		_apply_event.call_deferred(0)   # CALM
+	elif lvl == 2:
+		_apply_event.call_deferred(1) # TYPHOON
+		await get_tree().create_timer(0.5).timeout
+		GameManager.play_dialogue(2)
 	elif lvl == 4:
 		_apply_event.call_deferred(3)   # EARTHQUAKE
 	elif lvl == 7:
