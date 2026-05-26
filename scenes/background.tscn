@@ -1,274 +1,454 @@
 [gd_scene format=3 uid="uid://cgdcplpup7os2"]
 
 [ext_resource type="Texture2D" uid="uid://chi31acjfc2y0" path="res://assets/Road-Tileset.png" id="1_oabld"]
+[ext_resource type="Texture2D" uid="uid://qkoxgtkqr76t" path="res://assets/Flood & Typhoon Assets/Environment/Ground/Water_Tiles_Sprites-Sheet.png" id="2_cbsqf"]
+[ext_resource type="Texture2D" uid="uid://d13xa3pl7wst1" path="res://assets/Grass-Tileset.png" id="2_jougr"]
+[ext_resource type="Texture2D" uid="uid://d3cmlghaou68v" path="res://assets/Flood & Typhoon Assets/Environment/Ground/Wave_Tileset_Sprite-Sheet.png" id="3_wisxt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wisxt"]
+atlas = ExtResource("2_cbsqf")
+region = Rect2(0, 0, 288, 672)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wax1t"]
+atlas = ExtResource("2_cbsqf")
+region = Rect2(288, 0, 288, 672)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tmhi"]
+atlas = ExtResource("2_cbsqf")
+region = Rect2(576, 0, 288, 672)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cbsqf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wisxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wax1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tmhi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5f8m"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(0, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vm3t"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(416, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8efq7"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(832, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_da6cc"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(1248, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6e46"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(1664, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_td6w2"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(2080, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2thq"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(2496, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0470j"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(2912, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivgg2"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(3328, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4ipc"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(3744, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xduy"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(4160, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fligg"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(4576, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhjnw"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(4992, 0, 416, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y13x"]
+atlas = ExtResource("3_wisxt")
+region = Rect2(5408, 0, 416, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iquee"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5f8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vm3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8efq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da6cc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6e46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td6w2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2thq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0470j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivgg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4ipc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xduy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fligg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhjnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0y13x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Background" type="Node2D" unique_id=1238761047]
 
 [node name="RoadA" type="Node2D" parent="." unique_id=114432789]
+z_index = -2
 
 [node name="Main" type="Node2D" parent="RoadA" unique_id=627204981]
 
 [node name="RoadTileset" type="Sprite2D" parent="RoadA/Main" unique_id=1975817509]
+z_index = -4
 texture_filter = 1
-position = Vector2(541, 1776)
+position = Vector2(541, 912.00006)
 scale = Vector2(3, 3)
 texture = ExtResource("1_oabld")
 
-[node name="RoadTileset2" type="Sprite2D" parent="RoadA/Main" unique_id=66121198]
-texture_filter = 1
-position = Vector2(541, 1488)
+[node name="TyphoonTileset" type="AnimatedSprite2D" parent="RoadA/Main" unique_id=1451471980]
+visible = false
+modulate = Color(1, 1, 1, 0.39215687)
+z_index = -4
+position = Vector2(541, 912.00006)
 scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
+sprite_frames = SubResource("SpriteFrames_cbsqf")
+autoplay = "default"
 
-[node name="RoadTileset3" type="Sprite2D" parent="RoadA/Main" unique_id=1758366188]
-texture_filter = 1
-position = Vector2(541, 1200)
+[node name="Wave" type="AnimatedSprite2D" parent="RoadA/Main/TyphoonTileset" unique_id=1248167132]
+z_index = 2
+position = Vector2(4.7683716e-07, -319.99976)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave2" type="AnimatedSprite2D" parent="RoadA/Main/TyphoonTileset" unique_id=2102340639]
+z_index = 2
+position = Vector2(1.0251999e-05, 320.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="FloodTileset" type="AnimatedSprite2D" parent="RoadA/Main" unique_id=1871032550]
+visible = false
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(541, 912.00006)
 scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
+sprite_frames = SubResource("SpriteFrames_cbsqf")
+autoplay = "default"
 
-[node name="RoadTileset4" type="Sprite2D" parent="RoadA/Main" unique_id=1107905263]
+[node name="Wave" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=525863343]
+position = Vector2(-1.5258789e-05, -288.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave2" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=605396599]
+position = Vector2(-1.5258789e-05, -256)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave3" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1807306739]
+position = Vector2(-1.5258789e-05, -224.00005)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave4" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=583598291]
+position = Vector2(-1.5258789e-05, -192)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave5" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1547162968]
+position = Vector2(-1.5258789e-05, -160.00002)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave6" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=836264124]
+position = Vector2(-1.5258789e-05, -128.00006)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave7" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1829224866]
+position = Vector2(-1.5258789e-05, -96.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave8" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1261081454]
+position = Vector2(-1.5258789e-05, -64.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave9" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=2100647757]
+position = Vector2(-1.5258789e-05, -32)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave10" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1566335133]
+position = Vector2(-1.5258789e-05, -3.0517578e-05)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave11" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1281983633]
+position = Vector2(-1.5258789e-05, 32.00009)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave12" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=657508065]
+position = Vector2(-1.5258789e-05, 64.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave13" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1750864462]
+position = Vector2(-1.5258789e-05, 96)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave14" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1534359957]
+position = Vector2(-1.5258789e-05, 128)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave15" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1597792052]
+position = Vector2(-1.5258789e-05, 159.99997)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave16" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=766629224]
+position = Vector2(-1.5258789e-05, 192.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave17" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1601447482]
+position = Vector2(-1.5258789e-05, 223.99994)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave18" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1776248426]
+position = Vector2(-1.5258789e-05, 255.99994)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave19" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1072580884]
+position = Vector2(-1.5258789e-05, 287.99994)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave20" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1022639581]
+z_index = 2
+position = Vector2(4.7683716e-07, -319.99976)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave21" type="AnimatedSprite2D" parent="RoadA/Main/FloodTileset" unique_id=1191363051]
+z_index = 2
+position = Vector2(1.0251999e-05, 320.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="GrassTileset" type="Sprite2D" parent="RoadA/Main" unique_id=203229930]
+z_index = -1
 texture_filter = 1
 position = Vector2(541, 912)
 scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset5" type="Sprite2D" parent="RoadA/Main" unique_id=35047603]
-texture_filter = 1
-position = Vector2(541, 624)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset6" type="Sprite2D" parent="RoadA/Main" unique_id=1296035739]
-texture_filter = 1
-position = Vector2(541, 336)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset7" type="Sprite2D" parent="RoadA/Main" unique_id=1076540670]
-texture_filter = 1
-position = Vector2(541, 48)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="Left" type="Node2D" parent="RoadA" unique_id=1912492351]
-
-[node name="RoadTileset" type="Sprite2D" parent="RoadA/Left" unique_id=2067410622]
-texture_filter = 1
-position = Vector2(-515, 1776)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset2" type="Sprite2D" parent="RoadA/Left" unique_id=44303148]
-texture_filter = 1
-position = Vector2(-515, 1488)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset3" type="Sprite2D" parent="RoadA/Left" unique_id=1046196308]
-texture_filter = 1
-position = Vector2(-515, 1200)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset4" type="Sprite2D" parent="RoadA/Left" unique_id=612772155]
-texture_filter = 1
-position = Vector2(-515, 912)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset5" type="Sprite2D" parent="RoadA/Left" unique_id=622796648]
-texture_filter = 1
-position = Vector2(-515, 624)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset6" type="Sprite2D" parent="RoadA/Left" unique_id=1303720818]
-texture_filter = 1
-position = Vector2(-515, 336)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset7" type="Sprite2D" parent="RoadA/Left" unique_id=728321178]
-texture_filter = 1
-position = Vector2(-515, 48)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="Right" type="Node2D" parent="RoadA" unique_id=778612419]
-
-[node name="RoadTileset" type="Sprite2D" parent="RoadA/Right" unique_id=1652650956]
-texture_filter = 1
-position = Vector2(1597, 1776)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset2" type="Sprite2D" parent="RoadA/Right" unique_id=2040980967]
-texture_filter = 1
-position = Vector2(1597, 1488)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset3" type="Sprite2D" parent="RoadA/Right" unique_id=918070430]
-texture_filter = 1
-position = Vector2(1597, 1200)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset4" type="Sprite2D" parent="RoadA/Right" unique_id=1020121823]
-texture_filter = 1
-position = Vector2(1597, 912)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset5" type="Sprite2D" parent="RoadA/Right" unique_id=2037502666]
-texture_filter = 1
-position = Vector2(1597, 624)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset6" type="Sprite2D" parent="RoadA/Right" unique_id=803404265]
-texture_filter = 1
-position = Vector2(1597, 336)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset7" type="Sprite2D" parent="RoadA/Right" unique_id=10931579]
-texture_filter = 1
-position = Vector2(1597, 48)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
+texture = ExtResource("2_jougr")
 
 [node name="RoadB" type="Node2D" parent="." unique_id=353010371]
+z_index = -2
 position = Vector2(0, -2016)
 
-[node name="Main" type="Node2D" parent="RoadB" unique_id=646561680]
+[node name="Main" type="Node2D" parent="RoadB" unique_id=1164657595]
 
-[node name="RoadTileset" type="Sprite2D" parent="RoadB/Main" unique_id=1179306015]
+[node name="RoadTileset" type="Sprite2D" parent="RoadB/Main" unique_id=412087079]
+z_index = -4
 texture_filter = 1
-position = Vector2(541, 1776)
+position = Vector2(541, 912.00006)
 scale = Vector2(3, 3)
 texture = ExtResource("1_oabld")
 
-[node name="RoadTileset2" type="Sprite2D" parent="RoadB/Main" unique_id=815906760]
-texture_filter = 1
-position = Vector2(541, 1488)
+[node name="TyphoonTileset" type="AnimatedSprite2D" parent="RoadB/Main" unique_id=103956518]
+visible = false
+modulate = Color(1, 1, 1, 0.39215687)
+z_index = -4
+position = Vector2(541, 912.00006)
 scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
+sprite_frames = SubResource("SpriteFrames_cbsqf")
+autoplay = "default"
 
-[node name="RoadTileset3" type="Sprite2D" parent="RoadB/Main" unique_id=457005388]
-texture_filter = 1
-position = Vector2(541, 1200)
+[node name="Wave" type="AnimatedSprite2D" parent="RoadB/Main/TyphoonTileset" unique_id=15028280]
+z_index = 2
+position = Vector2(4.7683716e-07, -319.99976)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave2" type="AnimatedSprite2D" parent="RoadB/Main/TyphoonTileset" unique_id=153205970]
+z_index = 2
+position = Vector2(1.0251999e-05, 320.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="FloodTileset" type="AnimatedSprite2D" parent="RoadB/Main" unique_id=650953035]
+visible = false
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(541, 912.00006)
 scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
+sprite_frames = SubResource("SpriteFrames_cbsqf")
+autoplay = "default"
 
-[node name="RoadTileset4" type="Sprite2D" parent="RoadB/Main" unique_id=404139070]
+[node name="Wave" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=1318747022]
+position = Vector2(-1.5258789e-05, -288.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave2" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=314899296]
+position = Vector2(-1.5258789e-05, -256)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave3" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=1468344433]
+position = Vector2(-1.5258789e-05, -224.00005)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave4" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=350748327]
+position = Vector2(-1.5258789e-05, -192)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave5" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=1049895159]
+position = Vector2(-1.5258789e-05, -160.00002)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave6" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=227431394]
+position = Vector2(-1.5258789e-05, -128.00006)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave7" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=1187397613]
+position = Vector2(-1.5258789e-05, -96.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave8" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=114212312]
+position = Vector2(-1.5258789e-05, -64.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave9" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=795470975]
+position = Vector2(-1.5258789e-05, -32)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave10" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=294917394]
+position = Vector2(-1.5258789e-05, -3.0517578e-05)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave11" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=277615658]
+position = Vector2(-1.5258789e-05, 32.00009)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave12" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=737846051]
+position = Vector2(-1.5258789e-05, 64.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave13" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=1409599781]
+position = Vector2(-1.5258789e-05, 96)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave14" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=1572690501]
+position = Vector2(-1.5258789e-05, 128)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave15" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=1451276246]
+position = Vector2(-1.5258789e-05, 159.99997)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave16" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=1624199458]
+position = Vector2(-1.5258789e-05, 192.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave17" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=1935468533]
+position = Vector2(-1.5258789e-05, 223.99994)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave18" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=359543304]
+position = Vector2(-1.5258789e-05, 255.99994)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave19" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=2073566988]
+position = Vector2(-1.5258789e-05, 287.99994)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave20" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=632700209]
+z_index = 2
+position = Vector2(4.7683716e-07, -319.99976)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="Wave21" type="AnimatedSprite2D" parent="RoadB/Main/FloodTileset" unique_id=2105254557]
+z_index = 2
+position = Vector2(1.0251999e-05, 320.00003)
+sprite_frames = SubResource("SpriteFrames_iquee")
+autoplay = "default"
+
+[node name="GrassTileset" type="Sprite2D" parent="RoadB/Main" unique_id=147730518]
+z_index = -1
 texture_filter = 1
 position = Vector2(541, 912)
 scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset5" type="Sprite2D" parent="RoadB/Main" unique_id=1091730614]
-texture_filter = 1
-position = Vector2(541, 624)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset6" type="Sprite2D" parent="RoadB/Main" unique_id=444452224]
-texture_filter = 1
-position = Vector2(541, 336)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset7" type="Sprite2D" parent="RoadB/Main" unique_id=1886955022]
-texture_filter = 1
-position = Vector2(541, 48)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="Left" type="Node2D" parent="RoadB" unique_id=1463249395]
-
-[node name="RoadTileset" type="Sprite2D" parent="RoadB/Left" unique_id=882376851]
-texture_filter = 1
-position = Vector2(-515, 1776)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset2" type="Sprite2D" parent="RoadB/Left" unique_id=736561863]
-texture_filter = 1
-position = Vector2(-515, 1488)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset3" type="Sprite2D" parent="RoadB/Left" unique_id=713987877]
-texture_filter = 1
-position = Vector2(-515, 1200)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset4" type="Sprite2D" parent="RoadB/Left" unique_id=1192402049]
-texture_filter = 1
-position = Vector2(-515, 912)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset5" type="Sprite2D" parent="RoadB/Left" unique_id=512822950]
-texture_filter = 1
-position = Vector2(-515, 624)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset6" type="Sprite2D" parent="RoadB/Left" unique_id=161880564]
-texture_filter = 1
-position = Vector2(-515, 336)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset7" type="Sprite2D" parent="RoadB/Left" unique_id=549322680]
-texture_filter = 1
-position = Vector2(-515, 48)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="Right" type="Node2D" parent="RoadB" unique_id=834753876]
-
-[node name="RoadTileset" type="Sprite2D" parent="RoadB/Right" unique_id=1958836566]
-texture_filter = 1
-position = Vector2(1597, 1776)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset2" type="Sprite2D" parent="RoadB/Right" unique_id=1728971128]
-texture_filter = 1
-position = Vector2(1597, 1488)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset3" type="Sprite2D" parent="RoadB/Right" unique_id=1330109765]
-texture_filter = 1
-position = Vector2(1597, 1200)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset4" type="Sprite2D" parent="RoadB/Right" unique_id=556016316]
-texture_filter = 1
-position = Vector2(1597, 912)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset5" type="Sprite2D" parent="RoadB/Right" unique_id=1590347189]
-texture_filter = 1
-position = Vector2(1597, 624)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset6" type="Sprite2D" parent="RoadB/Right" unique_id=1009399746]
-texture_filter = 1
-position = Vector2(1597, 336)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
-
-[node name="RoadTileset7" type="Sprite2D" parent="RoadB/Right" unique_id=610045074]
-texture_filter = 1
-position = Vector2(1597, 48)
-scale = Vector2(3, 3)
-texture = ExtResource("1_oabld")
+texture = ExtResource("2_jougr")

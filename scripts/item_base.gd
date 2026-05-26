@@ -155,43 +155,109 @@ func _get_block_options() -> Array[Dictionary]:
 	var event := GameManager.current_hazard_event
 	var options: Array[Dictionary] = []
 
-	if event in [EVENT_CALM, EVENT_TYPHOON]:
-		options.append({"node": "Tree branches"})
-		options.append({"node": "Sprite2D"})
+	# ── Normal spawn (all lanes) ──────────────────────────────────────────
+	match event:
+		EVENT_CALM:
+			options.append({"node": "Branches1"})
+			options.append({"node": "Branches2"})
+			options.append({"node": "DebrisAnim", "animation": &"Debris1"})
+			options.append({"node": "DebrisAnim", "animation": &"Debris2"})
+		EVENT_TYPHOON:
+			options.append({"node": "Branches1"})
+			options.append({"node": "Branches2"})
+			options.append({"node": "FloodBlockage1"})
+			options.append({"node": "FloodBlockage2"})
+			options.append({"node": "FloodBlockage3"})
+			options.append({"node": "FloodBlockage4"})
+		EVENT_FLOODING:
+			options.append({"node": "FloodBlockage1"})
+			options.append({"node": "FloodBlockage2"})
+			options.append({"node": "FloodBlockage3"})
+			options.append({"node": "FloodBlockage4"})
+		EVENT_EARTHQUAKE:
+			options.append_array(_get_shared_vehicle_options())
+			options.append({"node": "Crack1"})
+			options.append({"node": "Crack2"})
+			options.append({"node": "CrackAnim", "animation": &"Crack"})
+			options.append({"node": "DebrisAnim", "animation": &"Debris1"})
+			options.append({"node": "DebrisAnim", "animation": &"Debris2"})
+		EVENT_VOLCANIC:
+			options.append_array(_get_shared_vehicle_options())
+			options.append({"node": "Crack1"})
+			options.append({"node": "Crack2"})
+			options.append({"node": "CrackAnim", "animation": &"Crack"})
+			options.append({"node": "DebrisAnim", "animation": &"Debris1"})
+			options.append({"node": "DebrisAnim", "animation": &"Debris2"})
 
+	# ── Left lane (lane_index == 0) ───────────────────────────────────────
+	if lane_index == 0:
+		match event:
+			EVENT_TYPHOON:
+				options.append({"node": "L-LaneTreeAnim", "animation": &"Tree1"})
+				options.append({"node": "L-LaneTreeAnim", "animation": &"Tree2"})
+				options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris3"})
+				options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris4"})
+			EVENT_FLOODING:
+				options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris3"})
+			EVENT_EARTHQUAKE:
+				options.append({"node": "L-LaneTreeAnim", "animation": &"Tree1"})
+				options.append({"node": "L-LaneTreeAnim", "animation": &"Tree2"})
+				options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris3"})
+				options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris4"})
+			EVENT_VOLCANIC:
+				options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris3"})
+				options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris4"})
+
+	# ── Right lane (lane_index == 2) ──────────────────────────────────────
+	if lane_index == 2:
+		match event:
+			EVENT_TYPHOON:
+				options.append({"node": "R-LaneTreeAnim", "animation": &"Tree1"})
+				options.append({"node": "R-LaneTreeAnim", "animation": &"Tree2"})
+				options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris3"})
+				options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris4"})
+			EVENT_FLOODING:
+				options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris3"})
+			EVENT_EARTHQUAKE:
+				options.append({"node": "R-LaneTreeAnim", "animation": &"Tree1"})
+				options.append({"node": "R-LaneTreeAnim", "animation": &"Tree2"})
+				options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris3"})
+				options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris4"})
+			EVENT_VOLCANIC:
+				options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris3"})
+				options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris4"})
+
+	# ── Middle lane / two-lane (lane_index == 1) ──────────────────────────
+	if lane_index == 1:
+		match event:
+			EVENT_TYPHOON:
+				options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris5", "collision": "MR"})
+				options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris5", "collision": "ML"})
+				options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris6", "collision": "MR"})
+				options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris6", "collision": "ML"})
+			EVENT_FLOODING:
+				options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris5", "collision": "MR"})
+				options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris5", "collision": "ML"})
+				options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris6", "collision": "MR"})
+				options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris6", "collision": "ML"})
+			EVENT_EARTHQUAKE:
+				options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris5", "collision": "MR"})
+				options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris5", "collision": "ML"})
+				options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris6", "collision": "MR"})
+				options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris6", "collision": "ML"})
+			EVENT_VOLCANIC:
+				options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris5", "collision": "MR"})
+				options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris5", "collision": "ML"})
+				options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris6", "collision": "MR"})
+				options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris6", "collision": "ML"})
+
+	return options
+
+
+func _get_shared_vehicle_options() -> Array[Dictionary]:
+	var options: Array[Dictionary] = []
 	for animation in VEHICLE_ANIMATIONS:
 		options.append({"node": "CrackAnim", "animation": animation})
-
-	if event in [EVENT_CALM, EVENT_EARTHQUAKE, EVENT_VOLCANIC]:
-		options.append({"node": "Crack1"})
-		options.append({"node": "Crack2"})
-		options.append({"node": "DebrisAnim", "animation": &"Debris1"})
-		options.append({"node": "DebrisAnim", "animation": &"Debris2"})
-
-	if event in [EVENT_EARTHQUAKE, EVENT_VOLCANIC]:
-		options.append({"node": "CrackAnim", "animation": &"Crack"})
-
-	if lane_index == 2:
-		if event in [EVENT_CALM, EVENT_TYPHOON, EVENT_EARTHQUAKE]:
-			options.append({"node": "R-LaneTreeAnim", "animation": &"Tree1"})
-			options.append({"node": "R-LaneTreeAnim", "animation": &"Tree2"})
-		options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris3"})
-		if event != EVENT_FLOODING:
-			options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris4"})
-	elif lane_index == 0:
-		if event in [EVENT_CALM, EVENT_TYPHOON, EVENT_EARTHQUAKE]:
-			options.append({"node": "L-LaneTreeAnim", "animation": &"Tree1"})
-			options.append({"node": "L-LaneTreeAnim", "animation": &"Tree2"})
-		options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris3"})
-		if event != EVENT_FLOODING:
-			options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris4"})
-	else:
-		options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris5", "collision": "MR"})
-		options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris5", "collision": "ML"})
-		if event != EVENT_FLOODING:
-			options.append({"node": "MR-2LaneDebrisAnim", "animation": &"Debris6", "collision": "MR"})
-			options.append({"node": "ML-2LaneDebrisAnim", "animation": &"Debris6", "collision": "ML"})
-
 	return options
 
 
@@ -220,8 +286,12 @@ func _hide_visuals() -> void:
 		"ML-2LaneDebrisAnim",
 		"R-LaneTreeAnim",
 		"L-LaneTreeAnim",
-		"Tree branches",
-		"Sprite2D",
+		"Branches1",
+		"Branches2",
+		"FloodBlockage1",
+		"FloodBlockage2",
+		"FloodBlockage3",
+		"FloodBlockage4",
 	]:
 		var node := get_node_or_null(node_name)
 		if node is CanvasItem:

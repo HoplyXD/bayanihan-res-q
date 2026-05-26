@@ -47,7 +47,7 @@ func _start_shake(intensity: float, duration: float) -> void:
 
 
 func _roll_next_anim_time() -> void:
-	_next_anim_time = randf_range(1.0, 6.0)
+	_next_anim_time = randf_range(1.0, 5.0)
 	_anim_timer = 0.0
 
 
@@ -56,6 +56,7 @@ func _on_level_up(lvl: int) -> void:
 		return
 	if lvl ==2:
 		_apply_event.call_deferred(1) # TYPHOON
+		await get_tree().create_timer(1.0).timeout
 		GameManager.play_dialogue(2)
 	if lvl >= 8:
 		_event_weights[0] = max(_event_weights[0] - 2, 10)
@@ -112,30 +113,32 @@ func _apply_event(idx: int) -> void:
 			pass
 
 		1:  # TYPHOON
-			_current_event_bonus[4] =  6
-			_current_event_bonus[3] =  6
+			_current_event_bonus[4] =  10
+			_current_event_bonus[3] =  10
 			_current_event_bonus[0] = -6
 			_current_event_bonus[1] = -6
 			$Typhoon.show()
 
+
 		2:  # FLOODING
-			_current_event_bonus[3] =  15
+			_current_event_bonus[4] =  20
+			_current_event_bonus[3] =  -10
 			_current_event_bonus[0] = -5
 			_current_event_bonus[2] = -5
 			$Flooding.show()
 
 		3:  # EARTHQUAKE
 			_current_event_bonus[4] = 20
-			_current_event_bonus[3] = -10
+			_current_event_bonus[3] = -20
 			_current_event_bonus[2] =  5
 			_current_event_bonus[0] = -5
 			$Earthquake.show()
 
 		4:  # VOLCANIC
-			_current_event_bonus[3] = -3
-			_current_event_bonus[4] = 15
-			_current_event_bonus[1] = -4
-			_current_event_bonus[2] = -3
+			_current_event_bonus[4] = 30
+			_current_event_bonus[3] = -20
+			_current_event_bonus[1] = -5
+			_current_event_bonus[2] = -5
 			$Volcanic.show()
 
 	# Add new bonus
