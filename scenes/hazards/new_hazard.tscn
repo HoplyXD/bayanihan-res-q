@@ -1,0 +1,1086 @@
+[gd_scene format=3 uid="uid://bi7x41elvdwko"]
+
+[ext_resource type="Script" uid="uid://b45hjxxwcttm1" path="res://scripts/hazard_event.gd" id="1_b64ds"]
+[ext_resource type="Texture2D" uid="uid://ctjltej0qgjjf" path="res://UI Deliverables/Road-Tileset.png" id="2_t7fbv"]
+[ext_resource type="Texture2D" uid="uid://qlv1lm885g4m" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Weather VFX/Light_Drizzle.png" id="3_x3eag"]
+[ext_resource type="Texture2D" uid="uid://dv86djhtkeknw" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Weather VFX/Storm.png" id="4_idfv7"]
+[ext_resource type="Texture2D" uid="uid://cwrx0y54svpxq" path="res://Obstacle Assets/Electrical-Post.32x32.png" id="5_jiek5"]
+[ext_resource type="Texture2D" uid="uid://pigrve4smyfv" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Puddle Variations/Puddles Assets4.png" id="6_k3jmw"]
+[ext_resource type="Texture2D" uid="uid://chvuxt3vf8nyu" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Puddle Variations/Puddles Assets1.png" id="7_f8pg3"]
+[ext_resource type="Texture2D" uid="uid://c4wstwdstpm0s" path="res://icon.svg" id="8_5r7aa"]
+[ext_resource type="Texture2D" uid="uid://druoe1kw3d78y" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Manhole/Manhole_Cover.png" id="9_f76jb"]
+[ext_resource type="Texture2D" uid="uid://bd3673wj8qc4i" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Weather VFX/waves tile sprite-Sheet.png" id="10_lhip5"]
+[ext_resource type="Texture2D" uid="uid://y0b2n34r3nke" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Obstacles/Trash_Flooded.png" id="11_lvs52"]
+[ext_resource type="Texture2D" uid="uid://16pgb62mnoeo" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Obstacles/Leaves_Flooded.png" id="12_pkfs4"]
+[ext_resource type="Texture2D" uid="uid://dc6dfygjrdfst" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Obstacles/Trash_Flooded2.png" id="13_dogw5"]
+[ext_resource type="Texture2D" uid="uid://c2u4brwlvpawa" path="res://Obstacle Assets/Fallen-Tree-1.png" id="14_25ayp"]
+[ext_resource type="Texture2D" uid="uid://bdn5uffp5olve" path="res://Obstacle Assets/fallen_tree-2.png" id="15_3paye"]
+[ext_resource type="Texture2D" uid="uid://cr8modpggyrdl" path="res://assets/Obstacle Assets/Typhoon_Flood Assets/Weather VFX/Flood.png" id="16_05tfl"]
+[ext_resource type="Texture2D" uid="uid://c8ktadgyg3j27" path="res://assets/Obstacle Assets/crack-2_96x96.png" id="17_u737u"]
+[ext_resource type="Texture2D" uid="uid://c2ai0pwc2esl7" path="res://assets/Obstacle Assets/do_u_like_my_crack_animation-96x96.png" id="18_2doty"]
+[ext_resource type="Texture2D" uid="uid://bm0ljn3v10exg" path="res://assets/Obstacle Assets/Debris #6 (2-lane) Animation Sheet.png" id="19_t2b14"]
+[ext_resource type="Texture2D" uid="uid://dvfcv5ehttc6m" path="res://assets/Obstacle Assets/Debris #3 (1-lane) Animati0n Sheet.png" id="20_6snwj"]
+[ext_resource type="Texture2D" uid="uid://bk0bafleikmf1" path="res://assets/Obstacle Assets/Debris #1 (1-lane).png" id="21_fab6r"]
+[ext_resource type="Texture2D" uid="uid://bxil7on1gvstk" path="res://assets/Obstacle Assets/Debris #2 (1-lane).png" id="22_5ayby"]
+[ext_resource type="Texture2D" uid="uid://c3e1ulncbdssn" path="res://assets/Obstacle Assets/Political Poster #1.png" id="23_heu8p"]
+[ext_resource type="Texture2D" uid="uid://b3825ylqcb3y6" path="res://assets/Obstacle Assets/Political Poster #2.png" id="24_d4j8l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr0rw"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(0, 0, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wi54b"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(96, 0, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rptbp"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(192, 0, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgo24"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(288, 0, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgytg"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(0, 72, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlsdd"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(96, 72, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jotn8"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(192, 72, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_443ls"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(288, 72, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61cgq"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(0, 144, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoye4"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(96, 144, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkh44"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(192, 144, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmy5n"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(288, 144, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dw8u"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(0, 216, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd61j"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(96, 216, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kq77y"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(192, 216, 96, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4cy3"]
+atlas = ExtResource("3_x3eag")
+region = Rect2(288, 216, 96, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qh4va"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qr0rw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi54b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rptbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgo24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgytg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlsdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jotn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_443ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61cgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uoye4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkh44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmy5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dw8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd61j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kq77y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4cy3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iis8h"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sifu"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7i7b"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62npe"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh5nd"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2lkr"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnjvn"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxco3"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4a0gi"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qgcn"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 288, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5v0r"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 288, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_net56"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 288, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6qbw"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 384, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16hr1"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 384, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wap16"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 384, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xp46u"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 480, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vqxm"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 480, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7fw0"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 480, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85lie"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 576, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fh6v"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 576, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_namsg"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 576, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn8b0"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 672, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qphg"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 672, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74s1c"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 672, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xr6fx"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 768, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssbum"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 768, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3qab"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 768, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_takkm"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 864, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66n2w"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 864, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od6km"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 864, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m3cf"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(0, 960, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spps5"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(96, 960, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpapj"]
+atlas = ExtResource("4_idfv7")
+region = Rect2(192, 960, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iwb58"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iis8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sifu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7i7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62npe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh5nd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2lkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnjvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxco3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4a0gi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qgcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5v0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_net56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6qbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16hr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wap16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xp46u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vqxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7fw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85lie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fh6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_namsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn8b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qphg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74s1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xr6fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssbum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3qab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_takkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66n2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od6km")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m3cf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spps5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpapj")
+}],
+"loop": true,
+"name": &"default_1",
+"speed": 7.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0re4m"]
+atlas = ExtResource("10_lhip5")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkych"]
+atlas = ExtResource("10_lhip5")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4a62"]
+atlas = ExtResource("10_lhip5")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtgtr"]
+atlas = ExtResource("10_lhip5")
+region = Rect2(960, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ughso"]
+atlas = ExtResource("10_lhip5")
+region = Rect2(1280, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjkng"]
+atlas = ExtResource("10_lhip5")
+region = Rect2(1600, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6a8w"]
+atlas = ExtResource("10_lhip5")
+region = Rect2(1920, 0, 320, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cxoen"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0re4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkych")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4a62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtgtr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ughso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjkng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6a8w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dd7o"]
+atlas = ExtResource("16_05tfl")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ji1h3"]
+atlas = ExtResource("16_05tfl")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ft0sk"]
+atlas = ExtResource("16_05tfl")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q01vr"]
+atlas = ExtResource("16_05tfl")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_27xdd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dd7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ji1h3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ft0sk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q01vr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcftw"]
+atlas = ExtResource("18_2doty")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khu2u"]
+atlas = ExtResource("18_2doty")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjqws"]
+atlas = ExtResource("18_2doty")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jkr8"]
+atlas = ExtResource("18_2doty")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbhxy"]
+atlas = ExtResource("18_2doty")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awpi1"]
+atlas = ExtResource("18_2doty")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ftxf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcftw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khu2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjqws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jkr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbhxy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awpi1")
+}],
+"loop": true,
+"name": &"crack",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2efuk"]
+atlas = ExtResource("19_t2b14")
+region = Rect2(0, 0, 224, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxwv3"]
+atlas = ExtResource("19_t2b14")
+region = Rect2(224, 0, 224, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7ms3"]
+atlas = ExtResource("19_t2b14")
+region = Rect2(448, 0, 224, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxoen"]
+atlas = ExtResource("19_t2b14")
+region = Rect2(672, 0, 224, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwb58"]
+atlas = ExtResource("19_t2b14")
+region = Rect2(896, 0, 224, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh4va"]
+atlas = ExtResource("19_t2b14")
+region = Rect2(1120, 0, 224, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6uptf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2efuk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxwv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7ms3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxoen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwb58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qh4va")
+}],
+"loop": true,
+"name": &"collapse1",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27xdd"]
+atlas = ExtResource("20_6snwj")
+region = Rect2(0, 0, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kca4m"]
+atlas = ExtResource("20_6snwj")
+region = Rect2(128, 0, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1vlk"]
+atlas = ExtResource("20_6snwj")
+region = Rect2(256, 0, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g16xd"]
+atlas = ExtResource("20_6snwj")
+region = Rect2(384, 0, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8oyw"]
+atlas = ExtResource("20_6snwj")
+region = Rect2(512, 0, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgcl0"]
+atlas = ExtResource("20_6snwj")
+region = Rect2(640, 0, 128, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wm2lh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27xdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kca4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1vlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g16xd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8oyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgcl0")
+}],
+"loop": true,
+"name": &"collapse2",
+"speed": 5.0
+}]
+
+[node name="Hazard" type="CanvasLayer" unique_id=491691522]
+script = ExtResource("1_b64ds")
+
+[node name="Typhoon" type="Sprite2D" parent="." unique_id=917264538]
+self_modulate = Color(0.31, 0.31, 0.31, 0.5882353)
+position = Vector2(547, 966)
+scale = Vector2(8.59375, 15.1875)
+
+[node name="RoadScroll" type="Node2D" parent="Typhoon" unique_id=1630428450]
+position = Vector2(-63.65091, -63.604935)
+scale = Vector2(0.11636364, 0.06584362)
+
+[node name="Sprite2D" type="Sprite2D" parent="Typhoon/RoadScroll" unique_id=432397132]
+position = Vector2(541, 1755)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("2_t7fbv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Typhoon/RoadScroll" unique_id=402181370]
+position = Vector2(541, 1423)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("2_t7fbv")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Typhoon/RoadScroll" unique_id=1030947603]
+position = Vector2(541, 1088.9999)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("2_t7fbv")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Typhoon/RoadScroll" unique_id=1883756192]
+position = Vector2(542, 763)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("2_t7fbv")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Typhoon/RoadScroll" unique_id=1003301246]
+position = Vector2(541, 429.99997)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("2_t7fbv")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Typhoon/RoadScroll" unique_id=1795763152]
+position = Vector2(541, 101)
+scale = Vector2(3.0742188, 3.4804685)
+texture = ExtResource("2_t7fbv")
+
+[node name="TyphoonRain" type="AnimatedSprite2D" parent="Typhoon" unique_id=245384653]
+position = Vector2(-0.6399962, 0.06584549)
+scale = Vector2(1.3151516, 1.752172)
+sprite_frames = SubResource("SpriteFrames_qh4va")
+autoplay = "default"
+frame_progress = 0.6007457
+
+[node name="TyphoonLightning" type="AnimatedSprite2D" parent="Typhoon" unique_id=1369533153]
+position = Vector2(-1.0472729, -13.037038)
+scale = Vector2(1.1596314, 1.054608)
+sprite_frames = SubResource("SpriteFrames_iwb58")
+autoplay = "default"
+frame_progress = 0.04630214
+
+[node name="POSTS2" type="Node2D" parent="Typhoon" unique_id=777591726]
+position = Vector2(-71.051384, -66.821686)
+scale = Vector2(0.013540102, 0.00433524)
+
+[node name="POST" type="Sprite2D" parent="Typhoon/POSTS2" unique_id=1797516010]
+position = Vector2(890.3199, 18785.342)
+scale = Vector2(35.74934, 63.068417)
+texture = ExtResource("5_jiek5")
+
+[node name="POST2" type="Sprite2D" parent="Typhoon/POSTS2" unique_id=2056631921]
+position = Vector2(9406.974, 7774.0435)
+scale = Vector2(35.74934, 63.068417)
+texture = ExtResource("5_jiek5")
+
+[node name="Debris" type="Node2D" parent="Typhoon" unique_id=1305023061]
+
+[node name="PuddlesAssets4" type="Sprite2D" parent="Typhoon/Debris" unique_id=615118481]
+position = Vector2(-34.734543, -13.432098)
+scale = Vector2(0.6290909, 0.3209877)
+texture = ExtResource("6_k3jmw")
+
+[node name="PuddlesAssets1" type="Sprite2D" parent="Typhoon/Debris" unique_id=38219124]
+position = Vector2(34.67636, 29.942398)
+scale = Vector2(0.6127273, 0.33436236)
+texture = ExtResource("7_f8pg3")
+
+[node name="Flooding" type="Sprite2D" parent="." unique_id=459615170]
+self_modulate = Color(0, 1, 1, 0.39215687)
+position = Vector2(547, 966)
+scale = Vector2(8.594, 15.188)
+texture = ExtResource("8_5r7aa")
+
+[node name="Drain" type="Sprite2D" parent="Flooding" unique_id=155325117]
+position = Vector2(35.192005, 34.10586)
+scale = Vector2(0.4072609, 0.2304451)
+texture = ExtResource("9_f76jb")
+
+[node name="FLOOD TYPE 2" type="Node2D" parent="Flooding" unique_id=700591209]
+position = Vector2(-66.208984, -87.63498)
+scale = Vector2(0.116360255, 0.06584146)
+metadata/_edit_group_ = true
+
+[node name="FloodRow1" type="Node2D" parent="Flooding/FLOOD TYPE 2" unique_id=593499324]
+position = Vector2(-2, 2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow1" unique_id=827524861]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(82, 421)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow1" unique_id=565156110]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(400, 421)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow1" unique_id=1878761370]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(720, 421)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow1" unique_id=2000303715]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(1039, 421)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="FloodRow2" type="Node2D" parent="Flooding/FLOOD TYPE 2" unique_id=1181160514]
+position = Vector2(-2, 0)
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow2" unique_id=2106629587]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(82, 743)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow2" unique_id=263933396]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(400, 743)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow2" unique_id=1460704788]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(720, 743)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow2" unique_id=428254757]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(1039, 743)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="FloodRow3" type="Node2D" parent="Flooding/FLOOD TYPE 2" unique_id=1096255997]
+position = Vector2(-2, 0)
+
+[node name="AnimatedSprite2D9" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow3" unique_id=1414630899]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(82, 1063)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D10" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow3" unique_id=172456348]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(400, 1063)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D11" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow3" unique_id=873846594]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(720, 1063)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D12" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow3" unique_id=109121448]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(1039, 1063)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="FloodRow4" type="Node2D" parent="Flooding/FLOOD TYPE 2" unique_id=2052570722]
+position = Vector2(2, 95)
+
+[node name="AnimatedSprite2D13" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow4" unique_id=227533962]
+self_modulate = Color(1, 1, 1, 0.4392157)
+position = Vector2(78, 1288)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D14" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow4" unique_id=567353400]
+self_modulate = Color(1, 1, 1, 0.4392157)
+position = Vector2(396, 1288)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D15" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow4" unique_id=842356846]
+self_modulate = Color(1, 1, 1, 0.4392157)
+position = Vector2(716, 1288)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D16" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow4" unique_id=63773623]
+self_modulate = Color(1, 1, 1, 0.4392157)
+position = Vector2(1035, 1288)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="FloodRow5" type="Node2D" parent="Flooding/FLOOD TYPE 2" unique_id=1151777791]
+position = Vector2(2, 93)
+
+[node name="AnimatedSprite2D17" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow5" unique_id=2072999491]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(78, 1610)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D18" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow5" unique_id=894503169]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(396, 1610)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D19" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow5" unique_id=491512995]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(716, 1610)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D20" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow5" unique_id=882355701]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(1035, 1610)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="FloodRow6" type="Node2D" parent="Flooding/FLOOD TYPE 2" unique_id=1228961925]
+position = Vector2(2, 93)
+
+[node name="AnimatedSprite2D21" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow6" unique_id=318119010]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(78, 1930)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D22" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow6" unique_id=734396156]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(396, 1930)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D23" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow6" unique_id=1167547896]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(716, 1930)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D24" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow6" unique_id=2130829986]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(1035, 1930)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="FloodRow7" type="Node2D" parent="Flooding/FLOOD TYPE 2" unique_id=1635967886]
+position = Vector2(2, 413)
+
+[node name="AnimatedSprite2D21" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow7" unique_id=863807132]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(78, 1930)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D22" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow7" unique_id=478818576]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(396, 1930)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D23" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow7" unique_id=2007306121]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(716, 1930)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="AnimatedSprite2D24" type="AnimatedSprite2D" parent="Flooding/FLOOD TYPE 2/FloodRow7" unique_id=1657967098]
+self_modulate = Color(1, 1, 1, 0.56078434)
+position = Vector2(1035, 1930)
+sprite_frames = SubResource("SpriteFrames_cxoen")
+autoplay = "default"
+
+[node name="Debris" type="Node2D" parent="Flooding" unique_id=2142502579]
+position = Vector2(-63.016052, -39.7024)
+scale = Vector2(0.116360255, 0.06584146)
+
+[node name="Float" type="Sprite2D" parent="Flooding/Debris" unique_id=440096311]
+position = Vector2(226.55995, 546.0001)
+scale = Vector2(5, 5)
+texture = ExtResource("11_lvs52")
+
+[node name="Float2" type="Sprite2D" parent="Flooding/Debris" unique_id=779337514]
+position = Vector2(541.5599, 107.00006)
+scale = Vector2(5, 5)
+texture = ExtResource("12_pkfs4")
+
+[node name="Float3" type="Sprite2D" parent="Flooding/Debris" unique_id=1073918171]
+position = Vector2(813.56, 811.0001)
+scale = Vector2(5, 5)
+texture = ExtResource("13_dogw5")
+
+[node name="Tree" type="Sprite2D" parent="Flooding/Debris" unique_id=1603832482]
+position = Vector2(925.55994, 379.00006)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("14_25ayp")
+
+[node name="Tree2" type="Sprite2D" parent="Flooding/Debris" unique_id=1561298385]
+position = Vector2(123.55994, -176.99995)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("15_3paye")
+
+[node name="FloodingLightning" type="AnimatedSprite2D" parent="Flooding" unique_id=343264472]
+position = Vector2(-1.2799644, -3.9504852)
+scale = Vector2(1.3211664, 1.2430865)
+sprite_frames = SubResource("SpriteFrames_iwb58")
+animation = &"default_1"
+autoplay = "default"
+
+[node name="FloodingRain" type="AnimatedSprite2D" parent="Flooding" unique_id=1357603102]
+position = Vector2(0.75634384, -0.16459274)
+scale = Vector2(1.2787508, 1.6067144)
+sprite_frames = SubResource("SpriteFrames_qh4va")
+autoplay = "default"
+
+[node name="POSTS2" type="Node2D" parent="Flooding" unique_id=358544143]
+position = Vector2(-63.597855, -48.854362)
+scale = Vector2(0.116360255, 0.06584146)
+
+[node name="POST" type="Sprite2D" parent="Flooding/POSTS2" unique_id=1340735841]
+position = Vector2(1037, 244)
+scale = Vector2(4, 4)
+texture = ExtResource("5_jiek5")
+
+[node name="POST2" type="Sprite2D" parent="Flooding/POSTS2" unique_id=921417764]
+position = Vector2(161.55994, 970.00006)
+rotation = 1.097812
+scale = Vector2(4, 4)
+texture = ExtResource("5_jiek5")
+
+[node name="Puddles" type="Node2D" parent="Flooding" unique_id=671384674]
+position = Vector2(-63.597855, -48.854362)
+scale = Vector2(0.116360255, 0.06584146)
+
+[node name="Puddle" type="AnimatedSprite2D" parent="Flooding/Puddles" unique_id=564514615]
+self_modulate = Color(0.8, 1, 1, 0.7921569)
+position = Vector2(1034.56, 345.00006)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_27xdd")
+autoplay = "default"
+frame = 3
+frame_progress = 0.1344577
+
+[node name="Puddle2" type="AnimatedSprite2D" parent="Flooding/Puddles" unique_id=2142444401]
+self_modulate = Color(0.8, 1, 1, 0.7921569)
+position = Vector2(17.559937, 975.0002)
+scale = Vector2(0.74260354, 1.90823)
+sprite_frames = SubResource("SpriteFrames_27xdd")
+autoplay = "default"
+frame = 3
+frame_progress = 0.39808902
+
+[node name="Earthquake" type="Sprite2D" parent="." unique_id=1861907530]
+visible = false
+self_modulate = Color(1, 1, 0, 0.19607843)
+position = Vector2(547, 966)
+scale = Vector2(8.594, 15.188)
+texture = ExtResource("17_u737u")
+
+[node name="Debris" type="Node2D" parent="Earthquake" unique_id=678883741]
+
+[node name="CrackSprite" type="Sprite2D" parent="Earthquake/Debris" unique_id=781229457]
+position = Vector2(-0.23271942, 32.459858)
+scale = Vector2(0.27999187, 0.10699239)
+texture = ExtResource("17_u737u")
+
+[node name="CrackAnimated" type="AnimatedSprite2D" parent="Earthquake/Debris" unique_id=126426229]
+position = Vector2(35.48988, -11.32473)
+scale = Vector2(0.26423472, 0.118651815)
+sprite_frames = SubResource("SpriteFrames_8ftxf")
+animation = &"crack"
+autoplay = "crack"
+frame = 5
+frame_progress = 1.0
+
+[node name="CrackAnimated2" type="AnimatedSprite2D" parent="Earthquake/Debris" unique_id=190185469]
+position = Vector2(-39.562485, -33.94127)
+scale = Vector2(0.26423472, 0.11865182)
+sprite_frames = SubResource("SpriteFrames_8ftxf")
+animation = &"crack"
+autoplay = "crack"
+frame = 5
+frame_progress = 1.0
+flip_h = true
+
+[node name="CrackAnimated3" type="AnimatedSprite2D" parent="Earthquake/Debris" unique_id=1184157609]
+position = Vector2(-34.209908, -27.883858)
+scale = Vector2(0.26423472, 0.11865182)
+sprite_frames = SubResource("SpriteFrames_8ftxf")
+animation = &"crack"
+autoplay = "crack"
+frame = 5
+frame_progress = 1.0
+
+[node name="Collapse1" type="AnimatedSprite2D" parent="Earthquake/Debris" unique_id=1812119066]
+position = Vector2(-35.89714, 8.296024)
+scale = Vector2(0.14596976, 0.10493482)
+sprite_frames = SubResource("SpriteFrames_6uptf")
+animation = &"collapse1"
+autoplay = "collapse1"
+frame = 5
+frame_progress = 1.0
+flip_h = true
+
+[node name="Collapse2" type="AnimatedSprite2D" parent="Earthquake/Debris" unique_id=201923264]
+position = Vector2(34.384426, 31.24075)
+scale = Vector2(0.26453826, 0.20363334)
+sprite_frames = SubResource("SpriteFrames_wm2lh")
+animation = &"collapse2"
+autoplay = "collapse2"
+frame = 5
+frame_progress = 0.9938297
+
+[node name="Debris1" type="Sprite2D" parent="Earthquake/Debris" unique_id=1721008212]
+position = Vector2(-55.954735, 44.46356)
+scale = Vector2(0.31249097, 0.21681386)
+texture = ExtResource("21_fab6r")
+
+[node name="Debris2" type="Sprite2D" parent="Earthquake/Debris" unique_id=1335583021]
+position = Vector2(45.03142, -34.04003)
+scale = Vector2(0.29271877, 0.18929419)
+texture = ExtResource("22_5ayby")
+
+[node name="PoliticalPoster1" type="Sprite2D" parent="Earthquake/Debris" unique_id=61870282]
+position = Vector2(55.96928, -39.175667)
+scale = Vector2(0.5763467, 0.29011378)
+texture = ExtResource("23_heu8p")
+
+[node name="PoliticalPoster2" type="Sprite2D" parent="Earthquake/Debris" unique_id=493594391]
+position = Vector2(-56.274727, 4.3702264)
+scale = Vector2(0.4318056, 0.21964303)
+texture = ExtResource("24_d4j8l")
+
+[node name="Volcanic" type="Sprite2D" parent="." unique_id=1325717967]
+visible = false
+self_modulate = Color(0.23921569, 0, 0, 0.5882353)
+position = Vector2(547, 966)
+scale = Vector2(8.594, 15.188)

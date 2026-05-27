@@ -34,6 +34,8 @@ func _ready() -> void:
 	if bg:
 		bg_a = bg.get_node_or_null("RoadA")
 		bg_b = bg.get_node_or_null("RoadB")
+		_apply_background_variant(bg_a)
+		_apply_background_variant(bg_b)
 	else:
 		push_warning("RoadScroll: could not find Background node in parent.")
 
@@ -65,5 +67,28 @@ func _process(delta: float) -> void:
 	# ── Wrap background panels (same logic) ────────────────────────────────
 	if bg_a and bg_a.position.y >= ROAD_H:
 		bg_a.position.y = bg_b.position.y - ROAD_H
+		_apply_background_variant(bg_a)
 	if bg_b and bg_b.position.y >= ROAD_H:
 		bg_b.position.y = bg_a.position.y - ROAD_H
+		_apply_background_variant(bg_b)
+
+
+func _apply_background_variant(panel: Node2D) -> void:
+	if panel == null:
+		return
+
+	var typhoon_tileset := panel.get_node_or_null("Main/TyphoonTileset") as CanvasItem
+	var flood_tileset := panel.get_node_or_null("Main/FloodTileset") as CanvasItem
+	if typhoon_tileset == null or flood_tileset == null:
+		return
+
+	match GameManager.current_hazard_event:
+		1:
+			typhoon_tileset.visible = true
+			flood_tileset.visible = false
+		2:
+			typhoon_tileset.visible = false
+			flood_tileset.visible = true
+		_:
+			typhoon_tileset.visible = false
+			flood_tileset.visible = false

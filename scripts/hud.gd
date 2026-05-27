@@ -64,12 +64,10 @@ const RESOURCE_TEXTURES: Dictionary = {
 
 const RESOURCE_TEXTURE_VARIANTS: Dictionary = {
 	"RICE": [
-		preload("res://assets/Item Assets/Rice Icon (Detailed) .png"),
 		preload("res://assets/Item Assets/Rice Icon w logo 1 (Detailed) .png"),
 	],
 	"WATER": [
 		preload("res://assets/Item Assets/water bottle icon.png"),
-		preload("res://assets/Item Assets/Water Icon (Silver-Detailed).png"),
 	],
 	"MEDS": [
 		preload("res://assets/Item Assets/Medicine Icon (Detailed) .png"),
