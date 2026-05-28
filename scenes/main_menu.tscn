@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bs4rl7ia5qo0c"]
+[gd_scene load_steps=14 format=3 uid="uid://bs4rl7ia5qo0c"]
 
 [ext_resource type="Script" uid="uid://ba3vdgnuvuecd" path="res://scripts/main_menu.gd" id="1_d2nv2"]
 [ext_resource type="Texture2D" uid="uid://dmqjdwl7djf8y" path="res://assets/CoverArtDraft.png" id="2_flqon"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cc34bb8g5jej6" path="res://UI Deliverables/Buttons/Playbutton.png" id="4_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://crw4hwjpr4olc" path="res://UI Deliverables/Buttons/MenuButton.png" id="5_oa1go"]
 [ext_resource type="Texture2D" uid="uid://bpymdq12l8loj" path="res://UI Deliverables/Buttons/Window2.png" id="6_flqon"]
+[ext_resource type="Texture2D" uid="uid://xaa631cy4p0y" path="res://assets/UI Assets/helpbutton.png" id="6_rcqid"]
 [ext_resource type="FontFile" uid="uid://b2pkbqm63xs17" path="res://UI Deliverables/Fonts/ThertoleRegular.ttf" id="7_rcqid"]
 [ext_resource type="Texture2D" uid="uid://siq20iegkalo" path="res://UI Deliverables/Buttons/Xbutton2.png" id="8_1ajci"]
 [ext_resource type="Texture2D" uid="uid://2k4g2mglp310" path="res://UI Deliverables/Sliders (Volume)/1/Grabber.png" id="9_7b55j"]
@@ -30,21 +31,29 @@ texture = ExtResource("3_flqon")
 
 [node name="PlayButton" type="TextureButton" parent="HUD"]
 texture_filter = 1
-offset_left = 384.0
-offset_top = 1429.0
-offset_right = 416.0
-offset_bottom = 1461.0
+offset_left = 444.0
+offset_top = 1398.0
+offset_right = 476.0
+offset_bottom = 1430.0
 scale = Vector2(8, 8)
 texture_normal = ExtResource("4_rtw2f")
 
 [node name="MenuButton" type="TextureButton" parent="HUD"]
 texture_filter = 1
-offset_left = 661.00006
-offset_top = 1545.0
-offset_right = 693.00006
-offset_bottom = 1577.0
+offset_left = 285.0
+offset_top = 1507.0001
+offset_right = 317.0
+offset_bottom = 1539.0001
 scale = Vector2(5, 5)
 texture_normal = ExtResource("5_oa1go")
+
+[node name="HowButton" type="TextureButton" parent="HUD"]
+offset_left = 919.0
+offset_top = 1751.0
+offset_right = 951.0
+offset_bottom = 1783.0
+scale = Vector2(3.5, 3.5)
+texture_normal = ExtResource("6_rcqid")
 
 [node name="CoverArt" type="TextureRect" parent="HUD"]
 texture_filter = 1
