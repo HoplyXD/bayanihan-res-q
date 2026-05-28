@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://btvrrbkl82bqr"]
+[gd_scene format=3 uid="uid://btvrrbkl82bqr"]
 
 [ext_resource type="Script" uid="uid://igbf5f5r4ww0" path="res://scripts/dialogue.gd" id="1_jwyou"]
 [ext_resource type="Texture2D" uid="uid://d2wvgkwfqjcgp" path="res://Character sprites/Linnea.png" id="2_03vpb"]
@@ -10,61 +10,73 @@
 [ext_resource type="Texture2D" uid="uid://dcqjc0mu2icao" path="res://UI Deliverables/DialogueBox.png" id="8_noxhw"]
 [ext_resource type="FontFile" uid="uid://cidnk7s46u5kg" path="res://UI Deliverables/Fonts/Minecraft.ttf" id="9_d2kxg"]
 
-[node name="Dialogue" type="CanvasLayer"]
+[node name="Dialogue" type="CanvasLayer" unique_id=1357752456]
 script = ExtResource("1_jwyou")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=451812808]
 offset_right = 1080.0
 offset_bottom = 1920.0
 color = Color(0.49411765, 0.49411765, 0.49411765, 0.43137255)
 metadata/_edit_lock_ = true
 
-[node name="CharEarthquake" type="Node2D" parent="."]
+[node name="Character1" type="Sprite2D" parent="." unique_id=1391044868]
+position = Vector2(821, 845)
+scale = Vector2(0.20178224, 0.20178224)
 
-[node name="Linnea" type="Sprite2D" parent="CharEarthquake"]
+[node name="Character2" type="Sprite2D" parent="." unique_id=814312980]
+position = Vector2(300, 845)
+rotation = -3.1415927
+scale = Vector2(0.202, -0.202)
+
+[node name="CharEarthquake" type="Node2D" parent="." unique_id=463968327]
+
+[node name="Linnea" type="Sprite2D" parent="CharEarthquake" unique_id=1946175704]
+visible = false
 position = Vector2(821, 845)
 scale = Vector2(0.20178224, 0.20178224)
 texture = ExtResource("2_03vpb")
 
-[node name="Rocky" type="Sprite2D" parent="CharEarthquake"]
+[node name="Rocky" type="Sprite2D" parent="CharEarthquake" unique_id=1193675363]
+visible = false
 position = Vector2(822, 841)
 scale = Vector2(0.21496587, 0.21496587)
 texture = ExtResource("3_ccu7b")
 
-[node name="CharFlood_Typhoon" type="Node2D" parent="."]
+[node name="CharFlood_Typhoon" type="Node2D" parent="." unique_id=784847459]
 
-[node name="Raine" type="Sprite2D" parent="CharFlood_Typhoon"]
+[node name="Raine" type="Sprite2D" parent="CharFlood_Typhoon" unique_id=1104963252]
 visible = false
 position = Vector2(825, 854.00006)
 scale = Vector2(0.2019043, 0.2019043)
 texture = ExtResource("4_6xhvj")
 
-[node name="Wendy" type="Sprite2D" parent="CharFlood_Typhoon"]
+[node name="Wendy" type="Sprite2D" parent="CharFlood_Typhoon" unique_id=1831253496]
+visible = false
 position = Vector2(827, 837)
 scale = Vector2(0.21313478, 0.21313478)
 texture = ExtResource("5_sv5jy")
 
-[node name="CharVolcanic" type="Node2D" parent="."]
+[node name="CharVolcanic" type="Node2D" parent="." unique_id=1908639738]
 
-[node name="Ash" type="Sprite2D" parent="CharVolcanic"]
+[node name="Ash" type="Sprite2D" parent="CharVolcanic" unique_id=1273954328]
 visible = false
 position = Vector2(816.99994, 845.99994)
 scale = Vector2(0.20153807, 0.20153807)
 texture = ExtResource("6_ocawk")
 
-[node name="Magnus" type="Sprite2D" parent="CharVolcanic"]
+[node name="Magnus" type="Sprite2D" parent="CharVolcanic" unique_id=2108829372]
 visible = false
 position = Vector2(821.99994, 847)
 scale = Vector2(0.20410155, 0.20410155)
 texture = ExtResource("7_5ih08")
 
-[node name="Control" type="Panel" parent="."]
+[node name="Control" type="Panel" parent="." unique_id=653650875]
 offset_left = 85.0
 offset_top = 1119.0
 offset_right = 1010.0
 offset_bottom = 1338.0
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=968440259]
 layout_mode = 0
 offset_left = -85.0
 offset_top = -89.0
@@ -72,7 +84,7 @@ offset_right = 993.0
 offset_bottom = 252.0
 texture = ExtResource("8_noxhw")
 
-[node name="NameLabel" type="Label" parent="Control/TextureRect"]
+[node name="NameLabel" type="Label" parent="Control/TextureRect" unique_id=1996145395]
 layout_mode = 0
 offset_left = 84.0
 offset_top = 52.0
@@ -83,7 +95,7 @@ theme_override_font_sizes/font_size = 40
 text = "Name"
 horizontal_alignment = 1
 
-[node name="TextLabel" type="Label" parent="Control/TextureRect"]
+[node name="TextLabel" type="Label" parent="Control/TextureRect" unique_id=2017081634]
 custom_minimum_size = Vector2(925, 0)
 layout_mode = 0
 offset_left = 84.0
@@ -98,7 +110,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="ContinueLabel" type="Label" parent="Control/TextureRect"]
+[node name="ContinueLabel" type="Label" parent="Control/TextureRect" unique_id=1567717085]
 layout_mode = 0
 offset_left = 84.0
 offset_top = 254.0
@@ -110,7 +122,7 @@ text = "▼  tap / Enter"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=374095004]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -119,7 +131,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Control"]
+[node name="TextureRect2" type="TextureRect" parent="Control" unique_id=526450196]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

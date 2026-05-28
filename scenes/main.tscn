@@ -48,4 +48,5 @@ position = Vector2(540, 960)
 [node name="Dialogue" parent="." unique_id=179663980 instance=ExtResource("9_85g3d")]
 process_mode = 3
 process_priority = 3
+layer = 10
 visible = false

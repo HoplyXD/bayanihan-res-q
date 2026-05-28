@@ -52,6 +52,27 @@ func _spawn_item() -> void:
 	item.lane_index    = lane
 	item.position      = Vector2(LANE_POSITIONS[lane], SPAWN_Y)
 	add_child(item)
+	# item._ready() has already run by this point, so its occupies_*
+	# flags reflect the final visual / collision variant.
+	_spawn_grass_companions(item)
+
+
+# Spawns up to two extra item.tscn instances purely for scenery: one on the
+# L lane, one on the R lane. They roll 50% independently. Each side is
+# skipped when the main item already occupies that lane (L / ML disables
+# left, R / MR disables right).
+func _spawn_grass_companions(main_item: ItemBase) -> void:
+	if not main_item.occupies_left and randi() % 2 == 0:
+		_spawn_grass_at("L", LANE_POSITIONS[0])
+	if not main_item.occupies_right and randi() % 2 == 0:
+		_spawn_grass_at("R", LANE_POSITIONS[2])
+
+
+func _spawn_grass_at(side: String, x: float) -> void:
+	var g: ItemBase = _item_scene.instantiate() as ItemBase
+	g.display_side = side
+	g.position     = Vector2(x, SPAWN_Y)
+	add_child(g)
 
 
 func _pick_spawn_type() -> int:

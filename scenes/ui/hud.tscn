@@ -412,6 +412,7 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="DumpButton" type="Button" parent="." unique_id=893339923]
+visible = false
 offset_left = 256.0
 offset_top = 1605.0
 offset_right = 856.0
@@ -488,6 +489,7 @@ text = "🟡 RICE   🔵 WATER   🔴 MEDS
 horizontal_alignment = 1
 
 [node name="GameOver" type="CanvasLayer" parent="." unique_id=1166721777]
+layer = 10
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=1296990085]

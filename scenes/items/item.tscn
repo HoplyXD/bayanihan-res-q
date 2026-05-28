@@ -25,6 +25,10 @@
 [ext_resource type="Texture2D" uid="uid://c1k7enylrqut1" path="res://assets/Flood & Typhoon Assets/Obstacles/Leaves_Flooded.png" id="23_70qoo"]
 [ext_resource type="Texture2D" uid="uid://m716sv5hikfd" path="res://assets/Flood & Typhoon Assets/Obstacles/Trash_Flooded2.png" id="24_0f4th"]
 [ext_resource type="Texture2D" uid="uid://ci0pf4hr7fem8" path="res://assets/Flood & Typhoon Assets/Obstacles/Trash_Flooded.png" id="25_v3reu"]
+[ext_resource type="Texture2D" uid="uid://b5qtdeehkw7f6" path="res://assets/Obstacle Assets/Electrical-Post.32x32.png" id="26_0f4th"]
+[ext_resource type="Texture2D" uid="uid://c3e1ulncbdssn" path="res://assets/Obstacle Assets/Political Poster #1.png" id="27_v3reu"]
+[ext_resource type="Texture2D" uid="uid://b3825ylqcb3y6" path="res://assets/Obstacle Assets/Political Poster #2.png" id="28_axa1q"]
+[ext_resource type="Texture2D" uid="uid://hb6qqj2l2f2c" path="res://assets/Obstacle Assets/Political Poster #3.png" id="29_s2atr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_item"]
 size = Vector2(84, 84)
@@ -878,6 +882,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_g8tsn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl6k7")
+}],
+"loop": false,
+"name": &"Tree1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ys3d")
+}],
+"loop": false,
+"name": &"Tree2",
+"speed": 5.0
+}]
+
 [node name="Item" type="Area2D" unique_id=2130882771]
 collision_layer = 2
 collision_mask = 0
@@ -1019,3 +1042,67 @@ position = Vector2(-224.00002, 0)
 scale = Vector2(-3, 3)
 sprite_frames = SubResource("SpriteFrames_31qmc")
 animation = &"Debris5"
+
+[node name="GrassItems" type="Node2D" parent="." unique_id=1949434037]
+
+[node name="R-Tree" type="AnimatedSprite2D" parent="GrassItems" unique_id=520883492]
+visible = false
+position = Vector2(100, -100)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_g8tsn")
+animation = &"Tree1"
+
+[node name="L-Tree" type="AnimatedSprite2D" parent="GrassItems" unique_id=1230996227]
+visible = false
+position = Vector2(-100, -100)
+scale = Vector2(-3, 3)
+sprite_frames = SubResource("SpriteFrames_g8tsn")
+animation = &"Tree1"
+
+[node name="R - Electrical Post" type="Sprite2D" parent="GrassItems" unique_id=927276855]
+visible = false
+position = Vector2(196.00002, -115)
+scale = Vector2(3, 3)
+texture = ExtResource("26_0f4th")
+
+[node name="L - Electrical Post" type="Sprite2D" parent="GrassItems" unique_id=632616940]
+visible = false
+position = Vector2(-196, -115)
+scale = Vector2(3, 3)
+texture = ExtResource("26_0f4th")
+
+[node name="R - Political Poster 1" type="Sprite2D" parent="GrassItems" unique_id=1767229473]
+visible = false
+position = Vector2(193, -27.999998)
+scale = Vector2(3, 3)
+texture = ExtResource("27_v3reu")
+
+[node name="L - Political Poster 1" type="Sprite2D" parent="GrassItems" unique_id=1420901575]
+visible = false
+position = Vector2(-193, -21.000002)
+scale = Vector2(3, 3)
+texture = ExtResource("27_v3reu")
+
+[node name="R - Political Poster 2" type="Sprite2D" parent="GrassItems" unique_id=23105955]
+visible = false
+position = Vector2(193, -27.999998)
+scale = Vector2(3, 3)
+texture = ExtResource("28_axa1q")
+
+[node name="L - Political Poster 2" type="Sprite2D" parent="GrassItems" unique_id=1841929594]
+visible = false
+position = Vector2(-193, -21.000002)
+scale = Vector2(3, 3)
+texture = ExtResource("28_axa1q")
+
+[node name="R - Political Poster 3" type="Sprite2D" parent="GrassItems" unique_id=1538542161]
+visible = false
+position = Vector2(193, -27.999998)
+scale = Vector2(3, 3)
+texture = ExtResource("29_s2atr")
+
+[node name="L - Political Poster 3" type="Sprite2D" parent="GrassItems" unique_id=11127904]
+visible = false
+position = Vector2(-193, -21.000002)
+scale = Vector2(3, 3)
+texture = ExtResource("29_s2atr")

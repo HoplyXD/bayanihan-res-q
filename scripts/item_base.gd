@@ -16,6 +16,10 @@ enum ItemType {
 
 @export var item_type: ItemType = ItemType.RESOURCE_RICE
 @export var lane_index: int = 1
+## When non-empty ("L" or "R"), this item.tscn instance is a pure visual
+## companion: collision is disabled, the main item / block visuals stay
+## hidden, and only the matching GrassItems node for that side is shown.
+@export var display_side: String = ""
 
 const EVENT_CALM: int = 0
 const EVENT_TYPHOON: int = 1
@@ -50,13 +54,36 @@ const VEHICLE_ANIMATIONS: Array[StringName] = [&"Car1", &"Car2", &"Car3", &"Tric
 var collected: bool = false
 var _selected_texture_path: String = ""
 
+# Set by _compute_lane_occupancy() once visuals/collisions are picked.
+# Read by Spawner to skip grass companions on lanes this item already covers.
+var occupies_left:  bool = false
+var occupies_right: bool = false
+
 
 func _ready() -> void:
+	if display_side != "":
+		_init_as_grass_display()
+		return
 	collision_layer = 2
 	collision_mask = 0
 	monitorable = true
 	monitoring = false
 	_refresh_texture()
+	_compute_lane_occupancy()
+
+
+# Grass-only companion: no collision, no main visuals, just one side prop.
+func _init_as_grass_display() -> void:
+	monitorable = false
+	monitoring = false
+	if default_collision != null:
+		default_collision.disabled = true
+	if mr_lane_collision != null:
+		mr_lane_collision.disabled = true
+	if ml_lane_collision != null:
+		ml_lane_collision.disabled = true
+	_hide_visuals()
+	_pick_and_show_grass(display_side)
 
 
 func _process(delta: float) -> void:
@@ -290,12 +317,78 @@ func _hide_visuals() -> void:
 		var node := get_node_or_null(node_name)
 		if node is CanvasItem:
 			(node as CanvasItem).visible = false
+	_hide_grass()
+
+
+func _hide_grass() -> void:
+	var grass := get_node_or_null("GrassItems")
+	if grass == null:
+		return
+	for child in grass.get_children():
+		if child is CanvasItem:
+			(child as CanvasItem).visible = false
 
 
 func _reset_collision_shapes() -> void:
 	default_collision.disabled = false
 	mr_lane_collision.disabled = true
 	ml_lane_collision.disabled = true
+
+
+func _compute_lane_occupancy() -> void:
+	occupies_left  = (lane_index == 0)
+	occupies_right = (lane_index == 2)
+	# A middle-lane BLOCK can extend into the left (ML) or right (MR) lane.
+	if lane_index == 1 and item_type == ItemType.BLOCK:
+		if not ml_lane_collision.disabled:
+			occupies_left = true
+		if not mr_lane_collision.disabled:
+			occupies_right = true
+
+
+# ---------------------------------------------------------------------------
+# Side grass — picks one GrassItems child for the given side ("L" / "R").
+# Called either from grass-display init (this item.tscn is itself the
+# decoration) or, in the future, by any other caller that needs a side prop
+# shown on an item.
+# ---------------------------------------------------------------------------
+func _pick_and_show_grass(side: String) -> void:
+	var options := _get_grass_options(side)
+	if options.is_empty():
+		return
+	var option: Dictionary = options.pick_random()
+	var node := get_node_or_null("GrassItems/" + str(option.get("node", "")))
+	if node == null:
+		return
+	if node is AnimatedSprite2D:
+		_show_animated_variant(node as AnimatedSprite2D, option.get("animation", &""))
+	elif node is CanvasItem:
+		_show_canvas_variant(node as CanvasItem)
+
+
+# Matches the GrassItems node names in item.tscn. Per-event filtering:
+#   - Trees:           Calm, Typhoon, Earthquake
+#   - Electrical Post: every event except Flood
+#   - Political Poster 1/2/3: all events
+func _get_grass_options(side: String) -> Array[Dictionary]:
+	var event := GameManager.current_hazard_event
+	var tree_node:  String = "%s-Tree" % side
+	var post_node:  String = "%s - Electrical Post" % side
+	var poster_fmt: String = "%s - Political Poster %d"
+	var options: Array[Dictionary] = []
+
+	match event:
+		EVENT_CALM, EVENT_TYPHOON, EVENT_EARTHQUAKE:
+			options.append({"node": tree_node, "animation": &"Tree1"})
+			options.append({"node": tree_node, "animation": &"Tree2"})
+
+	if event != EVENT_FLOODING:
+		options.append({"node": post_node})
+
+	for i in range(1, 4):
+		options.append({"node": poster_fmt % [side, i]})
+
+	return options
 
 
 func _pick(paths: Array) -> String:

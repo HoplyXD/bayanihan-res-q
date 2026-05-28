@@ -2,7 +2,8 @@ extends CanvasLayer
 @onready var camera: Camera2D = $"../Camera2D"
 
 # [CALM=0, TYPHOON=1, FLOODING=2, EARTHQUAKE=3, VOLCANIC=4]
-var _event_weights: Array[int] = [40, 15, 15, 15, 15]
+const _INITIAL_EVENT_WEIGHTS: Array[int] = [40, 15, 15, 15, 15]
+var _event_weights: Array[int] = _INITIAL_EVENT_WEIGHTS.duplicate()
 var event_state: int = 0
 
 # [RICE=0, WATER=1, MEDS=2, HAZARD=3, BLOCK=4, SHIELD=5, SPEED=6, FUEL=7, REPAIR=8]
@@ -53,6 +54,18 @@ func _roll_next_anim_time() -> void:
 
 func _on_level_up(lvl: int) -> void:
 	if lvl <= 1:
+		# Fresh game / restart: wipe leftover state from the previous run so
+		# the road resets to CALM (grass) instead of inheriting a flood / quake
+		# overlay. Clearing _current_event_bonus first ensures _apply_event
+		# doesn't try to subtract last run's bonus from the spawner weights.
+		_event_weights = _INITIAL_EVENT_WEIGHTS.duplicate()
+		_current_event_bonus = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+		event_state = 0
+		_shake_intensity = 0.0
+		_shake_timer = 0.0
+		if camera != null:
+			camera.offset = Vector2.ZERO
+		_apply_event.call_deferred(0)   # CALM — hides Typhoon/Flooding/etc.
 		return
 	if lvl >= 8:
 		_event_weights[0] = max(_event_weights[0] - 2, 10)
@@ -60,16 +73,24 @@ func _on_level_up(lvl: int) -> void:
 		_event_weights[2] = min(_event_weights[2] + 1, 25)
 		_event_weights[3] = min(_event_weights[3] + 1, 25)
 		_event_weights[4] = min(_event_weights[4] + 1, 25)
-	if lvl == 1 or lvl == 3 or lvl == 5 or lvl == 6:
+	if lvl == 1 or lvl == 3 or lvl == 5 or lvl == 6 or lvl == 8:
 		_apply_event.call_deferred(0)   # CALM
 	elif lvl == 2:
 		_apply_event.call_deferred(1) # TYPHOON
 		await get_tree().create_timer(0.5).timeout
 		GameManager.play_dialogue(2)
 	elif lvl == 4:
-		_apply_event.call_deferred(3)   # EARTHQUAKE
-	elif lvl == 7:
 		_apply_event.call_deferred(2)   # FLOODING
+		await get_tree().create_timer(0.5).timeout
+		GameManager.play_dialogue(3)
+	elif lvl == 7:
+		_apply_event.call_deferred(3)   # EARTHQUAKE
+		await get_tree().create_timer(0.5).timeout
+		GameManager.play_dialogue(4)
+	elif lvl == 9:
+		_apply_event.call_deferred(4)   # VOLCANIC
+		await get_tree().create_timer(0.5).timeout
+		GameManager.play_dialogue(5)
 	else:
 		_apply_event.call_deferred(_weighted_random())
 
