@@ -209,6 +209,10 @@ func _get_block_options() -> Array[Dictionary]:
 			options.append({"node": "CrackAnim", "animation": &"Crack"})
 			options.append({"node": "DebrisAnim", "animation": &"Debris1"})
 			options.append({"node": "DebrisAnim", "animation": &"Debris2"})
+			options.append({"node": "MagmaBlockage1"})
+			options.append({"node": "MagmaBlockage2"})
+			options.append({"node": "MagmaBlockage3"})
+			options.append({"node": "MagmaBlockage4"})
 
 	# ── Left lane (lane_index == 0) ───────────────────────────────────────
 	if lane_index == 0:
@@ -228,6 +232,7 @@ func _get_block_options() -> Array[Dictionary]:
 			EVENT_VOLCANIC:
 				options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris3"})
 				options.append({"node": "L-LaneDebrisAnim", "animation": &"Debris4"})
+				options.append({"node": "L-LaneLavaAnim", "animation": &"default"})
 
 	# ── Right lane (lane_index == 2) ──────────────────────────────────────
 	if lane_index == 2:
@@ -247,6 +252,7 @@ func _get_block_options() -> Array[Dictionary]:
 			EVENT_VOLCANIC:
 				options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris3"})
 				options.append({"node": "R-LaneDebrisAnim", "animation": &"Debris4"})
+				options.append({"node": "R-LaneLavaAnim", "animation": &"default"})
 
 	# ── Middle lane / two-lane (lane_index == 1) ──────────────────────────
 	if lane_index == 1:
@@ -307,12 +313,19 @@ func _hide_visuals() -> void:
 		"ML-2LaneDebrisAnim",
 		"R-LaneTreeAnim",
 		"L-LaneTreeAnim",
+		"R-LaneLavaAnim",
+		"L-LaneLavaAnim",
 		"Branches1",
 		"Branches2",
 		"FloodBlockage1",
 		"FloodBlockage2",
 		"FloodBlockage3",
 		"FloodBlockage4",
+		"LavaBlockage",
+		"MagmaBlockage1",
+		"MagmaBlockage2",
+		"MagmaBlockage3",
+		"MagmaBlockage4",
 	]:
 		var node := get_node_or_null(node_name)
 		if node is CanvasItem:
@@ -356,37 +369,85 @@ func _pick_and_show_grass(side: String) -> void:
 	var options := _get_grass_options(side)
 	if options.is_empty():
 		return
+	var grass := get_node_or_null("GrassItems")
+	if grass == null:
+		return
 	var option: Dictionary = options.pick_random()
-	var node := get_node_or_null("GrassItems/" + str(option.get("node", "")))
+	var node := grass.get_node_or_null(str(option.get("node", "")))
 	if node == null:
 		return
+	# GrassItems is authored as visible=false so it doesn't bleed onto normal
+	# items. A grass-display companion needs the parent flipped on, otherwise
+	# the chosen child stays hidden by the cascading invisibility.
+	if grass is CanvasItem:
+		(grass as CanvasItem).visible = true
 	if node is AnimatedSprite2D:
 		_show_animated_variant(node as AnimatedSprite2D, option.get("animation", &""))
 	elif node is CanvasItem:
 		_show_canvas_variant(node as CanvasItem)
 
 
-# Matches the GrassItems node names in item.tscn. Per-event filtering:
-#   - Trees:           Calm, Typhoon, Earthquake
-#   - Electrical Post: every event except Flood
-#   - Political Poster 1/2/3: all events
+# Matches the GrassItems node names in item.tscn. One match block per event,
+# same shape as _get_block_options so it's easy to tweak any single event.
 func _get_grass_options(side: String) -> Array[Dictionary]:
 	var event := GameManager.current_hazard_event
-	var tree_node:  String = "%s-Tree" % side
-	var post_node:  String = "%s - Electrical Post" % side
-	var poster_fmt: String = "%s - Political Poster %d"
+	var tree_node:         String = "%s-Tree" % side
+	var post_node:         String = "%s - Electrical Post" % side
+	var poster1_node:      String = "%s - Political Poster 1" % side
+	var poster2_node:      String = "%s - Political Poster 2" % side
+	var poster3_node:      String = "%s - Political Poster 3" % side
+	var evac_node:         String = "%s - Evacuation Sign" % side
+	var coconut_node:      String = "%s - Coconut Tree" % side
+	var burned_coco_node:  String = "%s - Burned Coconut Tree" % side
+	var bahay_node:        String = "%s - Bahay Kubo" % side
+	var burned_bahay_node: String = "%s - Burned Bahay Kubo" % side
 	var options: Array[Dictionary] = []
 
 	match event:
-		EVENT_CALM, EVENT_TYPHOON, EVENT_EARTHQUAKE:
+		EVENT_CALM:
 			options.append({"node": tree_node, "animation": &"Tree1"})
 			options.append({"node": tree_node, "animation": &"Tree2"})
-
-	if event != EVENT_FLOODING:
-		options.append({"node": post_node})
-
-	for i in range(1, 4):
-		options.append({"node": poster_fmt % [side, i]})
+			options.append({"node": post_node})
+			options.append({"node": poster1_node})
+			options.append({"node": poster2_node})
+			options.append({"node": poster3_node})
+			options.append({"node": coconut_node})
+			options.append({"node": bahay_node})
+		EVENT_TYPHOON:
+			options.append({"node": tree_node, "animation": &"Tree1"})
+			options.append({"node": tree_node, "animation": &"Tree2"})
+			options.append({"node": post_node})
+			options.append({"node": poster1_node})
+			options.append({"node": poster2_node})
+			options.append({"node": poster3_node})
+			options.append({"node": evac_node})
+			options.append({"node": coconut_node})
+			options.append({"node": bahay_node})
+		EVENT_FLOODING:
+			options.append({"node": poster1_node})
+			options.append({"node": poster2_node})
+			options.append({"node": poster3_node})
+			options.append({"node": evac_node})
+			options.append({"node": coconut_node})
+			options.append({"node": bahay_node})
+		EVENT_EARTHQUAKE:
+			options.append({"node": tree_node, "animation": &"Tree1"})
+			options.append({"node": tree_node, "animation": &"Tree2"})
+			options.append({"node": post_node})
+			options.append({"node": poster1_node})
+			options.append({"node": poster2_node})
+			options.append({"node": poster3_node})
+			options.append({"node": evac_node})
+			options.append({"node": coconut_node})
+			options.append({"node": bahay_node})
+		EVENT_VOLCANIC:
+			options.append({"node": post_node})
+			options.append({"node": poster1_node})
+			options.append({"node": poster2_node})
+			options.append({"node": poster3_node})
+			options.append({"node": evac_node})
+			options.append({"node": burned_coco_node})
+			options.append({"node": burned_bahay_node})
 
 	return options
 

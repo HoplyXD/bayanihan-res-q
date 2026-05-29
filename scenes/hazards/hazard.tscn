@@ -430,14 +430,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mieln"]
-lifetime_randomness = 1.0
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 1.0
-gravity = Vector3(0, 98, 0)
-scale_max = 216.37999
-
 [node name="Hazard" type="CanvasLayer" unique_id=1707968697]
 script = ExtResource("1_idyoq")
 
@@ -452,7 +444,7 @@ position = Vector2(-0.6399962, 0.06584549)
 scale = Vector2(1.3151516, 1.752172)
 sprite_frames = SubResource("SpriteFrames_qh4va")
 autoplay = "default"
-frame_progress = 0.13054542
+frame_progress = 0.949401
 
 [node name="TyphoonLightning" type="AnimatedSprite2D" parent="Typhoon" unique_id=883390252]
 modulate = Color(1, 1, 1, 0.60784316)
@@ -460,7 +452,7 @@ position = Vector2(-0.8145526, -0.395065)
 scale = Vector2(1.3090909, 1.3168724)
 sprite_frames = SubResource("SpriteFrames_iwb58")
 autoplay = "default"
-frame_progress = 0.9858407
+frame_progress = 0.28983292
 
 [node name="Flooding" type="Sprite2D" parent="." unique_id=1299594879]
 visible = false
@@ -496,69 +488,40 @@ position = Vector2(547, 966)
 scale = Vector2(8.594, 15.188)
 
 [node name="Volcanic" type="Sprite2D" parent="." unique_id=1448536882]
+visible = false
 self_modulate = Color(0.23921569, 0, 0, 0.5882353)
 position = Vector2(547, 966)
 scale = Vector2(8.594, 15.188)
-
-[node name="Hazyair2" type="Sprite2D" parent="Volcanic" unique_id=90199713]
-visible = false
-position = Vector2(-6.1089115, 45.496445)
-scale = Vector2(1.2181463, 0.39093372)
-texture = ExtResource("16_0jkr8")
-
-[node name="Hazyair3" type="Sprite2D" parent="Volcanic" unique_id=284293546]
-position = Vector2(10.065166, -32.953648)
-scale = Vector2(1.0920893, 0.37515914)
-texture = ExtResource("16_0jkr8")
-flip_h = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Volcanic" unique_id=1404259171]
 position = Vector2(-1.4544902, -0.3621254)
 scale = Vector2(1.3490517, 1.3257452)
 sprite_frames = SubResource("SpriteFrames_cgcl0")
 autoplay = "default"
-frame_progress = 0.40143546
+frame_progress = 0.7196769
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Volcanic" unique_id=1916623163]
 position = Vector2(0.87269783, 0.3292079)
 scale = Vector2(-1.33, 1.337)
 sprite_frames = SubResource("SpriteFrames_cgcl0")
 autoplay = "default"
-frame_progress = 0.1247478
+frame_progress = 0.44298413
 
-[node name="Hazyair4" type="Sprite2D" parent="Volcanic" unique_id=1618615323]
-visible = false
-position = Vector2(-21.061203, -49.90782)
-scale = Vector2(1.2181463, 0.39093372)
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Volcanic" unique_id=1998086803]
+texture_filter = 1
+position = Vector2(-1.1636022, -125.75717)
+amount = 20
 texture = ExtResource("16_0jkr8")
-
-[node name="Hazyair5" type="Sprite2D" parent="Volcanic" unique_id=1632123454]
-visible = false
-position = Vector2(-23.85385, 5.201477)
-scale = Vector2(1.2181463, 0.39093372)
-texture = ExtResource("16_0jkr8")
-
-[node name="Hazyair6" type="Sprite2D" parent="Volcanic" unique_id=881846802]
-visible = false
-position = Vector2(28.62462, 13.76086)
-scale = Vector2(1.0920893, 0.37515914)
-texture = ExtResource("16_0jkr8")
-flip_h = true
-
-[node name="Hazyair7" type="Sprite2D" parent="Volcanic" unique_id=336950666]
-visible = false
-position = Vector2(-56.78381, -21.661839)
-scale = Vector2(1.0920893, 0.37515914)
-texture = ExtResource("16_0jkr8")
-flip_h = true
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Volcanic" unique_id=331938494]
-visible = false
-position = Vector2(212.12474, 8.032658)
-emitting = false
-texture = ExtResource("16_0jkr8")
-lifetime = 600.0
+lifetime = 20.53
 randomness = 1.0
-use_fixed_seed = true
-seed = 703923900
-process_material = SubResource("ParticleProcessMaterial_mieln")
+spread = 180.0
+gravity = Vector2(0, 500)
+initial_velocity_max = 63.38
+linear_accel_min = -100.0
+linear_accel_max = 100.0
+angle_max = 5.0
+scale_amount_min = 5.0
+scale_amount_max = 20.0
+color = Color(1, 1, 1, 0.60784316)
+anim_speed_max = 128.0
+anim_offset_max = 1.0

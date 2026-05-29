@@ -76,7 +76,7 @@ func _on_level_up(lvl: int) -> void:
 	if lvl == 1 or lvl == 3 or lvl == 5 or lvl == 6 or lvl == 8:
 		_apply_event.call_deferred(0)   # CALM
 	elif lvl == 2:
-		_apply_event.call_deferred(1) # TYPHOON
+		_apply_event.call_deferred(4) # TYPHOON
 		await get_tree().create_timer(0.5).timeout
 		GameManager.play_dialogue(2)
 	elif lvl == 4:

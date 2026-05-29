@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c4dj4uamatm8i" path="res://scenes/pause_menu.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://cgdcplpup7os2" path="res://scenes/background.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://btvrrbkl82bqr" path="res://scenes/dialogue.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://cq4f7h1pitem1" path="res://scenes/items/item.tscn" id="10_choun"]
 
 [node name="Main" type="Node2D" unique_id=1819170390]
 
@@ -50,3 +51,9 @@ process_mode = 3
 process_priority = 3
 layer = 10
 visible = false
+
+[node name="Item" parent="." unique_id=2130882771 instance=ExtResource("10_choun")]
+position = Vector2(269, 902)
+
+[node name="Item2" parent="." unique_id=1806726383 instance=ExtResource("10_choun")]
+position = Vector2(817, 379)
