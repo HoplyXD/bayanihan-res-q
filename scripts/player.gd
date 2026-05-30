@@ -69,17 +69,16 @@ func _process(delta: float) -> void:
 
 ## Input layer.
 ##  - Keyboard A/Left, D/Right, Space (dump cargo), Esc (pause).
-##  - Desktop: left-click on the left / right half of the screen switches lanes.
 ##  - Mobile: swipe horizontally (drag past SWIPE_THRESHOLD px) to switch lanes.
-##    Tap-to-switch is intentionally OFF on touch so the inventory slot buttons
-##    (and other HUD buttons) don't get hijacked by a tap-side lane switch.
+##  - No click / tap-to-move on either mouse or touch — buttons in the HUD
+##    should never get hijacked by a stray screen tap, and on desktop the
+##    keyboard handles lane switching.
 ##  - dump_cargo() is NOT bound to a screen-area tap; use the HUD DumpButton
 ##    on mobile or KEY_SPACE on desktop.
 ##
 ## Uses _unhandled_input (not _input) so HUD Buttons with mouse_filter=STOP
 ## (PauseButton, DumpButton, inventory slots) absorb their own taps first.
 const SWIPE_THRESHOLD: float = 80.0
-const SCREEN_HALF_X:   float = 540.0
 
 var _touch_start_pos: Vector2 = Vector2.ZERO
 var _touch_is_swipe:  bool    = false
@@ -98,18 +97,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_ESCAPE:        GameManager.pause()
 		return
 
-	# ── Mouse click (desktop only) ────────────────────────────────────────
-	if event is InputEventMouseButton and event.pressed \
-			and event.button_index == MOUSE_BUTTON_LEFT:
-		_lane_switch_from_x(event.position.x)
-		return
-
 	# ── Touch press: track start position for swipe detection only ────────
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			_touch_start_pos = event.position
 			_touch_is_swipe  = false
-		# Release intentionally does NOTHING — no tap-to-switch on mobile.
+		# Release intentionally does NOTHING — no tap-to-switch.
 		return
 
 	# ── Touch drag: fire once per touch when swipe threshold is crossed ───
@@ -118,13 +111,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if absf(dx) >= SWIPE_THRESHOLD:
 			_touch_is_swipe = true
 			switch_lane(1 if dx > 0.0 else -1)
-
-
-func _lane_switch_from_x(x: float) -> void:
-	if x < SCREEN_HALF_X:
-		switch_lane(-1)
-	else:
-		switch_lane(1)
 
 
 # ---------------------------------------------------------------------------
