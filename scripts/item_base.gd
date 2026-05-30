@@ -59,6 +59,11 @@ var _selected_texture_path: String = ""
 var occupies_left:  bool = false
 var occupies_right: bool = false
 
+# True if this grass-display item is currently registered with the
+# AudioManager spark ambient (electrical post visible during quake/volcanic).
+# Used so _exit_tree can release the refcount even if the item is freed early.
+var _spark_registered: bool = false
+
 
 func _ready() -> void:
 	if display_side != "":
@@ -109,6 +114,12 @@ func on_collected(player: Node) -> void:
 		ItemType.HAZARD:
 			GameManager.on_hazard_hit()
 		ItemType.BLOCK:
+			# Play the impact SFX BEFORE on_block_hit so shield-saves still sound.
+			AudioManager.play_sfx_random([
+				"res://Sound Files/HitDebris1.MP3",
+				"res://Sound Files/HitDebris2.MP3",
+				"res://Sound Files/HitDebris3.MP3",
+			])
 			GameManager.on_block_hit()
 		ItemType.POWERUP_SHIELD:
 			GameManager.collect_powerup("SHIELD")
@@ -373,7 +384,8 @@ func _pick_and_show_grass(side: String) -> void:
 	if grass == null:
 		return
 	var option: Dictionary = options.pick_random()
-	var node := grass.get_node_or_null(str(option.get("node", "")))
+	var node_name: String = str(option.get("node", ""))
+	var node := grass.get_node_or_null(node_name)
 	if node == null:
 		return
 	# GrassItems is authored as visible=false so it doesn't bleed onto normal
@@ -385,6 +397,22 @@ func _pick_and_show_grass(side: String) -> void:
 		_show_animated_variant(node as AnimatedSprite2D, option.get("animation", &""))
 	elif node is CanvasItem:
 		_show_canvas_variant(node as CanvasItem)
+
+	# Electrical posts spark only during seismic / volcanic events. The
+	# sparks ambient is refcounted: it plays as long as at least one live
+	# Electrical Post item is on screen and stops as soon as the last one
+	# despawns (handled in _exit_tree below).
+	if node_name.ends_with("Electrical Post"):
+		var event := GameManager.current_hazard_event
+		if event == EVENT_EARTHQUAKE or event == EVENT_VOLCANIC:
+			AudioManager.register_spark_source(self)
+			_spark_registered = true
+
+
+func _exit_tree() -> void:
+	if _spark_registered:
+		AudioManager.unregister_spark_source(self)
+		_spark_registered = false
 
 
 # Matches the GrassItems node names in item.tscn. One match block per event,

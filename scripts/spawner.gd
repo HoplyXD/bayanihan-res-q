@@ -13,7 +13,7 @@ const FUEL_CHANCE_INCREASE: int = 4
 const MAX_FUEL_CHANCE: int = 100
 
 # [RICE=0, WATER=1, MEDS=2, HAZARD=3, BLOCK=4, SHIELD=5, SPEED=6, FUEL=7, REPAIR=8]
-var _spawn_weights: Array[int] = [22, 18, 12, 12, 8, 3, 3, 0, 6]
+var _spawn_weights: Array[int] = [24, 20, 14, 12, 8, 2, 2, 0, 2]
 
 var _item_scene: PackedScene = preload("res://scenes/items/item.tscn")
 

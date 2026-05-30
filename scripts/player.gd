@@ -15,6 +15,18 @@ var hit_timer: float = 0.0
 
 const HIT_FLASH_DURATION: float = 0.45
 
+# ── FX anim durations / thresholds ───────────────────────────────────────
+const SPEED_FX_DURATION:    float = 3.0
+const REPAIRED_FX_DURATION: float = 1.0
+const LOW_FUEL_THRESHOLD:   float = 25.0   # fuel <= this turns on LowFuel anim
+
+@onready var speed_anim:    AnimatedSprite2D = $Speed
+@onready var lowfuel_anim:  AnimatedSprite2D = $LowFuel
+@onready var repaired_anim: AnimatedSprite2D = $Repaired
+
+var _speed_fx_timer:    float = 0.0
+var _repaired_fx_timer: float = 0.0
+
 var _tween: Tween = null
 var _shake_tween: Tween = null
 
@@ -25,6 +37,10 @@ func _ready() -> void:
 	$PickupArea.area_entered.connect(_on_pickup_area_entered)
 	GameManager.hazard_hit.connect(_on_hazard_hit)
 	GameManager.block_hit.connect(_on_block_hit)
+	GameManager.powerup_collected.connect(_on_powerup_collected)
+	GameManager.fuel_changed.connect(_on_fuel_changed)
+	GameManager.game_over.connect(_on_game_over)
+	_stop_all_fx_anims()
 
 
 func _process(delta: float) -> void:
@@ -40,6 +56,15 @@ func _process(delta: float) -> void:
 		if hit_timer <= 0.0:
 			is_hit = false
 			queue_redraw()
+
+	if _speed_fx_timer > 0.0:
+		_speed_fx_timer -= delta
+		if _speed_fx_timer <= 0.0:
+			_hide_anim(speed_anim)
+	if _repaired_fx_timer > 0.0:
+		_repaired_fx_timer -= delta
+		if _repaired_fx_timer <= 0.0:
+			_hide_anim(repaired_anim)
 
 
 func _input(event: InputEvent) -> void:
@@ -139,3 +164,55 @@ func _draw() -> void:
 		draw_rect(Rect2(-54, -86, 108, 170), Color(0.0, 1.0, 0.4, 0.25))
 		draw_rect(Rect2(-54, -86, 108, 4), Color(0.0, 1.0, 0.4, 0.8))
 		draw_rect(Rect2(-54, 80, 108, 4), Color(0.0, 1.0, 0.4, 0.8))
+
+
+# ---------------------------------------------------------------------------
+# FX animations — Speed (3s after boost), Repaired (1s after repair),
+# LowFuel (while fuel <= LOW_FUEL_THRESHOLD).
+# ---------------------------------------------------------------------------
+func _on_powerup_collected(type: String) -> void:
+	match type:
+		"SPEED_BOOST":
+			_play_anim(speed_anim, &"Speedup")
+			_speed_fx_timer = SPEED_FX_DURATION
+		"REPAIR_KIT":
+			_play_anim(repaired_anim, &"")
+			_repaired_fx_timer = REPAIRED_FX_DURATION
+
+
+func _on_fuel_changed(fuel: float) -> void:
+	if fuel > 0.0 and fuel <= LOW_FUEL_THRESHOLD:
+		if not lowfuel_anim.visible:
+			_play_anim(lowfuel_anim, &"")
+	else:
+		if lowfuel_anim.visible:
+			_hide_anim(lowfuel_anim)
+
+
+func _on_game_over(_reason: String) -> void:
+	_stop_all_fx_anims()
+
+
+func _play_anim(anim: AnimatedSprite2D, animation_name: StringName) -> void:
+	if anim == null:
+		return
+	anim.visible = true
+	if not animation_name.is_empty():
+		anim.animation = animation_name
+	anim.frame = 0
+	anim.play()
+
+
+func _hide_anim(anim: AnimatedSprite2D) -> void:
+	if anim == null:
+		return
+	anim.visible = false
+	anim.stop()
+
+
+func _stop_all_fx_anims() -> void:
+	_speed_fx_timer = 0.0
+	_repaired_fx_timer = 0.0
+	_hide_anim(speed_anim)
+	_hide_anim(lowfuel_anim)
+	_hide_anim(repaired_anim)

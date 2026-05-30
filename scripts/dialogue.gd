@@ -7,8 +7,6 @@
 ## LINE FORMAT (Dictionary, all optional except "text"):
 ##   "speaker": String — name shown above the text
 ##   "text":    String — body text
-##   "sfx":     String — path to an AudioStream played while the line is shown
-##                       (auto-stopped when the line changes or dialogue ends)
 ##   "img":     String — texture path for Character1 (right portrait)
 ##   "img2":    String — texture path for Character2 (left portrait)
 ##
@@ -31,10 +29,6 @@ const CHAR_WENDY:  String = "res://Character sprites/Wendy.png"
 # ---------------------------------------------------------------------------
 const DIALOGUES: Dictionary = {
 	1: [
-		{"speaker": "ResHQ", "text": "Test Text."},
-		{"speaker": "ResHQ", "text": "Test Text 2"},
-	],
-	2: [
 		{
 			"speaker": "RAINE",
 			"text": "According to my calculations, emergency preparedness increases your survival probability by a ton!",
@@ -59,7 +53,7 @@ const DIALOGUES: Dictionary = {
 	],
 
 	# ── Flood (Raine / Wendy) ────────────────────────────────────────────────
-	3: [
+	2: [
 		{
 			"speaker": "RAINE",
 			"text": "Statistically speaking, I think our survival rate has increased after that!",
@@ -84,7 +78,7 @@ const DIALOGUES: Dictionary = {
 	],
 
 	# ── Earthquake (Rocky / Linnea) ──────────────────────────────────────────
-	4: [
+	3: [
 		{
 			"speaker": "LINNEA",
 			"text": "That shaking was intense… but hey, I didn't panic this time!",
@@ -108,7 +102,7 @@ const DIALOGUES: Dictionary = {
 	],
 
 	# ── Volcanic Eruption (Ash / Magnus) ─────────────────────────────────────
-	5: [
+	4: [
 		{
 			"speaker": "ASH",
 			"text": "You saw that explosion too, right!? And that ash cloud looked like the end of the world!",
@@ -199,14 +193,12 @@ func _show_line() -> void:
 
 	var speaker: String = ""
 	var text:    String = ""
-	var sfx:     String = ""
 	var img:     String = ""
 	var img2:    String = ""
 
 	if line is Dictionary:
 		speaker = line.get("speaker", "")
 		text    = line.get("text", "")
-		sfx     = line.get("sfx", "")
 		img     = line.get("img", "")
 		img2    = line.get("img2", "")
 	else:
@@ -218,12 +210,6 @@ func _show_line() -> void:
 
 	_apply_portrait(character1, img)
 	_apply_portrait(character2, img2)
-
-	# Always stop the previously-playing SFX on a line change, then start the
-	# new one (if any). An empty "sfx" means "silence this line".
-	SFXManager.stop()
-	if sfx != "":
-		SFXManager.play(sfx)
 
 	var is_last: bool = (_line_index >= _lines.size() - 1)
 	continue_label.text = "▼  tap / Enter to close" if is_last else "▼  tap / Enter"
@@ -333,7 +319,6 @@ func _next_line() -> void:
 func _end_dialogue() -> void:
 	_active  = false
 	visible  = false
-	SFXManager.stop()
 	_clear_portraits()
 	get_tree().paused = false
 	if _was_running:
