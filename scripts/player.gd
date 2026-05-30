@@ -67,7 +67,27 @@ func _process(delta: float) -> void:
 			_hide_anim(repaired_anim)
 
 
-func _input(event: InputEvent) -> void:
+## Mobile input layer.
+##  - Swipe horizontally (drag past SWIPE_THRESHOLD px) switches lanes.
+##  - A clean tap on the left / right half also switches lanes, only after
+##    release and only when no swipe was detected during the same touch.
+##  - dump_cargo() is intentionally NOT bound to a screen-area tap anymore;
+##    use the HUD DumpButton on mobile or KEY_SPACE on desktop. This keeps
+##    the inventory slot buttons working: previously any tap below y=1720
+##    dumped the whole inventory before / on top of the individual slot
+##    press, so tapping one slot acted like "dump all".
+##
+## Uses _unhandled_input (not _input) so HUD Buttons with mouse_filter=STOP
+## (PauseButton, DumpButton, inventory slots) absorb their own touches first
+## and the player never sees those events.
+const SWIPE_THRESHOLD: float = 80.0
+const SCREEN_HALF_X:   float = 540.0
+
+var _touch_start_pos: Vector2 = Vector2.ZERO
+var _touch_is_swipe:  bool    = false
+
+
+func _unhandled_input(event: InputEvent) -> void:
 	if not GameManager.game_running:
 		return
 
@@ -78,15 +98,38 @@ func _input(event: InputEvent) -> void:
 			KEY_D, KEY_RIGHT:  switch_lane(1)
 			KEY_SPACE:         GameManager.dump_cargo()
 			KEY_ESCAPE:        GameManager.pause()
+		return
 
-	# ── Touch (portrait, single-handed) ───────────────────────────────────
-	if event is InputEventScreenTouch and event.pressed:
-		if event.position.y > 1720.0:
-			GameManager.dump_cargo()
-		elif event.position.x < 540.0:
-			switch_lane(-1)
+	# ── Mouse click (desktop testing) ─────────────────────────────────────
+	if event is InputEventMouseButton and event.pressed \
+			and event.button_index == MOUSE_BUTTON_LEFT:
+		_lane_switch_from_x(event.position.x)
+		return
+
+	# ── Touch press: remember start position, reset swipe flag ────────────
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			_touch_start_pos = event.position
+			_touch_is_swipe  = false
 		else:
-			switch_lane(1)
+			# Release: if no swipe happened, treat as tap and switch by side.
+			if not _touch_is_swipe:
+				_lane_switch_from_x(event.position.x)
+		return
+
+	# ── Touch drag: detect horizontal swipe, fire once per touch ──────────
+	if event is InputEventScreenDrag and not _touch_is_swipe:
+		var dx: float = event.position.x - _touch_start_pos.x
+		if absf(dx) >= SWIPE_THRESHOLD:
+			_touch_is_swipe = true
+			switch_lane(1 if dx > 0.0 else -1)
+
+
+func _lane_switch_from_x(x: float) -> void:
+	if x < SCREEN_HALF_X:
+		switch_lane(-1)
+	else:
+		switch_lane(1)
 
 
 # ---------------------------------------------------------------------------

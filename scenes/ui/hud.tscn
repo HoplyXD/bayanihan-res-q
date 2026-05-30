@@ -67,6 +67,7 @@ layer = 10
 script = ExtResource("1_hud")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1515791839]
+z_index = -1
 offset_right = 1080.0
 offset_bottom = 165.0
 color = Color(0.12941177, 0.5137255, 0.89411765, 0.60784316)
