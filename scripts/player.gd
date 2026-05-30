@@ -67,19 +67,17 @@ func _process(delta: float) -> void:
 			_hide_anim(repaired_anim)
 
 
-## Mobile input layer.
-##  - Swipe horizontally (drag past SWIPE_THRESHOLD px) switches lanes.
-##  - A clean tap on the left / right half also switches lanes, only after
-##    release and only when no swipe was detected during the same touch.
-##  - dump_cargo() is intentionally NOT bound to a screen-area tap anymore;
-##    use the HUD DumpButton on mobile or KEY_SPACE on desktop. This keeps
-##    the inventory slot buttons working: previously any tap below y=1720
-##    dumped the whole inventory before / on top of the individual slot
-##    press, so tapping one slot acted like "dump all".
+## Input layer.
+##  - Keyboard A/Left, D/Right, Space (dump cargo), Esc (pause).
+##  - Desktop: left-click on the left / right half of the screen switches lanes.
+##  - Mobile: swipe horizontally (drag past SWIPE_THRESHOLD px) to switch lanes.
+##    Tap-to-switch is intentionally OFF on touch so the inventory slot buttons
+##    (and other HUD buttons) don't get hijacked by a tap-side lane switch.
+##  - dump_cargo() is NOT bound to a screen-area tap; use the HUD DumpButton
+##    on mobile or KEY_SPACE on desktop.
 ##
 ## Uses _unhandled_input (not _input) so HUD Buttons with mouse_filter=STOP
-## (PauseButton, DumpButton, inventory slots) absorb their own touches first
-## and the player never sees those events.
+## (PauseButton, DumpButton, inventory slots) absorb their own taps first.
 const SWIPE_THRESHOLD: float = 80.0
 const SCREEN_HALF_X:   float = 540.0
 
@@ -100,24 +98,21 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_ESCAPE:        GameManager.pause()
 		return
 
-	# ── Mouse click (desktop testing) ─────────────────────────────────────
+	# ── Mouse click (desktop only) ────────────────────────────────────────
 	if event is InputEventMouseButton and event.pressed \
 			and event.button_index == MOUSE_BUTTON_LEFT:
 		_lane_switch_from_x(event.position.x)
 		return
 
-	# ── Touch press: remember start position, reset swipe flag ────────────
+	# ── Touch press: track start position for swipe detection only ────────
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			_touch_start_pos = event.position
 			_touch_is_swipe  = false
-		else:
-			# Release: if no swipe happened, treat as tap and switch by side.
-			if not _touch_is_swipe:
-				_lane_switch_from_x(event.position.x)
+		# Release intentionally does NOTHING — no tap-to-switch on mobile.
 		return
 
-	# ── Touch drag: detect horizontal swipe, fire once per touch ──────────
+	# ── Touch drag: fire once per touch when swipe threshold is crossed ───
 	if event is InputEventScreenDrag and not _touch_is_swipe:
 		var dx: float = event.position.x - _touch_start_pos.x
 		if absf(dx) >= SWIPE_THRESHOLD:
