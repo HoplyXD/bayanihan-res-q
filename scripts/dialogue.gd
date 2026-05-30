@@ -145,6 +145,7 @@ var _active:            bool  = false
 var _accept_input:      bool  = false   # one-frame delay so trigger tap doesn't skip line 0
 var _was_running:       bool  = false
 var _pause_menu_active: bool  = false   # true while the pause menu is open
+var _last_advance_frame: int  = -1      # dedupe: touch + emulated-mouse fire same frame
 
 
 func _ready() -> void:
@@ -279,6 +280,15 @@ func _input(event: InputEvent) -> void:
 		advance = true
 
 	if advance:
+		# Dedupe: with "Emulate Mouse From Touch" enabled (Godot default), a
+		# single mobile tap fires both an InputEventScreenTouch AND an
+		# InputEventMouseButton in the same frame — without this we'd skip
+		# every other line and a 4-line dialogue would end after 2.
+		var frame: int = Engine.get_process_frames()
+		if frame == _last_advance_frame:
+			get_viewport().set_input_as_handled()
+			return
+		_last_advance_frame = frame
 		get_viewport().set_input_as_handled()
 		_next_line()
 
